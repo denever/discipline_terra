@@ -10,6 +10,8 @@ from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
 
+from stock.forms import ProductForm
+
 class ProductListView(ListView):
     queryset = Product.objects.all()
     context_object_name = 'products'
