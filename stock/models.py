@@ -5,10 +5,10 @@ from django.utils.translation import ugettext as _
 # Create your models here.
 class Product(models.Model):
     code = models.PositiveIntegerField(_('Code'), primary_key=True)
-    name = models.CharField(_('Product Name'))
+    name = models.CharField(_('Product Name'), max_length=200)
     description = models.CharField(_('Description'), max_length=200)
     quantity = models.PositiveIntegerField(_('Quantity'))
-    producer = models.CharField(_('Description'))
+    producer = models.CharField(_('Producer'), max_length=200)
 
     lastupdate_by = models.ForeignKey('accounts.UserProfile',
                                     related_name='companies_edited',
