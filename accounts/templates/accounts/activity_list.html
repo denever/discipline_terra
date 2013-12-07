@@ -1,0 +1,55 @@
+{% extends "accounts/base-accounts.html" %}
+{% load i18n %}
+
+{% block extra_head %}
+<script type="text/javascript" charset="utf-8" src="/static/datatables/js/jquery.dataTables.js"></script>
+<link href="/static/datatables/css/demo_table_jui.css" type="text/css" media="all" rel="stylesheet"/>
+{% endblock %}
+
+{% block title %}{% trans "Activity" %} {{ user }}{% endblock %}
+{% block title2 %}{% trans "Activity" %} {{ user }}{% endblock %}
+
+{% block content %}
+<script type="text/javascript">
+  $(document).ready( function () {
+  $('#activities').dataTable({"bJQueryUI": true, "aaSorting": [[ 0, "desc"]],
+  "oLanguage": { "sUrl": "/static/dataTables.italian.txt" }});
+  });
+</script>
+<div class="ui-helper-reset ui-widget">
+  <h1 class="ui-helper-reset ui-widget-header">{% trans "Activity" %}</h1>
+  <div class="ui-helper-reset ui-widget-content">
+    <table id="activities" class="display">
+      <thead>
+        <tr>
+          <th>{% trans "Date" %}</th>
+          <th>{% trans "Action" %}</th>
+          <th>{% trans "On" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for activity in activities %}
+        <tr>
+          <td>
+            {{ activity.date }}
+          </td>
+          <td>
+            {% if activity.action == 2 or activity.action == 3 %}
+            <a href="{% url activity-detail activity.id %}">
+            {{ activity.get_action_description }}
+            </a>
+            {% else %}
+            {{ activity.get_action_description }}
+            {% endif %}
+          </td>
+          <td>
+            {{ activity.get_content_type_name }}
+            {{ activity.object_repr }}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
