@@ -12,7 +12,7 @@ from django.dispatch import receiver
 from django.utils.encoding import force_unicode
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
-from django.utils import simplejson
+# from django.utils import simplejson -> json
 
 LOGIN, LOGOUT, CREATE, EDIT, DELETE = range(5)
 
