@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 
 from django.views.generic import TemplateView
 from django.views.generic import ListView, DetailView
-from django.utils import simplejson
+import json
 
 from accounts.models import UserProfile, Activity
 
@@ -25,7 +25,7 @@ class ActivityDetailView(DetailView):
         context = super(ActivityDetailView, self).get_context_data(**kwargs)
         activity = context['activity']
         try:
-            context['diff_list'] = simplejson.loads(activity.serialized_data)
+            context['diff_list'] = json.loads(activity.serialized_data)
         except Exception, e:
             print e
         return context
