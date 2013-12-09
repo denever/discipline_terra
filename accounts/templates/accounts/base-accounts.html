@@ -4,22 +4,17 @@
 {% block title %}{% trans "Account" %} {{ user }} {% endblock %}
 {% block title2 %}{% trans "Account" %} {{ user }} {% endblock %}
 
-{% block accountmenu %}
-<h3><a href="#">{% trans "Account" %}</a></h3>
-<div>
-  <ul class="menu">
+{% block navbar %}
     <li>
-      <a href="{% url profile %}">{% trans "Account" %}</a>
+      <a href="{% url 'profile' %}">{% trans "Account" %}</a>
     </li>
     <li>
-      <a href="{% url change-passwd %}">{% trans "Change password" %}</a>
+      <a href="{% url 'change-passwd' %}">{% trans "Change password" %}</a>
     </li>
     <li>
-      <a href="{% url activities %}">{% trans "Recent Activities" %}</a>
+      <a href="{% url 'activities' %}">{% trans "Recent Activities" %}</a>
     </li>
     <li>
-      <a href="{% url logout %}">{% trans "Logout" %}</a>
+      <a href="{% url 'logout' %}">{% trans "Logout" %}</a>
     </li>
-  </ul>
-</div>
 {% endblock %}

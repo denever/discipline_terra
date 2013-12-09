@@ -35,7 +35,7 @@
           </td>
           <td>
             {% if activity.action == 2 or activity.action == 3 %}
-            <a href="{% url activity-detail activity.id %}">
+            <a href="{% url 'activity-detail' activity.id %}">
             {{ activity.get_action_description }}
             </a>
             {% else %}
