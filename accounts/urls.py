@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required, permission_required
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls import patterns, include, url
 from accounts.views import ProfileView, ActivityListView, ActivityDetailView
 
 urlpatterns = patterns('accounts.views',
@@ -35,5 +35,6 @@ urlpatterns += patterns('',
 
                        (r'^changedone/$', 'django.contrib.auth.views.password_change_done',
                         {'template_name': 'accounts/password_change_done.html'},
+                        'password_change_done',
                         ),
                         )
