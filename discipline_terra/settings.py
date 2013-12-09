@@ -129,6 +129,7 @@ INSTALLED_APPS = (
     'stock',
     'accounts',
     'cover',
+#    'registration',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
@@ -161,3 +162,5 @@ LOGGING = {
         },
     }
 }
+
+AUTH_PROFILE_MODULE = "accounts.UserProfile"
