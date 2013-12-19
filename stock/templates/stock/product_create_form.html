@@ -26,12 +26,12 @@
 	{% for field in form %}
 	<div class="form-group {% if field.errors %}has-error{% endif %}">
 	  <label class="form-control" for="id_{{ field.html_name }}">{{ field.label }}</label>
-	  {{ field }}
 	  {% if field.errors %}
 	  {% for error in field.errors %}
 	  <p class="help-block">{{ error }}</p>
 	  {% endfor %}
 	  {% endif %}
+	  {{ field }}
 	</div>
 	{% endfor %}
 	<button type="submit" class="btn btn-default">{% trans "Save" %}</button>
@@ -40,16 +40,3 @@
     {% endblock %}
   </div>
 </div>
-
-<!-- <div class="form-group has-success"> -->
-<!--   <label class="control-label" for="inputSuccess">Input with success</label> -->
-<!--   <input type="text" class="form-control" id="inputSuccess"> -->
-<!-- </div> -->
-<!-- <div class="form-group has-warning"> -->
-<!--   <label class="control-label" for="inputWarning">Input with warning</label> -->
-<!--   <input type="text" class="form-control" id="inputWarning"> -->
-<!-- </div> -->
-<!-- <div class="form-group has-error"> -->
-<!--   <label class="control-label" for="inputError">Input with error</label> -->
-<!--   <input type="text" class="form-control" id="inputError"> -->
-<!--   </div> -->
