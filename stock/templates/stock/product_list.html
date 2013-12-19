@@ -10,7 +10,7 @@
   <thead>
     <tr>
       <td>{% trans "Code" %}</td>
-      <td>{% trans "Name" %}</td>
+      <td>{% trans "Description" %}</td>
       <td>{% trans "Quantity" %}</td>
       <td>{% trans "Producer" %}</td>
     </tr>
@@ -19,7 +19,7 @@
     {% for product in products %}
     <tr>
       <td><a href="{% url 'product-detail' product.code %}">{{product.code}}</a></td>
-      <td>{{product.name}}</td>
+      <td>{{product.description}}</td>
       <td>{{product.quantity}}</td>
       <td>{{product.producer}}</td>
       <td>

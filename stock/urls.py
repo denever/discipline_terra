@@ -11,7 +11,7 @@ urlpatterns = patterns('stock.views',
                        url(r'^$', login_required(ProductListView.as_view()),
                            name='stock'),
 
-                       url(r'^(?P<pk>\d+)/$',
+                       url(r'^product/(?P<pk>\w+)$',
                            login_required(ProductDetailView.as_view()),
                            name = 'product-detail'),
 
@@ -20,12 +20,12 @@ urlpatterns = patterns('stock.views',
                            name = 'product-create'
                            ),
 
-                       url(r'^(?P<pk>\d+)/update/$',
+                       url(r'^update/(?P<pk>\w+)$',
                            login_required(ProductUpdateView.as_view()),
                            name = 'product-edit'
                            ),
 
-                       url(r'^delete_product/(?P<pk>\d+)/$',
+                       url(r'^delete_product/(?P<pk>\w+)$',
                            login_required(ProductDeleteView.as_view()),
                            name = 'product-delete'
                            ),
