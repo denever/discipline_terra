@@ -129,6 +129,7 @@ INSTALLED_APPS = (
     'stock',
     'accounts',
     'cover',
+    'django_openid_auth',
 #    'registration',
 )
 
@@ -164,3 +165,15 @@ LOGGING = {
 }
 
 AUTH_PROFILE_MODULE = "accounts.UserProfile"
+
+
+################ django openid auth #############
+AUTHENTICATION_BACKENDS = (
+        'django.contrib.auth.backends.ModelBackend',
+        'accounts.auth.GoogleBackend',
+    )
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/'
+OPENID_SSO_SERVER_URL = 'https://www.google.com/accounts/o8/id'
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'

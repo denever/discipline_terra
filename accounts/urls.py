@@ -18,23 +18,33 @@ urlpatterns = patterns('accounts.views',
                        )
 
 urlpatterns += patterns('',
-                       (r'^login/$', 'django.contrib.auth.views.login',
-                        {'template_name': 'accounts/login.html'},
-                        "login"
-                        ),
+                        url(r'^google/login/$',
+                            'django_openid_auth.views.login_begin',
+                            name='openid-login'),
+                        url(r'^google/login-complete/$',
+                            'django_openid_auth.views.login_complete',
+                            name='openid-complete'),
+                        url(r'^logout/$',
+                            'django.contrib.auth.views.logout',
+                            {'next_page': '/',}),
+                    )
 
-                       (r'^logout/$', 'django.contrib.auth.views.logout',
-                        {'template_name': 'accounts/logout.html'},
-                        "logout",
-                        ),
+                       # (r'^login/$', 'django.contrib.auth.views.login',
+                       #  {'template_name': 'accounts/login.html'},
+                       #  "login"
+                       #  ),
 
-                       (r'^changepasswd/$', 'django.contrib.auth.views.password_change',
-                        {'template_name': 'accounts/password_change_form.html'},
-                        'change-passwd',
-                        ),
+                       # (r'^logout/$', 'django.contrib.auth.views.logout',
+                       #  {'template_name': 'accounts/logout.html'},
+                       #  "logout",
+                       #  ),
 
-                       (r'^changedone/$', 'django.contrib.auth.views.password_change_done',
-                        {'template_name': 'accounts/password_change_done.html'},
-                        'password_change_done',
-                        ),
-                        )
+                       # (r'^changepasswd/$', 'django.contrib.auth.views.password_change',
+                       #  {'template_name': 'accounts/password_change_form.html'},
+                       #  'change-passwd',
+                       #  ),
+
+                       # (r'^changedone/$', 'django.contrib.auth.views.password_change_done',
+                       #  {'template_name': 'accounts/password_change_done.html'},
+                       #  'password_change_done',
+                       #  ),
