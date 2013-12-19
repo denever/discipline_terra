@@ -1,8 +1,37 @@
 {% extends "stock/base-stock.html" %}
 {% load i18n %}
-{% for product in products %}
-{{product.code}}
-{{product.name}}
-{{product.quantity}}
-{{product.producer}}
-{% endfor %}
+
+{% block container %}
+<h3>Products</h3>
+<p>
+  <a href="{% url 'product-create' %}"><span class="glyphicon glyphicon-plus"></span> New product </a>
+</p>
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <td>{% trans "Code" %}</td>
+      <td>{% trans "Name" %}</td>
+      <td>{% trans "Quantity" %}</td>
+      <td>{% trans "Producer" %}</td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in products %}
+    <tr>
+      <td><a href="{% url 'product-detail' product.code %}">{{product.code}}</a></td>
+      <td>{{product.name}}</td>
+      <td>{{product.quantity}}</td>
+      <td>{{product.producer}}</td>
+      <td>
+	<a type="button" class="btn btn-default btn-xs" href="{% url 'product-edit' product.code %}">
+	  <span class="glyphicon glyphicon-edit"></span>
+	</a>
+	<a type="button" class="btn btn-default btn-xs"  href="{% url 'product-delete' product.code %}">
+	  <span class="glyphicon glyphicon-trash"></span>
+	</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

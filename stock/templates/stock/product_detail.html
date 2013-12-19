@@ -1,7 +1,29 @@
 {% extends "stock/base-stock.html" %}
 {% load i18n %}
-{{product.code}}
-{{product.name}}
-{{product.quantity}}
-{{product.producer}}
-
+{% block container %}
+<h3>{{product.name}}</h3>
+<p>
+  <a type="button" class="btn btn-default btn-xs" href="{% url 'product-edit' product.code %}">
+    <span class="glyphicon glyphicon-edit"></span>
+  </a>
+  <a type="button" class="btn btn-default btn-xs"  href="{% url 'product-delete' product.code %}">
+    <span class="glyphicon glyphicon-trash"></span>
+  </a>
+</p>
+<table class="table table-hover">
+  <tbody>
+    <tr>
+      <td>{% trans "Code" %}</td><td>{{product.code}}
+    </tr>
+    <tr>
+      <td>{% trans "Name" %}</td><td>{{product.name}}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Quantity" %}</td><td>{{product.quantity}}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Producer" %}</td><td>{{product.producer}}</td>
+    </tr>
+  </tbody>
+</table>
+{% endblock %}
