@@ -34,7 +34,7 @@ class ProductCreateView(CreateView):
 class ProductUpdateView(UpdateView):
     model = Product
     form_class = ProductForm
-    template_name = 'products/product_update_form.html'
+    template_name = 'stock/product_update_form.html'
     success_url = '/stock/'
     context_object_name = 'product'
 
@@ -42,7 +42,7 @@ class ProductUpdateView(UpdateView):
         self.product = form.save(commit=False)
         self.product.lastupdate_by = self.request.user.get_profile()
         self.product.newrevision_needed = True
-        self.success_url = reverse('product-detail', args=self.kwargs['pk'])
+        self.success_url = reverse('product-detail', args=[self.kwargs['pk']])
         return super(ProductUpdateView, self).form_valid(form)
 
     # def get_initial(self):
@@ -54,5 +54,5 @@ class ProductUpdateView(UpdateView):
 class ProductDeleteView(DeleteView):
     model = Product
     form_class = ProductForm
-    success_url = '/products/'
+    success_url = '/stock/'
     context_object_name = 'product'
