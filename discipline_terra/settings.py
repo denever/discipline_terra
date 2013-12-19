@@ -172,7 +172,7 @@ AUTHENTICATION_BACKENDS = (
         'django.contrib.auth.backends.ModelBackend',
         'accounts.auth.GoogleBackend',
     )
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/stock'
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 OPENID_SSO_SERVER_URL = 'https://www.google.com/accounts/o8/id'
