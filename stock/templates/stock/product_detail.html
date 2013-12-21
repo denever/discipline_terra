@@ -3,10 +3,10 @@
 {% block container %}
 <h3>{{product.name}}</h3>
 <p>
-  <a type="button" class="btn btn-default btn-xs" href="{% url 'product-edit' product.code %}">
+  <a type="button" class="btn btn-default btn-xs" href="{% url 'product-edit' product.id %}">
     <span class="glyphicon glyphicon-edit"></span>
   </a>
-  <a type="button" class="btn btn-default btn-xs"  href="{% url 'product-delete' product.code %}">
+  <a type="button" class="btn btn-default btn-xs"  href="{% url 'product-delete' product.id %}">
     <span class="glyphicon glyphicon-trash"></span>
   </a>
 </p>
