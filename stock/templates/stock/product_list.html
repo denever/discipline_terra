@@ -37,40 +37,4 @@
     {% endfor %}
   </tbody>
 </table>
-
-<h3>Packages</h3>
-<p>
-  <a href="{% url 'package-create' %}"><span class="glyphicon glyphicon-plus"></span> New package </a>
-</p>
-<table class="table table-hover table-bordered">
-  <thead>
-    <tr>
-      <td>{% trans "Code" %}</td>
-      <td>{% trans "Description" %}</td>
-      <td>{% trans "Quantity" %}</td>
-      <td>{% trans "Producer" %}</td>
-    </tr>
-  </thead>
-  <tbody>
-    {% for package in packages %}
-    <tr>
-      <td>{{package.product}}</td>
-      <td>{{package.description}}</td>
-      <td>{{package.quantity}}</td>
-      <td>{{package.producer}}</td>
-      <td>
-	<a href="{% url 'package-detail' package.product %}">
-	  <span class="glyphicon glyphicon-eye-open"></span>
-	</a>
-	<a type="button" class="btn btn-default btn-xs" href="{% url 'package-edit' package.product %}">
-	  <span class="glyphicon glyphicon-edit"></span>
-	</a>
-	<a type="button" class="btn btn-default btn-xs"  href="{% url 'package-delete' package.product %}">
-	  <span class="glyphicon glyphicon-trash"></span>
-	</a>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
 {% endblock %}

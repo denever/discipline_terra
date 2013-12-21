@@ -1,0 +1,42 @@
+{% extends "stock/base-stock.html" %}
+
+{% load i18n %}
+{% block extra_head %}
+{{ form.media }}
+{% endblock %}
+
+{% block title %}{% trans "New package registration" %}{% endblock %}
+
+{% block container %}
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">{% trans "New package registration" %}</h3>
+  </div>
+  <div class="panel-body">
+    <form role="form" action="{{ form.success_url }}" method="post">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+      <div class="form-group error">
+	{% for error in form.non_field_errors %}
+	<p class="help-block">{{ error }}</p>
+	{% endfor %}
+      </div>
+      {% endif %}
+      <fieldset>
+	{% for field in form %}
+	<div class="form-group {% if field.errors %}has-error{% endif %}">
+	  <label class="form-control" for="id_{{ field.html_name }}">{{ field.label }}</label>
+	  {% if field.errors %}
+	  {% for error in field.errors %}
+	  <p class="help-block">{{ error }}</p>
+	  {% endfor %}
+	  {% endif %}
+	  {{ field }}
+	</div>
+	{% endfor %}
+	<button type="submit" class="btn btn-default">{% trans "Save" %}</button>
+      </fieldset>
+    </form>
+    {% endblock %}
+  </div>
+</div>

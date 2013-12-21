@@ -17,6 +17,9 @@ urlpatterns = patterns('stock.views',
                        url(r'^$', login_required(ProductListView.as_view()),
                            name='stock'),
 
+                       url(r'^products/$', login_required(ProductListView.as_view()),
+                           name='products'),
+
                        url(r'^product/(?P<pk>\w+)$',
                            login_required(ProductDetailView.as_view()),
                            name = 'product-detail'),
@@ -35,6 +38,9 @@ urlpatterns = patterns('stock.views',
                            login_required(ProductDeleteView.as_view()),
                            name = 'product-delete'
                            ),
+
+                       url(r'^packages/$', login_required(PackageListView.as_view()),
+                           name='packages'),
 
                        url(r'^package/(?P<pk>\w+)$',
                            login_required(PackageDetailView.as_view()),

@@ -1,0 +1,19 @@
+{% extends "stock/base-stock.html" %}
+{% load i18n %}
+{% block container %}
+<div class="panel panel-warning">
+  <div class="panel-heading">
+    <h3 class="panel-title">{% trans "Delete package confirm" %}</h3>
+  </div>
+  <div class="panel-body">
+    <p>
+      {% trans "Do you really want to remove package for product" %} <strong>{{ package.product }}</strong>?
+    </p>
+    <form role="form" method="post">
+      {% csrf_token %}
+	<input type="hidden" name="post" value="yes">
+	<input type="submit" value="{% trans "Yes, I'm sure" %}">
+    </form>
+  </div>
+</div>
+{% endblock %}

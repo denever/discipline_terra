@@ -23,7 +23,7 @@ class ProductDetailView(DetailView):
 class ProductCreateView(CreateView):
     form_class = ProductForm
     template_name = 'stock/product_create_form.html'
-    success_url = '/stock/'
+    success_url = '/stock/products/'
 
     def form_valid(self, form):
         self.product = form.save(commit=False)
@@ -35,7 +35,7 @@ class ProductUpdateView(UpdateView):
     model = Product
     form_class = ProductForm
     template_name = 'stock/product_update_form.html'
-    success_url = '/stock/'
+    success_url = '/stock/products/'
     context_object_name = 'product'
 
     def form_valid(self, form):
@@ -54,7 +54,7 @@ class ProductUpdateView(UpdateView):
 class ProductDeleteView(DeleteView):
     model = Product
     form_class = ProductForm
-    success_url = '/stock/'
+    success_url = '/stock/products'
     context_object_name = 'product'
 
 # Packages managment
@@ -70,7 +70,7 @@ class PackageDetailView(DetailView):
 class PackageCreateView(CreateView):
     form_class = PackageForm
     template_name = 'stock/package_create_form.html'
-    success_url = '/stock/'
+    success_url = '/stock/packages/'
 
     def form_valid(self, form):
         self.package = form.save(commit=False)
@@ -82,7 +82,7 @@ class PackageUpdateView(UpdateView):
     model = Package
     form_class = PackageForm
     template_name = 'stock/package_update_form.html'
-    success_url = '/stock/'
+    success_url = '/stock/packages/'
     context_object_name = 'package'
 
     def form_valid(self, form):
@@ -101,5 +101,5 @@ class PackageUpdateView(UpdateView):
 class PackageDeleteView(DeleteView):
     model = Package
     form_class = PackageForm
-    success_url = '/stock/'
+    success_url = '/stock/packages/'
     context_object_name = 'package'
