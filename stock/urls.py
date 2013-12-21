@@ -20,7 +20,7 @@ urlpatterns = patterns('stock.views',
                        url(r'^products/$', login_required(ProductListView.as_view()),
                            name='products'),
 
-                       url(r'^product/(?P<pk>\w+)$',
+                       url(r'^product/(?P<pk>\d+)$',
                            login_required(ProductDetailView.as_view()),
                            name = 'product-detail'),
 
@@ -29,12 +29,12 @@ urlpatterns = patterns('stock.views',
                            name = 'product-create'
                            ),
 
-                       url(r'^product_update/(?P<pk>\w+)$',
+                       url(r'^product_update/(?P<pk>\d+)$',
                            login_required(ProductUpdateView.as_view()),
                            name = 'product-edit'
                            ),
 
-                       url(r'^product_delete/(?P<pk>\w+)$',
+                       url(r'^product_delete/(?P<pk>\d+)$',
                            login_required(ProductDeleteView.as_view()),
                            name = 'product-delete'
                            ),
@@ -42,7 +42,7 @@ urlpatterns = patterns('stock.views',
                        url(r'^packages/$', login_required(PackageListView.as_view()),
                            name='packages'),
 
-                       url(r'^package/(?P<pk>\w+)$',
+                       url(r'^package/(?P<pk>\d+)$',
                            login_required(PackageDetailView.as_view()),
                            name = 'package-detail'),
 
@@ -51,12 +51,12 @@ urlpatterns = patterns('stock.views',
                            name = 'package-create'
                            ),
 
-                       url(r'^package_update/(?P<pk>\w+)$',
+                       url(r'^package_update/(?P<pk>\d+)$',
                            login_required(PackageUpdateView.as_view()),
                            name = 'package-edit'
                            ),
 
-                       url(r'^package_delete/(?P<pk>\w+)$',
+                       url(r'^package_delete/(?P<pk>\d+)$',
                            login_required(PackageDeleteView.as_view()),
                            name = 'package-delete'
                            ),
