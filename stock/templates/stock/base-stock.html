@@ -1,6 +1,7 @@
 {% extends "templates/base.html" %}
 {% load i18n %}
-{% block title %}Stock management{% endblock %}
+{% block title %}{% trans "Stock management" %}{% endblock %}
+
 {% block navbar %}
 <li class="active">
   <a href="{% url 'stock' %}">{% trans "Products" %}</a>
@@ -9,4 +10,5 @@
   <a href="{% url 'packages' %}">{% trans "Packages" %}</a>  
 </li>
 {% endblock %}
+
 
