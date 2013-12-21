@@ -10,7 +10,7 @@ from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
 
-from stock.forms import ProductForm
+from stock.forms import ProductForm, PackageForm
 
 class ProductListView(ListView):
     queryset = Product.objects.all()
@@ -56,3 +56,50 @@ class ProductDeleteView(DeleteView):
     form_class = ProductForm
     success_url = '/stock/'
     context_object_name = 'product'
+
+# Packages managment
+
+class PackageListView(ListView):
+    queryset = Package.objects.all()
+    context_object_name = 'packages'
+
+class PackageDetailView(DetailView):
+    model = Package
+    context_object_name = 'package'
+
+class PackageCreateView(CreateView):
+    form_class = PackageForm
+    template_name = 'stock/package_create_form.html'
+    success_url = '/stock/'
+
+    def form_valid(self, form):
+        self.package = form.save(commit=False)
+        self.package.record_by = self.request.user.get_profile()
+        self.package.lastupdate_by = self.request.user.get_profile()
+        return super(PackageCreateView, self).form_valid(form)
+
+class PackageUpdateView(UpdateView):
+    model = Package
+    form_class = PackageForm
+    template_name = 'stock/package_update_form.html'
+    success_url = '/stock/'
+    context_object_name = 'package'
+
+    def form_valid(self, form):
+        self.package = form.save(commit=False)
+        self.package.lastupdate_by = self.request.user.get_profile()
+        self.package.newrevision_needed = True
+        self.success_url = reverse('package-detail', args=[self.kwargs['pk']])
+        return super(PackageUpdateView, self).form_valid(form)
+
+    # def get_initial(self):
+    #     self.initial = super(PackageUpdateView, self).get_initial()
+    #     self.initial['ateco_sector'] = self.object.ateco_sector.name
+    #     self.initial['cpi'] = self.object.cpi.name
+    #     return self.initial
+
+class PackageDeleteView(DeleteView):
+    model = Package
+    form_class = PackageForm
+    success_url = '/stock/'
+    context_object_name = 'package'
