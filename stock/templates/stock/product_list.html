@@ -18,11 +18,14 @@
   <tbody>
     {% for product in products %}
     <tr>
-      <td><a href="{% url 'product-detail' product.code %}">{{product.code}}</a></td>
+      <td>{{product.code}}</td>
       <td>{{product.description}}</td>
       <td>{{product.quantity}}</td>
       <td>{{product.producer}}</td>
       <td>
+	<a href="{% url 'product-detail' product.code %}">
+	  <span class="glyphicon glyphicon-eye-open"></span>
+	</a>
 	<a type="button" class="btn btn-default btn-xs" href="{% url 'product-edit' product.code %}">
 	  <span class="glyphicon glyphicon-edit"></span>
 	</a>
@@ -51,11 +54,14 @@
   <tbody>
     {% for package in packages %}
     <tr>
-      <td><a href="{% url 'package-detail' package.product %}">{{package.product}}</a></td>
+      <td>{{package.product}}</td>
       <td>{{package.description}}</td>
       <td>{{package.quantity}}</td>
       <td>{{package.producer}}</td>
       <td>
+	<a href="{% url 'package-detail' package.product %}">
+	  <span class="glyphicon glyphicon-eye-open"></span>
+	</a>
 	<a type="button" class="btn btn-default btn-xs" href="{% url 'package-edit' package.product %}">
 	  <span class="glyphicon glyphicon-edit"></span>
 	</a>
