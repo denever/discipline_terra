@@ -4,7 +4,7 @@ from django.utils.translation import ugettext as _
 
 # Create your models here.
 class Product(models.Model):
-    code = models.CharField(_('Code'), max_length=200, primary_key=True)
+    code = models.CharField(_('Code'), max_length=200, unique=True)
     description = models.CharField(_('Description'), max_length=200)
     quantity = models.PositiveIntegerField(_('Quantity'))
     producer = models.CharField(_('Producer'), max_length=200)
@@ -27,7 +27,7 @@ class Product(models.Model):
 
 
 class Package(models.Model):
-    product = models.ForeignKey(Product, verbose_name=_('Product'))
+    product = models.ForeignKey(Product, verbose_name=_('Product'), unique=True)
     size = models.PositiveIntegerField(_('Package size'))
     barcode = models.PositiveIntegerField(_('Barcode'), max_length=200)
 
