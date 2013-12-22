@@ -1,0 +1,55 @@
+{% extends "catalog/base-catalog.html" %}
+{% load i18n %}
+
+{% block container %}
+<h3>Prices</h3>
+<p>
+  <a href="{% url 'price-create' %}"><span class="glyphicon glyphicon-plus"></span> New price </a>
+</p>
+{% if is_paginated %}
+<ul class="pager">
+  {% if page_obj.has_previous %}
+  <li class="previous"><a href="/catalog/prices?page={{ page_obj.previous_page_number }}">&larr; {% trans "Previous" %}</a></li>
+  {% endif %}
+  <li>{% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}.</li>
+  {% if page_obj.has_next %}
+  <li class="next"><a href="/catalog/prices?page={{ page_obj.next_page_number }}">{% trans "Next" %} &rarr;</a></li>
+  {% endif %}
+</ul>
+{% endif %}
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <td>{% trans "Product" %}</td>
+      <td>{% trans "Price in" %}</td>
+      <td>{% trans "VAT IN" %}</td>
+      <td>{% trans "Gain" %}</td>
+      <td>{% trans "VAT OUT" %}</td>
+      <td>{% trans "Price out" %}</td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for price in prices %}
+    <tr>
+      <td>{{price.product}}</td>
+      <td>{{price.price_in}} €</td>
+      <td>{{price.vat_in}} %</td>
+      <td>{{price.gain_percentage}} %</td>
+      <td>{{price.vat_out}} %</td>      
+      <td>{{price.price_out}} €</td>      
+      <td>
+        <a href="{% url 'price-detail' price.id %}">
+          <span class="glyphicon glyphicon-eye-open"></span>
+        </a>
+        <a type="button" class="btn btn-default btn-xs" href="{% url 'price-edit' price.id %}">
+          <span class="glyphicon glyphicon-edit"></span>
+        </a>
+        <a type="button" class="btn btn-default btn-xs"  href="{% url 'price-delete' price.id %}">
+          <span class="glyphicon glyphicon-trash"></span>
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

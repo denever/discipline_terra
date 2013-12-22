@@ -1,0 +1,35 @@
+{% extends "catalog/base-catalog.html" %}
+{% load i18n %}
+{% block container %}
+<h3>{% trans "Price for" %} {{price.product}}</h3>
+<p>
+  <a type="button" class="btn btn-default btn-xs" href="{% url 'price-edit' price.id %}">
+    <span class="glyphicon glyphicon-edit"></span>
+  </a>
+  <a type="button" class="btn btn-default btn-xs"  href="{% url 'price-delete' price.id %}">
+    <span class="glyphicon glyphicon-trash"></span>
+  </a>
+</p>
+<table class="table table-hover">
+  <tbody>
+    <tr>
+      <td>{% trans "Product" %}</td><td>{{price.product}}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Price in" %}</td><td>{{price.price_in}} €</td>
+    </tr>
+    <tr>
+      <td>{% trans "VAT in" %}</td><td>{{price.vat_in}} %</td>
+    </tr>
+    <tr>
+      <td>{% trans "Gain" %}</td><td>{{price.gain_percentage}} %</td>
+    </tr>
+    <tr>
+      <td>{% trans "VAT out" %}</td><td>{{price.vat_out}} %</td>
+    </tr>
+    <tr>
+      <td>{% trans "Price out" %}</td><td>{{price.price_out}} €</td>
+    </tr>
+  </tbody>
+</table>
+{% endblock %}

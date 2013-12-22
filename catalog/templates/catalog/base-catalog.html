@@ -1,0 +1,9 @@
+{% extends "templates/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Catalog management" %}{% endblock %}
+
+{% block navbar %}
+<li class="active">
+  <a href="{% url 'prices' %}">{% trans "Prices" %}</a>
+</li>
+{% endblock %}
