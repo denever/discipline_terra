@@ -130,6 +130,7 @@ INSTALLED_APPS = (
     'accounts',
     'cover',
     'django_openid_auth',
+    'catalog',
 #    'registration',
 )
 
