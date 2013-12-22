@@ -25,6 +25,15 @@ class Product(models.Model):
         verbose_name = _('Product')
         verbose_name_plural = _('Products')
 
+    def status(self):
+        tot = 4 * self.wrn_tsh
+        prc = int(100*float(self.quantity) / float(tot))
+        if self.quantity < self.wrn_tsh:        
+            return ('danger', prc)
+        if self.quantity - self.wrn_tsh > self.wrn_tsh:
+            return ('success', prc)
+        if self.quantity - self.wrn_tsh < self.wrn_tsh:
+            return ('warning', prc)
 
 class Package(models.Model):
     product = models.ForeignKey(Product, verbose_name=_('Product'), unique=True)

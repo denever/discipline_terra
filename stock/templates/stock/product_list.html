@@ -33,6 +33,12 @@
           <span class="glyphicon glyphicon-trash"></span>
         </a>
       </td>
+    </tr>      
+    <tr>
+      <td colspan="5" class="progress">
+	<span class="progress-bar progress-bar-{{product.status.0}}" role="progressbar" aria-valuenow="{{product.status.1}}" aria-valuemin="0" aria-valuemax="100" style="width: {{product.status.1}}%">
+	</span>
+      </td>
     </tr>
     {% endfor %}
   </tbody>
