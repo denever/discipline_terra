@@ -15,6 +15,7 @@ from stock.forms import ProductForm, PackageForm
 class ProductListView(ListView):
     queryset = Product.objects.all()
     context_object_name = 'products'
+    paginate_by = 5
 
 class ProductDetailView(DetailView):
     model = Product
@@ -62,6 +63,7 @@ class ProductDeleteView(DeleteView):
 class PackageListView(ListView):
     queryset = Package.objects.all()
     context_object_name = 'packages'
+    paginate_by = 5
 
 class PackageDetailView(DetailView):
     model = Package

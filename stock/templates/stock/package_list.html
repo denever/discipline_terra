@@ -6,6 +6,17 @@
 <p>
   <a href="{% url 'package-create' %}"><span class="glyphicon glyphicon-plus"></span> New package </a>
 </p>
+{% if is_paginated %}
+<ul class="pager">
+  {% if page_obj.has_previous %}
+  <li class="previous"><a href="/stock/packages?page={{ page_obj.previous_page_number }}">&larr; {% trans "Previous" %}</a></li>
+  {% endif %}
+  <li>{% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}.</li>
+  {% if page_obj.has_next %}
+  <li class="next"><a href="/stock/packages?page={{ page_obj.next_page_number }}">{% trans "Next" %} &rarr;</a></li>
+  {% endif %}
+</ul>
+{% endif %}
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -21,17 +32,16 @@
       <td>{{package.product}}</td>
       <td>{{package.size}}</td>
       <td>{{package.barcode}}</td>
-      <td>{{package.producer}}</td>
       <td>
-	<a href="{% url 'package-detail' package.id %}">
-	  <span class="glyphicon glyphicon-eye-open"></span>
-	</a>
-	<a type="button" class="btn btn-default btn-xs" href="{% url 'package-edit' package.id %}">
-	  <span class="glyphicon glyphicon-edit"></span>
-	</a>
-	<a type="button" class="btn btn-default btn-xs"  href="{% url 'package-delete' package.id %}">
-	  <span class="glyphicon glyphicon-trash"></span>
-	</a>
+        <a href="{% url 'package-detail' package.id %}">
+          <span class="glyphicon glyphicon-eye-open"></span>
+        </a>
+        <a type="button" class="btn btn-default btn-xs" href="{% url 'package-edit' package.id %}">
+          <span class="glyphicon glyphicon-edit"></span>
+        </a>
+        <a type="button" class="btn btn-default btn-xs"  href="{% url 'package-delete' package.id %}">
+          <span class="glyphicon glyphicon-trash"></span>
+        </a>
       </td>
     </tr>
     {% endfor %}
