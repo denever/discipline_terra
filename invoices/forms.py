@@ -3,7 +3,7 @@ from django.forms import TextInput, NumberInput, Select
 from django.utils.translation import ugettext as _
 from localflavor.it.forms import ITSocialSecurityNumberField, ITVatNumberField
 
-from invoices.models import Customer
+from invoices.models import Customer, Order, Item
 from invoices.widgets import ITPhoneNumberField, AddressFormField
 
 class CustomerForm(forms.ModelForm):
@@ -24,3 +24,21 @@ class CustomerForm(forms.ModelForm):
             # 'vat_code': TextInput(attrs={'class': 'form-control'}),
             'email': TextInput(attrs={'class': 'form-control'}),
         }
+
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+
+        widgets = {
+            'customer': Select(attrs={'class': 'form-control'}),
+            }
+
+class ItemForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        exclude = ('order',)
+
+        widgets = {
+            'price': Select(attrs={'class': 'form-control'}),
+            'pieces': NumberInput(attrs={'class': 'form-control'}),
+            }

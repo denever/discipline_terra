@@ -1,0 +1,53 @@
+{% extends "invoices/base-invoices.html" %}
+{% load i18n %}
+
+{% block container %}
+<h3>Orders</h3>
+<p>
+  <a href="{% url 'order-create' %}"><span class="glyphicon glyphicon-plus"></span> New order </a>
+</p>
+{% if is_paginated %}
+<ul class="pager">
+  {% if page_obj.has_previous %}
+  <li class="previous"><a href="/invoices/orders?page={{ page_obj.previous_page_number }}">&larr; {% trans "Previous" %}</a></li>
+  {% endif %}
+  <li>{% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}.</li>
+  {% if page_obj.has_next %}
+  <li class="next"><a href="/invoices/orders?page={{ page_obj.next_page_number }}">{% trans "Next" %} &rarr;</a></li>
+  {% endif %}
+</ul>
+{% endif %}
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <td>{% trans "Customer" %}</td>
+      <td>{% trans "Items count" %}</td>
+      <td>{% trans "Total value" %}</td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for order in orders %}
+    <tr>
+      <td>
+        <a href="{% url 'customer-detail' order.customer.id %}">
+          <span class="glyphicon glyphicon-eye-open"></span>
+        </a>{{order.customer}}
+      </td>
+      <td>{{order.items_count}}</td>
+      <td>{{order.total_value}}</td>      
+      <td>
+        <a href="{% url 'order-detail' order.id %}">
+          <span class="glyphicon glyphicon-eye-open"></span>
+        </a>
+        <a type="button" class="btn btn-default btn-xs" href="{% url 'order-edit' order.id %}">
+          <span class="glyphicon glyphicon-edit"></span>
+        </a>
+        <a type="button" class="btn btn-default btn-xs"  href="{% url 'order-delete' order.id %}">
+          <span class="glyphicon glyphicon-trash"></span>
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -26,24 +26,24 @@ class Customer(models.Model):
         verbose_name_plural = _('Customers')
         get_latest_by = 'surname'
 
-class Cart(models.Model):
+class Item(models.Model):
     order = models.ForeignKey('invoices.Order',
-                                verbose_name=_('Order'), unique=True)
+                                verbose_name=_('Order'))
     price = models.ForeignKey('catalog.Price',
                               verbose_name=_('Product'), unique=True)
     pieces = models.IntegerField(_('Pieces'))
 
-    record_date = models.DateTimeField(_('Recorded on'), auto_now_add=True)
-
     class Meta:
-        verbose_name = _('Cart')
-        verbose_name_plural = _('Carts')
+        verbose_name = _('Item')
+        verbose_name_plural = _('Item')
 
+    @property
+    def value(self):
+        return float(self.pieces * self.price.price_out)
+    
 class Order(models.Model):
     customer = models.ForeignKey(Customer,
-                                verbose_name=_('Customer'), unique=True)
-
-    items = models.ManyToManyField('catalog.Price', through='Cart')
+                                verbose_name=_('Customer'))
 
     record_date = models.DateTimeField(_('Recorded on'), auto_now_add=True)
 
@@ -53,3 +53,17 @@ class Order(models.Model):
 
     def __unicode__(self):
         return _('Order of %s on %s: ') % (self.customer, self.record_date)
+
+    @property
+    def item_count(self):
+        total = int()
+        for item in self.item_set.all():
+            total += item.pieces
+        return total
+    
+    @property
+    def total_value(self):
+        total = float(0.0)
+        for item in self.item_set.all():
+            total += item.value
+        return total
