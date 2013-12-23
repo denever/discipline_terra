@@ -19,9 +19,6 @@ class CustomerForm(forms.ModelForm):
         widgets = {
             'surname': TextInput(attrs={'class': 'form-control'}),
             'name': TextInput(attrs={'class': 'form-control'}),
-            # 'phone': TextInput(),attrs={'class': 'form-control'}
-            # 'tax_code': TextInput(attrs={'class': 'form-control'}),
-            # 'vat_code': TextInput(attrs={'class': 'form-control'}),
             'email': TextInput(attrs={'class': 'form-control'}),
         }
 
