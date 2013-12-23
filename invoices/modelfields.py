@@ -1,6 +1,6 @@
 # encoding: utf-8
 from django.db import models
-from capautocomplete.widgets import AddressFormField
+from invoices.widgets import AddressFormField
 from urllib import urlencode
 
 class Address(object):
