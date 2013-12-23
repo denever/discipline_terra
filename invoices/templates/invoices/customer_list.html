@@ -1,0 +1,57 @@
+{% extends "invoices/base-invoices.html" %}
+{% load i18n %}
+
+{% block container %}
+<h3>Customers</h3>
+<p>
+  <a href="{% url 'customer-create' %}"><span class="glyphicon glyphicon-plus"></span> New customer </a>
+</p>
+{% if is_paginated %}
+<ul class="pager">
+  {% if page_obj.has_previous %}
+  <li class="previous"><a href="/invoices/customers?page={{ page_obj.previous_page_number }}">&larr; {% trans "Previous" %}</a></li>
+  {% endif %}
+  <li>{% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}.</li>
+  {% if page_obj.has_next %}
+  <li class="next"><a href="/invoices/customers?page={{ page_obj.next_page_number }}">{% trans "Next" %} &rarr;</a></li>
+  {% endif %}
+</ul>
+{% endif %}
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <td>{% trans "Surname" %}</td>
+      <td>{% trans "Name" %}</td>
+      <td>{% trans "Address" %}</td>
+      <td>{% trans "Tax Code" %}</td>
+      <td>{% trans "VAT Code" %}</td>
+      <td>{% trans "Phone" %}</td>
+      <td>{% trans "email" %}</td>      
+    </tr>
+  </thead>
+  <tbody>
+    {% for customer in customers %}
+    <tr>
+      <td>{{customer.surname}}</td>
+      <td>{{customer.name}}</td>
+      <td>{{customer.address}}</td>      
+      <td>{{customer.tax_code}}</td>
+      <td>{{customer.vat_code}}</td>
+      <td>{{customer.phone}}</td>      
+      <td>{{customer.email}}</td>      
+      <td>
+        <a href="{% url 'customer-detail' customer.id %}">
+          <span class="glyphicon glyphicon-eye-open"></span>
+        </a>
+        <a type="button" class="btn btn-default btn-xs" href="{% url 'customer-edit' customer.id %}">
+          <span class="glyphicon glyphicon-edit"></span>
+        </a>
+        <a type="button" class="btn btn-default btn-xs"  href="{% url 'customer-delete' customer.id %}">
+          <span class="glyphicon glyphicon-trash"></span>
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

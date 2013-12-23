@@ -1,0 +1,9 @@
+{% extends "templates/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Invoices management" %}{% endblock %}
+
+{% block navbar %}
+<li class="active">
+  <a href="{% url 'customers' %}">{% trans "Customers" %}</a>
+</li>
+{% endblock %}
