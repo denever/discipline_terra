@@ -30,17 +30,17 @@ class Item(models.Model):
     order = models.ForeignKey('invoices.Order',
                                 verbose_name=_('Order'))
     price = models.ForeignKey('catalog.Price',
-                              verbose_name=_('Product'), unique=True)
+                              verbose_name=_('Product'))
     pieces = models.IntegerField(_('Pieces'))
 
     class Meta:
         verbose_name = _('Item')
         verbose_name_plural = _('Item')
-
+        unique_together = ('order','price')
     @property
     def value(self):
         return float(self.pieces * self.price.price_out)
-    
+
 class Order(models.Model):
     customer = models.ForeignKey(Customer,
                                 verbose_name=_('Customer'))
@@ -60,7 +60,7 @@ class Order(models.Model):
         for item in self.item_set.all():
             total += item.pieces
         return total
-    
+
     @property
     def total_value(self):
         total = float(0.0)
