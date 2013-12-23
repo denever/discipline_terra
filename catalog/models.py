@@ -22,7 +22,7 @@ class Price(models.Model):
         verbose_name_plural = _('Prices')
 
     def __unicode__(self):
-        return _('Price of %s: ') % (self.product, self.price_out)
+        return _('Price of %s: %s') % (self.product, self.price_out)
 
     @property
     def price_out(self):
