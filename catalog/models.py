@@ -24,6 +24,7 @@ class Price(models.Model):
     def __unicode__(self):
         return _('Price of %s: ') % (self.product, self.price_out)
 
+    @property
     def price_out(self):
         tot_in = float(self.price_in + self.price_in*(self.vat_in/100))
         return float(tot_in + tot_in*(self.gain_percentage + self.vat_out)/100)
