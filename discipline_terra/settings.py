@@ -131,6 +131,8 @@ INSTALLED_APPS = (
     'cover',
     'django_openid_auth',
     'catalog',
+    'localflavor',
+    'invoices',
 #    'registration',
 )
 
