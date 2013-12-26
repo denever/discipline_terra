@@ -7,8 +7,8 @@ class Customer(models.Model):
     name = models.CharField(_('name'), max_length=200)
     surname = models.CharField(_('Surname'), max_length=200)
     address = AddressField(_('Address'))
-    tax_code = models.CharField(_('Tax code'), max_length=200, blank=True)
-    vat_code = models.CharField(_('Vat code'), max_length=200, blank=True)
+    tax_code = models.CharField(_('Tax code'), max_length=200, null=True, blank=True)
+    vat_code = models.CharField(_('Vat code'), max_length=200, null=True, blank=True)
     phone = models.CharField(_('Phone'), max_length=200)
     email = models.EmailField(_('Email'), max_length=200)
 
@@ -25,6 +25,7 @@ class Customer(models.Model):
         verbose_name = _('Customer')
         verbose_name_plural = _('Customers')
         get_latest_by = 'surname'
+        unique_together = ('tax_code','vat_code')
 
 class Item(models.Model):
     order = models.ForeignKey('invoices.Order',
