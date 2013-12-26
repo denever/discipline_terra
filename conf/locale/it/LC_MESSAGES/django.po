@@ -1,0 +1,742 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-12-26 20:56+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: accounts/models.py:19
+msgid "Logged In"
+msgstr "Connesso"
+
+#: accounts/models.py:19
+msgid "Logged Out"
+msgstr "Disconnesso"
+
+#: accounts/models.py:19
+msgid "Created"
+msgstr "Creato"
+
+#: accounts/models.py:19
+msgid "Edited"
+msgstr "Modificato"
+
+#: accounts/models.py:19
+msgid "Deleted"
+msgstr "Cancellato"
+
+#: accounts/models.py:28 accounts/models.py:29
+#: accounts/templates/accounts/base-accounts.html:4
+#: accounts/templates/accounts/base-accounts.html:5
+#: accounts/templates/accounts/base-accounts.html:9
+#: accounts/templates/accounts/profile.html:7
+#: accounts/templates/accounts/profile.html:8
+msgid "Account"
+msgstr ""
+
+#: accounts/models.py:33
+msgid "Activity date"
+msgstr "Data"
+
+#: accounts/models.py:34 accounts/templates/accounts/activity_detail.html:21
+#: accounts/templates/accounts/activity_list.html:26
+msgid "Action"
+msgstr "Azione"
+
+#: accounts/models.py:36
+msgid "Object name"
+msgstr "Nome oggetto"
+
+#: accounts/models.py:44 accounts/templates/accounts/activity_detail.html:9
+#: accounts/templates/accounts/activity_list.html:9
+#: accounts/templates/accounts/activity_list.html:10
+#: accounts/templates/accounts/activity_list.html:20
+msgid "Activity"
+msgstr ""
+
+#: accounts/models.py:45
+msgid "Activities"
+msgstr ""
+
+#: accounts/templates/accounts/activity_detail.html:4
+#: accounts/templates/accounts/activity_detail.html:5
+msgid "Activity Detail"
+msgstr ""
+
+#: accounts/templates/accounts/activity_detail.html:13
+msgid "Author"
+msgstr ""
+
+#: accounts/templates/accounts/activity_detail.html:17
+#: accounts/templates/accounts/activity_list.html:25
+msgid "Date"
+msgstr ""
+
+#: accounts/templates/accounts/activity_detail.html:25
+msgid "Object"
+msgstr ""
+
+#: accounts/templates/accounts/activity_detail.html:29
+msgid "Revision"
+msgstr ""
+
+#: accounts/templates/accounts/activity_detail.html:37
+msgid "Difference Details for activity"
+msgstr ""
+
+#: accounts/templates/accounts/activity_list.html:27
+msgid "On"
+msgstr ""
+
+#: accounts/templates/accounts/base-accounts.html:12
+#: accounts/templates/accounts/password_change_done.html:4
+#: accounts/templates/accounts/password_change_form.html:5
+msgid "Change password"
+msgstr ""
+
+#: accounts/templates/accounts/base-accounts.html:15
+msgid "Recent Activities"
+msgstr ""
+
+#: accounts/templates/accounts/base-accounts.html:18
+msgid "Logout"
+msgstr ""
+
+#: accounts/templates/accounts/password_change_done.html:4
+#: accounts/templates/accounts/password_change_form.html:5
+msgid "Documentation"
+msgstr ""
+
+#: accounts/templates/accounts/password_change_done.html:4
+#: accounts/templates/accounts/password_change_form.html:5
+msgid "Log out"
+msgstr ""
+
+#: accounts/templates/accounts/password_change_done.html:5
+#: accounts/templates/accounts/password_change_form.html:6
+#: accounts/templates/accounts/password_reset_complete.html:4
+#: accounts/templates/accounts/password_reset_confirm.html:4
+#: accounts/templates/accounts/password_reset_done.html:4
+#: accounts/templates/accounts/password_reset_form.html:4
+msgid "Home"
+msgstr ""
+
+#: accounts/templates/accounts/password_change_done.html:5
+#: accounts/templates/accounts/password_change_form.html:6
+#: accounts/templates/accounts/password_change_form.html:8
+#: accounts/templates/accounts/password_change_form.html:20
+msgid "Password change"
+msgstr ""
+
+#: accounts/templates/accounts/password_change_done.html:7
+#: accounts/templates/accounts/password_change_done.html:11
+msgid "Password change successful"
+msgstr ""
+
+#: accounts/templates/accounts/password_change_done.html:13
+msgid "Your password was changed."
+msgstr ""
+
+#: accounts/templates/accounts/password_change_form.html:16
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+msgstr[1] ""
+
+#: accounts/templates/accounts/password_change_form.html:22
+msgid ""
+"Please enter your old password, for security's sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
+msgstr ""
+
+#: accounts/templates/accounts/password_change_form.html:28
+msgid "Old password"
+msgstr ""
+
+#: accounts/templates/accounts/password_change_form.html:33
+msgid "New password"
+msgstr ""
+
+#: accounts/templates/accounts/password_change_form.html:38
+msgid "Password (again)"
+msgstr ""
+
+#: accounts/templates/accounts/password_change_form.html:44
+#: accounts/templates/accounts/password_reset_confirm.html:21
+msgid "Change my password"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_complete.html:4
+#: accounts/templates/accounts/password_reset_confirm.html:6
+#: accounts/templates/accounts/password_reset_done.html:4
+#: accounts/templates/accounts/password_reset_form.html:4
+#: accounts/templates/accounts/password_reset_form.html:6
+#: accounts/templates/accounts/password_reset_form.html:10
+msgid "Password reset"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_complete.html:6
+#: accounts/templates/accounts/password_reset_complete.html:10
+msgid "Password reset complete"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_complete.html:12
+msgid "Your password has been set.  You may go ahead and log in now."
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_complete.html:14
+msgid "Log in"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_confirm.html:4
+msgid "Password reset confirmation"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_confirm.html:12
+msgid "Enter new password"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_confirm.html:14
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_confirm.html:18
+msgid "New password:"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_confirm.html:20
+msgid "Confirm password:"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_confirm.html:26
+msgid "Password reset unsuccessful"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_confirm.html:28
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_done.html:6
+#: accounts/templates/accounts/password_reset_done.html:10
+msgid "Password reset successful"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_done.html:12
+msgid ""
+"We've e-mailed you instructions for setting your password to the e-mail "
+"address you submitted. You should be receiving it shortly."
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_email.html:2
+#, python-format
+msgid ""
+"You're receiving this e-mail because you requested a password reset for your "
+"user account at %(site_name)s."
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_email.html:8
+msgid "Your username, in case you've forgotten:"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_email.html:10
+msgid "Thanks for using our site!"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_email.html:12
+#, python-format
+msgid "The %(site_name)s team"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_form.html:12
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll e-mail "
+"instructions for setting a new one."
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_form.html:16
+msgid "E-mail address:"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_form.html:16
+msgid "Reset my password"
+msgstr ""
+
+#: catalog/models.py:8 catalog/templates/catalog/price_detail.html:16
+#: catalog/templates/catalog/price_list.html:23 invoices/models.py:34
+#: invoices/templates/customer_detail.html:16
+#: invoices/templates/invoices/order_detail.html:33 stock/models.py:25
+#: stock/models.py:39 stock/templates/stock/package_detail.html:16
+#: stock/templates/stock/package_list.html:23
+msgid "Product"
+msgstr "Prodotto"
+
+#: catalog/models.py:9
+msgid "Price IN"
+msgstr "Prezzo in entrata"
+
+#: catalog/models.py:10 catalog/templates/catalog/price_list.html:25
+msgid "VAT IN"
+msgstr "IVA in entrata"
+
+#: catalog/models.py:11 catalog/templates/catalog/price_detail.html:25
+#: catalog/templates/catalog/price_list.html:26
+#: invoices/templates/customer_detail.html:25
+msgid "Gain"
+msgstr "Guadagno"
+
+#: catalog/models.py:12 catalog/templates/catalog/price_list.html:27
+msgid "VAT OUT"
+msgstr "IVA in uscita"
+
+#: catalog/models.py:16 invoices/models.py:17 stock/models.py:16
+#: stock/models.py:45
+msgid "Last update by"
+msgstr "Ultimo aggiornamento di"
+
+#: catalog/models.py:17 stock/models.py:17 stock/models.py:46
+msgid "Last update on"
+msgstr "Ultimo aggiornamento il"
+
+#: catalog/models.py:21 invoices/templates/invoices/order_detail.html:34
+msgid "Price"
+msgstr "Prezzo"
+
+#: catalog/models.py:22 catalog/templates/catalog/base-catalog.html:7
+msgid "Prices"
+msgstr "Prezzi"
+
+#: catalog/models.py:25
+#, python-format
+msgid "Price of %s: %s"
+msgstr "Prezzo di %s: %s"
+
+#: catalog/templates/catalog/base-catalog.html:3
+msgid "Catalog management"
+msgstr "Gestione listino prezzi"
+
+#: catalog/templates/catalog/price_config_delete.html:6
+#: catalog/templates/catalog/price_confirm_delete.html:6
+msgid "Delete price confirm"
+msgstr "Conferma cancellazione prezzo"
+
+#: catalog/templates/catalog/price_config_delete.html:10
+#: catalog/templates/catalog/price_confirm_delete.html:10
+msgid "Do you really want to remove price for product"
+msgstr "Vuoi davvero cancellare il prezzo di questo prodotto"
+
+#: catalog/templates/catalog/price_config_delete.html:15
+#: catalog/templates/catalog/price_confirm_delete.html:15
+#: invoices/templates/invoices/customer_confirm_delete.html:15
+#: stock/templates/stock/package_confirm_delete.html:15
+#: stock/templates/stock/product_confirm_delete.html:15
+msgid "Yes, I'm sure"
+msgstr "Si, sono sicuro"
+
+#: catalog/templates/catalog/price_create_form.html:8
+#: catalog/templates/catalog/price_create_form.html:13
+msgid "New price registration"
+msgstr "Registra nuovo prezzo"
+
+#: catalog/templates/catalog/price_create_form.html:37
+#: catalog/templates/catalog/price_update_form.html:37
+#: invoices/templates/invoices/customer_create_form.html:37
+#: invoices/templates/invoices/customer_update_form.html:37
+#: invoices/templates/invoices/item_create_form.html:37
+#: invoices/templates/invoices/item_update_form.html:37
+#: invoices/templates/invoices/order_create_form.html:37
+#: stock/templates/stock/package_create_form.html:37
+#: stock/templates/stock/package_update_form.html:37
+#: stock/templates/stock/product_create_form.html:37
+#: stock/templates/stock/product_update_form.html:37
+msgid "Save"
+msgstr "Salva"
+
+#: catalog/templates/catalog/price_detail.html:4
+msgid "Price for"
+msgstr "Prezzo per"
+
+#: catalog/templates/catalog/price_detail.html:19
+#: catalog/templates/catalog/price_list.html:24
+msgid "Price in"
+msgstr "Prezzo in entrata"
+
+#: catalog/templates/catalog/price_detail.html:22
+#: invoices/templates/customer_detail.html:22
+msgid "VAT in"
+msgstr "IVA in entrata"
+
+#: catalog/templates/catalog/price_detail.html:28
+#: invoices/templates/customer_detail.html:28
+msgid "VAT out"
+msgstr "IVA in uscita"
+
+#: catalog/templates/catalog/price_detail.html:31
+#: catalog/templates/catalog/price_list.html:28
+msgid "Price out"
+msgstr "Prezzo al cliente"
+
+#: catalog/templates/catalog/price_list.html:12
+#: invoices/templates/invoices/customer_list.html:12
+#: invoices/templates/invoices/order_list.html:12
+#: stock/templates/stock/package_list.html:12
+#: stock/templates/stock/product_list.html:12
+msgid "Previous"
+msgstr "Precedente"
+
+#: catalog/templates/catalog/price_list.html:14
+#: invoices/templates/invoices/customer_list.html:14
+#: invoices/templates/invoices/order_list.html:14
+#: stock/templates/stock/package_list.html:14
+#: stock/templates/stock/product_list.html:14
+msgid "Page"
+msgstr "Pagina"
+
+#: catalog/templates/catalog/price_list.html:14
+#: invoices/templates/invoices/customer_list.html:14
+#: invoices/templates/invoices/order_list.html:14
+#: stock/templates/stock/package_list.html:14
+#: stock/templates/stock/product_list.html:14
+msgid "of"
+msgstr "di"
+
+#: catalog/templates/catalog/price_list.html:16
+#: invoices/templates/invoices/customer_list.html:16
+#: invoices/templates/invoices/order_list.html:16
+#: stock/templates/stock/package_list.html:16
+#: stock/templates/stock/product_list.html:16
+msgid "Next"
+msgstr "Successiva"
+
+#: catalog/templates/catalog/price_update_form.html:8
+#: catalog/templates/catalog/price_update_form.html:13
+#: stock/templates/stock/package_update_form.html:8
+#: stock/templates/stock/package_update_form.html:13
+#: stock/templates/stock/product_update_form.html:8
+#: stock/templates/stock/product_update_form.html:13
+msgid "Edit product"
+msgstr "Modifica prodotto"
+
+#: cover/templates/cover/cover.html:49 discipline_terra/templates/base.html:56
+msgid "Welcome"
+msgstr "Benventuo"
+
+#: cover/templates/cover/cover.html:49
+msgid "Thanks for logging in"
+msgstr "Grazie per esserti collegato"
+
+#: cover/templates/cover/cover.html:51
+msgid "Stock Management"
+msgstr "Gestione magazzino"
+
+#: cover/templates/cover/cover.html:54
+msgid "Catalog Management"
+msgstr "Gestione listino prezzi"
+
+#: cover/templates/cover/cover.html:57
+msgid "Customers Management"
+msgstr "Gestione clienti"
+
+#: cover/templates/cover/cover.html:60
+msgid "Orders Management"
+msgstr "Gestione ordini"
+
+#: cover/templates/cover/cover.html:66
+msgid "Facebook Login"
+msgstr ""
+
+#: cover/templates/cover/cover.html:69
+msgid "Google Login"
+msgstr ""
+
+#: cover/templates/cover/cover.html:72
+msgid "Register"
+msgstr "Registrati"
+
+#: discipline_terra/templates/base.html:44
+msgid "Discipline della Terra"
+msgstr ""
+
+#: discipline_terra/templates/base.html:56
+msgid "Last login"
+msgstr "Ultimo login"
+
+#: invoices/forms.py:10 invoices/models.py:10
+#: invoices/templates/invoices/customer_detail.html:25
+msgid "Tax code"
+msgstr "Codice Fiscale"
+
+#: invoices/forms.py:11 invoices/models.py:11
+msgid "Vat code"
+msgstr "Partita IVA"
+
+#: invoices/forms.py:12 invoices/models.py:12
+#: invoices/templates/invoices/customer_detail.html:31
+#: invoices/templates/invoices/customer_list.html:28
+msgid "Phone"
+msgstr "Telefono"
+
+#: invoices/forms.py:13 invoices/models.py:9
+#: invoices/templates/invoices/customer_list.html:25
+msgid "Address"
+msgstr "Indirizzo"
+
+#: invoices/forms.py:32
+msgid "Enter only one of tax code or vat code"
+msgstr "Inserisci o il codice fiscale o la partita iva"
+
+#: invoices/forms.py:34
+msgid "You must enter a tax code or a vat code"
+msgstr "Devi inserire o il codice fiscale o la partita iva"
+
+#: invoices/models.py:7
+msgid "name"
+msgstr "nome"
+
+#: invoices/models.py:8 invoices/templates/invoices/customer_detail.html:16
+#: invoices/templates/invoices/customer_list.html:23
+msgid "Surname"
+msgstr "Cognome"
+
+#: invoices/models.py:13 invoices/templates/invoices/customer_detail.html:34
+msgid "Email"
+msgstr ""
+
+#: invoices/models.py:18 invoices/models.py:49
+msgid "Recorded on"
+msgstr "Registrato il"
+
+#: invoices/models.py:25 invoices/models.py:47
+#: invoices/templates/customer_detail.html:4
+#: invoices/templates/invoices/customer_detail.html:4
+#: invoices/templates/invoices/order_detail.html:16
+#: invoices/templates/invoices/order_list.html:23
+msgid "Customer"
+msgstr "Cliente"
+
+#: invoices/models.py:26 invoices/templates/invoices/base-invoices.html:7
+msgid "Customers"
+msgstr "Clienti"
+
+#: invoices/models.py:32 invoices/models.py:52
+#: invoices/templates/invoices/order_detail.html:4
+msgid "Order"
+msgstr "Ordine"
+
+#: invoices/models.py:35 invoices/templates/invoices/order_detail.html:35
+msgid "Pieces"
+msgstr "Pezzi"
+
+#: invoices/models.py:38 invoices/models.py:39
+msgid "Item"
+msgstr "Voce"
+
+#: invoices/models.py:53 invoices/templates/invoices/base-invoices.html:10
+msgid "Orders"
+msgstr "Ordini"
+
+#: invoices/models.py:56
+#, python-format
+msgid "Order of %s on %s: "
+msgstr "Ordine di %s per %s: "
+
+#: invoices/widgets.py:25
+msgid "Enter a valid phone number"
+msgstr "Inserire un numero di telefono valido"
+
+#: invoices/templates/customer_detail.html:19
+msgid "Customer in"
+msgstr ""
+
+#: invoices/templates/customer_detail.html:31
+#: invoices/templates/customer_detail.html:34
+msgid "Customer out"
+msgstr ""
+
+#: invoices/templates/invoices/base-invoices.html:3
+msgid "Invoices management"
+msgstr "Gestione fatture"
+
+#: invoices/templates/invoices/customer_confirm_delete.html:6
+msgid "Delete customer confirm"
+msgstr "Conferma cancellazione cliente"
+
+#: invoices/templates/invoices/customer_confirm_delete.html:10
+msgid "Do you really want to remove customer"
+msgstr "Vuoi davvere cancellare il cliente"
+
+#: invoices/templates/invoices/customer_create_form.html:8
+#: invoices/templates/invoices/customer_create_form.html:13
+msgid "New customer registration"
+msgstr "Registra nuovo cliente"
+
+#: invoices/templates/invoices/customer_detail.html:19
+#: invoices/templates/invoices/customer_list.html:24
+msgid "Name"
+msgstr "Nome"
+
+#: invoices/templates/invoices/customer_detail.html:22
+msgid "Addess"
+msgstr ""
+
+#: invoices/templates/invoices/customer_detail.html:28
+msgid "VAT code"
+msgstr "Partita IVA"
+
+#: invoices/templates/invoices/customer_list.html:26
+msgid "Tax Code"
+msgstr "Codice Fiscale"
+
+#: invoices/templates/invoices/customer_list.html:27
+msgid "VAT Code"
+msgstr "Partita IVA"
+
+#: invoices/templates/invoices/customer_list.html:29
+msgid "email"
+msgstr ""
+
+#: invoices/templates/invoices/customer_update_form.html:8
+#: invoices/templates/invoices/customer_update_form.html:13
+msgid "Edit customer"
+msgstr "Modifica cliente"
+
+#: invoices/templates/invoices/item_create_form.html:8
+#: invoices/templates/invoices/item_create_form.html:13
+msgid "New item registration"
+msgstr "Inserisci nuova voce"
+
+#: invoices/templates/invoices/item_update_form.html:8
+msgid "Edit item in order"
+msgstr "Modifica voce dell'ordine"
+
+#: invoices/templates/invoices/item_update_form.html:13
+msgid "Edit item in"
+msgstr "Modifica voce nell'ordine"
+
+#: invoices/templates/invoices/order_create_form.html:8
+#: invoices/templates/invoices/order_create_form.html:13
+msgid "New order registration"
+msgstr "Registra nuovo ordine"
+
+#: invoices/templates/invoices/order_detail.html:19
+#: invoices/templates/invoices/order_list.html:24
+msgid "Items count"
+msgstr "Numero voci"
+
+#: invoices/templates/invoices/order_detail.html:22
+#: invoices/templates/invoices/order_list.html:25
+msgid "Total value"
+msgstr "Importo totale"
+
+#: invoices/templates/invoices/order_detail.html:36
+msgid "Total"
+msgstr "Totale"
+
+#: stock/models.py:7 stock/templates/stock/product_detail.html:21
+#: stock/templates/stock/product_list.html:23
+msgid "Code"
+msgstr "Codice"
+
+#: stock/models.py:8 stock/templates/stock/product_detail.html:24
+#: stock/templates/stock/product_list.html:24
+msgid "Description"
+msgstr "Descrizione"
+
+#: stock/models.py:9 stock/templates/stock/product_detail.html:27
+#: stock/templates/stock/product_list.html:25
+msgid "Quantity"
+msgstr "Quantità"
+
+#: stock/models.py:10 stock/templates/stock/package_list.html:26
+#: stock/templates/stock/product_detail.html:33
+#: stock/templates/stock/product_list.html:26
+msgid "Producer"
+msgstr "Produttore"
+
+#: stock/models.py:11 stock/templates/stock/product_detail.html:30
+msgid "Warning Threshold"
+msgstr "Soglia allarme"
+
+#: stock/models.py:12 stock/models.py:41
+#: stock/templates/stock/package_list.html:25
+msgid "Barcode"
+msgstr "Codice a barre"
+
+#: stock/models.py:26 stock/templates/stock/base-stock.html:7
+msgid "Products"
+msgstr "Prodotti"
+
+#: stock/models.py:40
+msgid "Package size"
+msgstr "Dimensione collo"
+
+#: stock/models.py:49
+#, python-format
+msgid "Package of %s"
+msgstr "Collo di %s"
+
+#: stock/models.py:53
+msgid "Package"
+msgstr "Collo"
+
+#: stock/models.py:54 stock/templates/stock/base-stock.html:10
+msgid "Packages"
+msgstr "Colli"
+
+#: stock/templates/stock/base-stock.html:3
+msgid "Stock management"
+msgstr "Gestione magazzino"
+
+#: stock/templates/stock/package_confirm_delete.html:6
+msgid "Delete package confirm"
+msgstr "Conferma cancellazione collo"
+
+#: stock/templates/stock/package_confirm_delete.html:10
+msgid "Do you really want to remove package for product"
+msgstr "Vuoi davvero cancellare il collo per il prodotto"
+
+#: stock/templates/stock/package_create_form.html:8
+#: stock/templates/stock/package_create_form.html:13
+msgid "New package registration"
+msgstr "Registra nuovo collo"
+
+#: stock/templates/stock/package_detail.html:19
+#: stock/templates/stock/package_list.html:24
+msgid "Size"
+msgstr "Dimensione"
+
+#: stock/templates/stock/package_detail.html:22
+msgid "barcode"
+msgstr "codice a barre"
+
+#: stock/templates/stock/product_confirm_delete.html:6
+msgid "Delete product confirm"
+msgstr "Conferma cancellazione prodotto"
+
+#: stock/templates/stock/product_confirm_delete.html:10
+msgid "Do you really want to remove product"
+msgstr "Vuoi davvero cancellare il prodotto"
+
+#: stock/templates/stock/product_create_form.html:8
+#: stock/templates/stock/product_create_form.html:13
+msgid "New product registration"
+msgstr "Registra nuovo prodotto"
