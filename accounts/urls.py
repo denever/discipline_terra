@@ -26,7 +26,9 @@ urlpatterns += patterns('',
                             name='openid-complete'),
                         url(r'^logout/$',
                             'django.contrib.auth.views.logout',
-                            {'next_page': '/',}),
+                            {'next_page': '/',},
+                            name='logout'
+                            ),
                     )
 
                        # (r'^login/$', 'django.contrib.auth.views.login',
