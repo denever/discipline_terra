@@ -2,9 +2,9 @@
 {% load i18n %}
 
 {% block container %}
-<h3>Products</h3>
+<h3>{% trans "Products" %}</h3>
 <p>
-  <a href="{% url 'product-create' %}"><span class="glyphicon glyphicon-plus"></span> New product </a>
+  <a href="{% url 'product-create' %}"><span class="glyphicon glyphicon-plus"></span>{% trans "New product" %}</a>
 </p>
 {% if is_paginated %}
 <ul class="pager">
@@ -12,9 +12,9 @@
   <li class="previous"><a href="/stock/products?page={{ page_obj.previous_page_number }}">&larr; {% trans "Previous" %}</a></li>
   {% endif %}
   <li>{% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}.</li>
-  {% if page_obj.has_next %}  
+  {% if page_obj.has_next %}
   <li class="next"><a href="/stock/products?page={{ page_obj.next_page_number }}">{% trans "Next" %} &rarr;</a></li>
-  {% endif %}  
+  {% endif %}
 </ul>
 {% endif %}
 <table class="table table-hover table-bordered">
@@ -33,20 +33,20 @@
       <td>{{product.description}}</td>
       <td>{{product.quantity}}</td>
       <td>{{product.producer}}</td>
-      <td>
-        <a href="{% url 'product-detail' product.id %}">
-          <span class="glyphicon glyphicon-eye-open"></span>
-        </a>
-        <a type="button" class="btn btn-default btn-xs" href="{% url 'product-edit' product.id %}">
-          <span class="glyphicon glyphicon-edit"></span>
-        </a>
-        <a type="button" class="btn btn-default btn-xs"  href="{% url 'product-delete' product.id %}">
-          <span class="glyphicon glyphicon-trash"></span>
-        </a>
+      <td rowspan="2" align="center">
+	<a href="{% url 'product-detail' product.id %}">
+	  <span class="glyphicon glyphicon-eye-open"></span>
+	</a>
+	<a type="button" class="btn btn-default btn-xs" href="{% url 'product-edit' product.id %}">
+	  <span class="glyphicon glyphicon-edit"></span>
+	</a>
+	<a type="button" class="btn btn-default btn-xs"  href="{% url 'product-delete' product.id %}">
+	  <span class="glyphicon glyphicon-trash"></span>
+	</a>
       </td>
-    </tr>      
+    </tr>
     <tr>
-      <td colspan="5" class="progress">
+      <td colspan="4" class="progress">
 	<span class="progress-bar progress-bar-{{product.status.0}}" role="progressbar" aria-valuenow="{{product.status.1}}" aria-valuemin="0" aria-valuemax="100" style="width: {{product.status.1}}%">
 	</span>
       </td>
