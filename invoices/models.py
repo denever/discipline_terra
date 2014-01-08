@@ -59,7 +59,7 @@ class Order(models.Model):
         verbose_name_plural = _('Orders')
 
     def __unicode__(self):
-        return _('Order of %s on %s: ') % (self.customer, self.record_date)
+        return _('Order from %(customer)s on %(recor_date)s: ') % {'customer': self.customer, 'record_date': self.record_date}
 
     @property
     def item_count(self):
