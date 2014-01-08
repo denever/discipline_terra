@@ -28,7 +28,9 @@ class Product(models.Model):
     def status(self):
         tot = 4 * self.wrn_tsh
         prc = int(100*float(self.quantity) / float(tot))
-        if self.quantity < self.wrn_tsh:        
+        if self.quantity == 0:
+            return ('danger', 1)
+        if self.quantity < self.wrn_tsh:
             return ('danger', prc)
         if self.quantity - self.wrn_tsh > self.wrn_tsh:
             return ('success', prc)
