@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 
 from invoices.models import *
 
@@ -17,6 +18,16 @@ class CustomerListView(ListView):
     queryset = Customer.objects.all()
     context_object_name = 'customers'
     paginate_by = 5
+
+class SearchCustomerListView(ListView):
+    model = Customer
+    context_object_name = 'customers'
+    paginate_by = 5
+    template_name = 'invoices/customer_list.html'
+
+    def get_queryset(self):
+        query = self.request.REQUEST.get("q")
+        return self.model.objects.filter(Q(surname__contains=query)| Q(name__contains=query))
 
 class CustomerDetailView(DetailView):
     model = Customer

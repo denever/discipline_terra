@@ -6,7 +6,7 @@ from invoices.modelfields import AddressField
 
 # Create your models here.
 class Customer(models.Model):
-    name = models.CharField(_('name'), max_length=200)
+    name = models.CharField(_('Name'), max_length=200)
     surname = models.CharField(_('Surname'), max_length=200)
     address = AddressField(_('Address'))
     tax_code = models.CharField(_('Tax code'), max_length=200, null=True, blank=True)

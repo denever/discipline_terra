@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.auth.decorators import login_required, permission_required
 
-from invoices.views import CustomerListView
+from invoices.views import CustomerListView, SearchCustomerListView
 from invoices.views import CustomerDetailView
 from invoices.views import CustomerCreateView
 from invoices.views import CustomerUpdateView
@@ -23,6 +23,9 @@ urlpatterns = patterns('invoices.views',
 
                        url(r'^customers/$', login_required(CustomerListView.as_view()),
                            name='customers'),
+
+                       url(r'^customers/search$', login_required(SearchCustomerListView.as_view()),
+                           name='customers-search'),
 
                        url(r'^customer/(?P<pk>\d+)$',
                            login_required(CustomerDetailView.as_view()),
