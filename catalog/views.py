@@ -18,6 +18,16 @@ class PriceListView(ListView):
     context_object_name = 'prices'
     paginate_by = 5
 
+class SearchPriceListView(ListView):
+    model = Price
+    context_object_name = 'prices'
+    paginate_by = 5
+    template_name = 'stock/price_list.html'
+
+    def get_queryset(self):
+        query = self.request.REQUEST.get("q")
+        return self.model.objects.filter(product__description__icontains=query)
+
 class PriceDetailView(DetailView):
     model = Price
     context_object_name = 'price'

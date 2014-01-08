@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.auth.decorators import login_required, permission_required
 
-from catalog.views import PriceListView
+from catalog.views import PriceListView, SearchPriceListView
 from catalog.views import PriceDetailView
 from catalog.views import PriceCreateView
 from catalog.views import PriceUpdateView
@@ -13,6 +13,9 @@ urlpatterns = patterns('catalog.views',
 
                        url(r'^prices/$', login_required(PriceListView.as_view()),
                            name='prices'),
+
+                       url(r'^prices/search$', login_required(SearchPriceListView.as_view()),
+                           name='prices-search'),
 
                        url(r'^price/(?P<pk>\d+)$',
                            login_required(PriceDetailView.as_view()),
