@@ -17,6 +17,24 @@ class ProductListView(ListView):
     context_object_name = 'products'
     paginate_by = 5
 
+class WarningProductListView(ListView):
+     context_object_name = 'products'
+     paginate_by = 5
+     template_name = 'stock/product_list.html'
+
+     def get_queryset(self):
+         filtered = [x for x in Product.objects.all() if x.status =='warning']
+         return filtered
+
+class DangerProductListView(ListView):
+     context_object_name = 'products'
+     paginate_by = 5
+     template_name = 'stock/product_list.html'
+
+     def get_queryset(self):
+         filtered = [x for x in Product.objects.all() if x.status == 'danger']
+         return filtered
+
 class ProductDetailView(DetailView):
     model = Product
     context_object_name = 'product'

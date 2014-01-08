@@ -1,9 +1,9 @@
 {% extends "stock/base-stock.html" %}
 {% load i18n %}
 {% block container %}
-<h3>{{product.name}}</h3>
+<h3 class="alert alert-{{product.status}}">{{product.description}}</h3>
 <div class="progress">
-  <div class="progress-bar progress-bar-{{product.status.0}}" role="progressbar" aria-valuenow="{{product.status.1}}" aria-valuemin="0" aria-valuemax="100" style="width: {{product.status.1}}%">
+  <div class="progress-bar progress-bar-{{product.status}}" role="progressbar" aria-valuenow="{{product.qty_percentage}}" aria-valuemin="0" aria-valuemax="100" style="width: {{product.qty_percentage}}%">
     <span class="sr-only">means</span>
   </div>
 </div>
@@ -25,6 +25,9 @@
     </tr>
     <tr>
       <td>{% trans "Quantity" %}</td><td>{{product.quantity}}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Packages left" %}</td><td>{{product.packages_left.0}} {% trans "packages" %}, {{product.packages_left.1}} {% trans "pieces" %}</td>
     </tr>
     <tr>
       <td>{% trans "Warning Threshold" %}</td><td>{{product.wrn_tsh}}</td>
