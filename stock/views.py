@@ -35,6 +35,16 @@ class DangerProductListView(ListView):
          filtered = [x for x in Product.objects.all() if x.status == 'danger']
          return filtered
 
+class SearchProductListView(ListView):
+    model = Product
+    context_object_name = 'products'
+    paginate_by = 5
+    template_name = 'stock/product_list.html'
+
+    def get_queryset(self):
+        query = self.request.REQUEST.get("q")
+        return self.model.objects.filter(description__icontains=query)
+
 class ProductDetailView(DetailView):
     model = Product
     context_object_name = 'product'
