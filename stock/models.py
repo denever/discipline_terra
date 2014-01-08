@@ -25,20 +25,31 @@ class Product(models.Model):
         verbose_name = _('Product')
         verbose_name_plural = _('Products')
 
+    @property
     def status(self):
-        tot = 4 * self.wrn_tsh
-        prc = int(100*float(self.quantity) / float(tot))
         if self.quantity == 0:
-            return ('danger', 1)
+            return 'danger'
         if self.quantity < self.wrn_tsh:
-            return ('danger', prc)
+            return 'danger'
         if self.quantity - self.wrn_tsh > self.wrn_tsh:
-            return ('success', prc)
+            return 'success'
         if self.quantity - self.wrn_tsh < self.wrn_tsh:
-            return ('warning', prc)
+            return 'warning'
+
+    @property
+    def qty_percentage(self):
+        tot = 4 * self.wrn_tsh
+        return int(100*float(self.quantity) / float(tot))
+
+    @property
+    def packages_left(self):
+        try:
+            return (self.quantity / self.package.size, self.quantity % self.package.size)
+        except Exception, e:
+            return ('N/A', self.quantity)
 
 class Package(models.Model):
-    product = models.ForeignKey(Product, verbose_name=_('Product'), unique=True)
+    product = models.OneToOneField(Product, verbose_name=_('Product'), unique=True)
     size = models.PositiveIntegerField(_('Package size'))
     barcode = models.PositiveIntegerField(_('Barcode'), max_length=200)
 
