@@ -1,12 +1,13 @@
 from django.db import models
 from django.utils.translation import ugettext as _
+from decimal import *
 
 # Create your models here.
 
 class Price(models.Model):
     product = models.ForeignKey('stock.Product',
                                 verbose_name=_('Product'), unique=True)
-    price_in = models.FloatField(_('Price IN'))
+    price_in = models.DecimalField(_('Price IN'), max_digits=10, decimal_places=2)
     vat_in = models.FloatField(_('VAT IN'))
     gain_percentage = models.FloatField(_('Gain'))
     vat_out = models.FloatField(_('VAT OUT'))
@@ -26,5 +27,8 @@ class Price(models.Model):
 
     @property
     def price_out(self):
-        tot_in = float(self.price_in + self.price_in*(self.vat_in/100))
-        return float(tot_in + tot_in*(self.gain_percentage + self.vat_out)/100)
+        getcontext().prec = 3
+        getcontext().rounding = ROUND_UP
+        tot_in = self.price_in + self.price_in*(Decimal(self.vat_in)/Decimal(100))
+        gain = (Decimal(self.gain_percentage) + Decimal(self.vat_out))/Decimal(100)
+        return tot_in + tot_in*gain

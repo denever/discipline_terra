@@ -1,3 +1,5 @@
+from decimal import *
+
 from django.db import models
 from django.utils.translation import ugettext as _
 from invoices.modelfields import AddressField
@@ -38,9 +40,13 @@ class Item(models.Model):
         verbose_name = _('Item')
         verbose_name_plural = _('Item')
         unique_together = ('order','price')
+
     @property
     def value(self):
-        return float(self.pieces * self.price.price_out)
+        # getcontext().prec = 3
+        # getcontext().rounding = ROUND_HALF_EVEN
+        print Decimal(self.pieces) * Decimal(self.price.price_out)
+        return Decimal(self.pieces) * self.price.price_out
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer,
@@ -64,7 +70,7 @@ class Order(models.Model):
 
     @property
     def total_value(self):
-        total = float(0.0)
+        total = Decimal(0.0)
         for item in self.item_set.all():
             total += item.value
         return total
