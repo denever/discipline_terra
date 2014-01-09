@@ -7,6 +7,15 @@ from django.dispatch import Signal, receiver
 product_warning_depletion = Signal(providing_args=["left"])
 product_danger_depletion = Signal(providing_args=["left"])
 
+def product_warning_handler(sender, **kwargs):
+    print 'product_warning_handler'
+
+def product_danger_handler(sender, **kwargs):
+    print 'product_danger_handler'
+
+product_warning_depletion.connect(product_warning_handler)
+product_danger_depletion.connect(product_danger_handler)
+
 # Create your models here.
 class Product(models.Model):
     code = models.CharField(_('Code'), max_length=200, unique=True)
@@ -54,16 +63,13 @@ class Product(models.Model):
             return ('N/A', self.quantity)
 
     def sell(self, pieces):
-        print 'sell'
         try:
             self.quantity = self.quantity - pieces
 
             if self.status == 'warning':
-                print self.status
                 product_warning_depletion.send(sender=self, left=self.quantity)
 
             if self.status == 'danger':
-                print self.status
                 product_danger_depletion.send(sender=self, left=self.quantity)
 
             self.save()
@@ -75,16 +81,6 @@ class Product(models.Model):
         self.quantity = self.quantity + pieces
         self.save()
         return self.quantity
-
-
-@receiver(product_warning_depletion, sender=Product)
-def product_warning_handler(sender, **kwargs):
-    print 'product_warning_handler'
-
-
-@receiver(product_warning_depletion, sender=Product)
-def product_danger_handler(sender, **kwargs):
-    print 'product_danger_handler'
 
 class Package(models.Model):
     product = models.OneToOneField(Product, verbose_name=_('Product'), unique=True)
