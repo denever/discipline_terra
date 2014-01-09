@@ -1,6 +1,11 @@
 # encoding: utf-8
 from django.db import models
 from django.utils.translation import ugettext as _
+from django.db.models.signals import pre_save, post_save, pre_delete
+from django.dispatch import Signal, receiver
+
+product_warning_depletion = Signal(providing_args=["left"])
+product_danger_depletion = Signal(providing_args=["left"])
 
 # Create your models here.
 class Product(models.Model):
@@ -27,8 +32,6 @@ class Product(models.Model):
 
     @property
     def status(self):
-        if self.quantity == 0:
-            return 'danger'
         if self.quantity < self.wrn_tsh:
             return 'danger'
         if self.quantity - self.wrn_tsh > self.wrn_tsh:
@@ -38,6 +41,8 @@ class Product(models.Model):
 
     @property
     def qty_percentage(self):
+        if self.quantity == 0:
+            return 1
         tot = 4 * self.wrn_tsh
         return int(100*float(self.quantity) / float(tot))
 
@@ -47,6 +52,39 @@ class Product(models.Model):
             return (self.quantity / self.package.size, self.quantity % self.package.size)
         except Exception, e:
             return ('N/A', self.quantity)
+
+    def sell(self, pieces):
+        print 'sell'
+        try:
+            self.quantity = self.quantity - pieces
+
+            if self.status == 'warning':
+                print self.status
+                product_warning_depletion.send(sender=self, left=self.quantity)
+
+            if self.status == 'danger':
+                print self.status
+                product_danger_depletion.send(sender=self, left=self.quantity)
+
+            self.save()
+        except Exception, e:
+            print e
+
+    def release(self, pieces):
+        print 'release'
+        self.quantity = self.quantity + pieces
+        self.save()
+        return self.quantity
+
+
+@receiver(product_warning_depletion, sender=Product)
+def product_warning_handler(sender, **kwargs):
+    print 'product_warning_handler'
+
+
+@receiver(product_warning_depletion, sender=Product)
+def product_danger_handler(sender, **kwargs):
+    print 'product_danger_handler'
 
 class Package(models.Model):
     product = models.OneToOneField(Product, verbose_name=_('Product'), unique=True)
@@ -65,3 +103,13 @@ class Package(models.Model):
         ordering = ['product']
         verbose_name = _('Package')
         verbose_name_plural = _('Packages')
+
+    def load(self, num_pkg):
+        self.product.quantity += num_pkg*self.size
+        self.save()
+        return self.quantity
+
+    def unload(self, num_pkg):
+        self.product.quantity -= num_pkg*self.size
+        self.save()
+        return self.quantity
