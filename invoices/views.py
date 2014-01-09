@@ -129,9 +129,10 @@ class ItemCreateView(CreateView):
 
     def form_valid(self, form):
         self.item = form.save(commit=False)
+        self.item.price.product.sell(self.item.pieces)
         self.item.order = get_object_or_404(Order, id=self.kwargs['order'])
-        self.item.record_by = self.request.user.get_profile()
-        self.item.lastupdate_by = self.request.user.get_profile()
+#        self.item.record_by = self.request.user.get_profile()
+#        self.item.lastupdate_by = self.request.user.get_profile()
         self.success_url = reverse('order-detail', args=[self.kwargs['order']])
         return super(ItemCreateView, self).form_valid(form)
 
@@ -147,21 +148,27 @@ class ItemUpdateView(UpdateView):
     success_url = '/invoices/items/'
     context_object_name = 'item'
 
+    def get_context_data(self, **kwargs):
+        context = super(ItemUpdateView, self).get_context_data(**kwargs)
+        context['order'] = get_object_or_404(Order, id=self.kwargs['order'])
+        return context
+
     def form_valid(self, form):
         self.item = form.save(commit=False)
-        self.item.lastupdate_by = self.request.user.get_profile()
+        previous_item = get_object_or_404(Item, id=self.item.id)
+        difference = previous_item.pieces - self.item.pieces
+        self.item.price.product.release(difference)
+#        self.item.lastupdate_by = self.request.user.get_profile()
         self.item.order = get_object_or_404(Order, id=self.kwargs['order'])
         self.success_url = reverse('order-detail', args=[self.kwargs['order']])
         return super(ItemUpdateView, self).form_valid(form)
-
-    # def get_initial(self):
-    #     self.initial = super(ItemUpdateView, self).get_initial()
-    #     self.initial['ateco_sector'] = self.object.ateco_sector.name
-    #     self.initial['cpi'] = self.object.cpi.name
-    #     return self.initial
 
 class ItemDeleteView(DeleteView):
     model = Item
     form_class = ItemForm
     success_url = '/invoices/items'
     context_object_name = 'item'
+
+    def get_success_url(self):
+        self.success_url = reverse('order-detail', args=[self.kwargs['order']])
+        return self.success_url
