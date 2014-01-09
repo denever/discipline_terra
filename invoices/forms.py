@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import TextInput, NumberInput, Select
 from django.utils.translation import ugettext as _
+from django.shortcuts import get_object_or_404
 from localflavor.it.forms import ITSocialSecurityNumberField, ITVatNumberField
 
 from invoices.models import Customer, Order, Item
@@ -52,3 +53,14 @@ class ItemForm(forms.ModelForm):
             'price': Select(attrs={'class': 'form-control'}),
             'pieces': NumberInput(attrs={'class': 'form-control'}),
             }
+
+    def clean(self):
+        # Check that items put in an order are not more than avaiable pieces in stock and than avaialable in the order
+        cleaned_data = super(ItemForm, self).clean()
+        previous_pieces = self.instance.pieces if self.instance.pieces else 0
+        pieces = cleaned_data.get("pieces")
+        price = cleaned_data.get("price")
+        tot_qty = price.product.quantity + previous_pieces
+        if pieces > tot_qty:
+            raise forms.ValidationError(_("Value %s exceed quantity available for this product: %s") % (pieces, tot_qty))
+        return cleaned_data
