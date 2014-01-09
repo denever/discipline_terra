@@ -73,7 +73,6 @@ class AddressWidget(forms.MultiWidget):
 	    return ['','','','','']
 
     def render(self, name, value, attrs=None):
-	print name
 	output = [super(AddressWidget, self).render(name, value, attrs)]
 	# output.append(self.js_script % ( reverse('cap'),
 	# 				 name+'_2',
