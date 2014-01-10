@@ -37,9 +37,6 @@
       <td>{{order.total_value}} €</td>      
       <td>
         <a href="{% url 'order-detail' order.id %}">
-          <span class="glyphicon glyphicon-eye-open"></span>
-        </a>
-        <a type="button" class="btn btn-default btn-xs" href="{% url 'order-edit' order.id %}">
           <span class="glyphicon glyphicon-edit"></span>
         </a>
         <a type="button" class="btn btn-default btn-xs"  href="{% url 'order-delete' order.id %}">

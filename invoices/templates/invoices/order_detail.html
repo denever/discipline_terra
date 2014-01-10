@@ -3,8 +3,8 @@
 {% block container %}
 <h3>{% trans "Order" %}</h3>
 <p>
-  <a type="button" class="btn btn-default btn-xs" href="{% url 'order-edit' order.id %}">
-    <span class="glyphicon glyphicon-edit"></span>
+  <a type="button" class="btn btn-default btn-xs" href="url 'order-close order.id">
+    <span class="glyphicon glyphicon-shopping-cart"></span>
   </a>
   <a type="button" class="btn btn-default btn-xs"  href="{% url 'order-delete' order.id %}">
     <span class="glyphicon glyphicon-trash"></span>
@@ -26,7 +26,7 @@
 <p>
   <a href="{% url 'item-create' order.id %}"><span class="glyphicon glyphicon-plus"></span> New item </a>
 </p>
-<h3>Items</h3>
+<h3>{% trans "Items" %}</h3>
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
@@ -41,7 +41,10 @@
     <tr>
       <td>{{item.price.product}}</td>
       <td>{{item.price.price_out}} €</td>
-      <td>{{item.pieces}}</td>
+      <td>{{item.pieces}}
+	{% if item.as_packages != "N/A" %}
+	(packages {{item.as_packages.0}} and {{item.as_packages.1}} pieces)
+	{% endif %}</td>
       <td>{{item.value}} €</td>
       <td>
         <a type="button" class="btn btn-default btn-xs" href="{% url 'item-edit' order.id item.id %}">

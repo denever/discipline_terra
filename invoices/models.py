@@ -48,6 +48,18 @@ class Item(models.Model):
     def value(self):
         return Decimal(self.pieces) * self.price.price_out
 
+    @property
+    def as_packages(self):
+        try:
+            packages = self.pieces / self.price.product.package.size
+            spare_pieces = self.pieces % self.price.product.package.size
+            if packages != 0:
+                return (packages, spare_pieces)
+            else:
+                return 'N/A'
+        except Exception, e:
+            return ('N/A', self.pieces)
+
 class Order(models.Model):
     customer = models.ForeignKey(Customer,
                                 verbose_name=_('Customer'))
