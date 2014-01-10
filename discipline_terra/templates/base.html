@@ -54,7 +54,9 @@
 	  {% if user.is_authenticated %}
 	  <ul class="nav navbar-nav navbar-right">
 	    <li>
-	      <a href="{% url 'logout' %}">{% trans "Logout" %}</a>
+	      <a type="button" class="btn btn-xs" href="{% url 'logout' %}">
+		<span class="glyphicon glyphicon-log-out"></span>
+	      </a>
 	    </li>
 	  </ul>
 	  {% endif %}
