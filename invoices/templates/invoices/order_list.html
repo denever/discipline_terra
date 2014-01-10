@@ -36,12 +36,15 @@
       <td>{{order.item_count}}</td>
       <td>{{order.total_value}} €</td>      
       <td>
-        <a href="{% url 'order-detail' order.id %}">
+        <a type="button" class="btn btn-default btn-xs" href="{% url 'order-detail' order.id %}">
           <span class="glyphicon glyphicon-edit"></span>
         </a>
         <a type="button" class="btn btn-default btn-xs"  href="{% url 'order-delete' order.id %}">
           <span class="glyphicon glyphicon-trash"></span>
         </a>
+	<a type="button" class="btn btn-default btn-xs" href="url 'order-close order.id">
+	  <span class="glyphicon glyphicon-shopping-cart"></span>
+	</a>
       </td>
     </tr>
     {% endfor %}

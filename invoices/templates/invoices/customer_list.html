@@ -51,7 +51,7 @@
       <td>{{customer.phone}}</td>
       <td>{{customer.email}}</td>
       <td>
-	<a href="{% url 'customer-detail' customer.id %}">
+	<a type="button" class="btn btn-default btn-xs" href="{% url 'customer-detail' customer.id %}">
 	  <span class="glyphicon glyphicon-eye-open"></span>
 	</a>
 	<a type="button" class="btn btn-default btn-xs" href="{% url 'customer-edit' customer.id %}">

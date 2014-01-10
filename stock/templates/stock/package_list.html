@@ -32,7 +32,7 @@
       <td>{{package.size}}</td>
       <td>{{package.barcode}}</td>
       <td align="center">
-        <a href="{% url 'package-detail' package.id %}">
+        <a type="button" class="btn btn-default btn-xs" href="{% url 'package-detail' package.id %}">
           <span class="glyphicon glyphicon-eye-open"></span>
         </a>
         <a type="button" class="btn btn-default btn-xs" href="{% url 'package-edit' package.id %}">

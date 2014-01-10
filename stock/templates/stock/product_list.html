@@ -47,7 +47,7 @@
       <td>{{product.packages_left.0}} {% trans "packages" %}, {{product.packages_left.1}} {% trans "pieces" %}</td>
       <td>{{product.producer}}</td>
       <td rowspan="2" align="center">
-	<a href="{% url 'product-detail' product.id %}">
+	<a type="button" class="btn btn-default btn-xs" href="{% url 'product-detail' product.id %}">
 	  <span class="glyphicon glyphicon-eye-open"></span>
 	</a>
 	<a type="button" class="btn btn-default btn-xs" href="{% url 'product-edit' product.id %}">
