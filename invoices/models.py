@@ -17,10 +17,12 @@ class Customer(models.Model):
     phone = models.CharField(_('Phone'), max_length=200)
     email = models.EmailField(_('Email'), max_length=200)
 
-    lastupdate_by = models.ForeignKey('accounts.UserProfile',
+    lastchange_by = models.ForeignKey('accounts.UserProfile',
                                     related_name='customer_edited',
-                                    verbose_name=_('Last update by'))
+                                    verbose_name=_('Last change by'))
+
     record_date = models.DateTimeField(_('Recorded on'), auto_now_add=True)
+    lastchange = models.DateTimeField(_('Last change on'), auto_now_add=True)
 
     def __unicode__(self):
         return "%s %s" % (self.surname, self.name)
@@ -70,9 +72,10 @@ class Order(models.Model):
                                 verbose_name=_('Customer'))
 
     record_date = models.DateTimeField(_('Recorded on'), auto_now_add=True)
-    lastupdate_by = models.ForeignKey('accounts.UserProfile',
+    lastchange_by = models.ForeignKey('accounts.UserProfile',
                                     related_name='order_edited',
-                                    verbose_name=_('Last update by'))
+                                    verbose_name=_('Last change by'))
+    lastchange = models.DateTimeField(_('Last change on'), auto_now_add=True)
 
     invoiced = models.BooleanField(_('Invoiced'), default=False)
 
@@ -102,12 +105,12 @@ class Order(models.Model):
 class Invoice(models.Model):
     customer = models.ForeignKey(Customer,
                                 verbose_name=_('Customer'))
-    record_date = models.DateTimeField(_('Recorded on'), auto_now_add=True)
+    date = models.DateTimeField(_('Invoiced on'), auto_now_add=True)
 
     class Meta:
         verbose_name = _('Invoice')
         verbose_name_plural = _('Invoices')
-        ordering = ['record_date']
+        ordering = ['date']
 
     def __unicode__(self):
         return _('Invoice for %(customer)s on %(record_date)s: ') % {'customer': self.customer, 'record_date': self.record_date}
