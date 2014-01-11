@@ -17,7 +17,20 @@ product_warning_depletion.connect(product_warning_handler)
 product_danger_depletion.connect(product_danger_handler)
 
 # Create your models here.
+class Category(models.Model):
+    name = models.CharField(_('Name'), max_length=200, unique=True)
+    description = models.CharField(_('Description'), max_length=200)
+
+    class Meta:
+        ordering = ['name']
+        verbose_name = _('Category')
+        verbose_name_plural = _('Categories')
+
+    def __unicode__(self):
+        return self.name
+
 class Product(models.Model):
+    category = models.ForeignKey(Category, verbose_name=_('Category'))
     code = models.CharField(_('Code'), max_length=200, unique=True)
     description = models.CharField(_('Description'), max_length=200)
     quantity = models.PositiveIntegerField(_('Quantity'))
@@ -25,10 +38,10 @@ class Product(models.Model):
     wrn_tsh =  models.PositiveIntegerField(_('Warning Threshold'))
     barcode = models.PositiveIntegerField(_('Barcode'), max_length=200)
 
-    lastupdate_by = models.ForeignKey('accounts.UserProfile',
+    lastchange_by = models.ForeignKey('accounts.UserProfile',
                                     related_name='products_edited',
-                                    verbose_name=_('Last update by'))
-    lastupdate = models.DateTimeField(_('Last update on'), auto_now_add=True)
+                                    verbose_name=_('Last change by'))
+    lastchange = models.DateTimeField(_('Last change on'), auto_now_add=True)
 
 
     def __unicode__(self):
@@ -77,7 +90,6 @@ class Product(models.Model):
             print e
 
     def release(self, pieces):
-        print 'release'
         self.quantity = self.quantity + pieces
         self.save()
         return self.quantity
@@ -87,10 +99,11 @@ class Package(models.Model):
     size = models.PositiveIntegerField(_('Package size'))
     barcode = models.PositiveIntegerField(_('Barcode'), max_length=200)
 
-    lastupdate_by = models.ForeignKey('accounts.UserProfile',
+
+    lastchange_by = models.ForeignKey('accounts.UserProfile',
                                     related_name='packages_edited',
-                                    verbose_name=_('Last update by'))
-    lastupdate = models.DateTimeField(_('Last update on'), auto_now_add=True)
+                                    verbose_name=_('Last change by'))
+    lastchange = models.DateTimeField(_('Last change on'), auto_now_add=True)
 
     def __unicode__(self):
         return _('Package of %s') % (self.product)
