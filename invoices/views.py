@@ -71,10 +71,30 @@ class OrderListView(ListView):
     context_object_name = 'orders'
     paginate_by = 5
 
+class SearchOrderListView(ListView):
+    model = Order
+    context_object_name = 'orders'
+    paginate_by = 5
+    template_name = 'invoices/order_list.html'
+
+    def get_queryset(self):
+        query = self.request.REQUEST.get("q")
+        return self.model.objects.filter(Q(customer__surname__contains=query)| Q(customer__name__contains=query))
+
 class InvoiceListView(ListView):
     queryset = Invoice.objects.all()
     context_object_name = 'invoices'
     paginate_by = 5
+
+class SearchInvoiceListView(ListView):
+    model = Invoice
+    context_object_name = 'invoices'
+    paginate_by = 5
+    template_name = 'invoices/invoice_list.html'
+
+    def get_queryset(self):
+        query = self.request.REQUEST.get("q")
+        return self.model.objects.filter(Q(customer__surname__contains=query)| Q(customer__name__contains=query))
 
 class InvoiceDetailView(DetailView):
     model = Invoice
@@ -199,7 +219,7 @@ class OrderInvoiceView(SingleObjectMixin, SingleObjectTemplateResponseMixin, Vie
             voice.save()
 
         order.delete()
-        
+
         return HttpResponseRedirect(reverse('invoices'))
 
     def get(self, request, *args, **kwargs):

@@ -7,7 +7,7 @@ from invoices.views import CustomerCreateView
 from invoices.views import CustomerUpdateView
 from invoices.views import CustomerDeleteView
 
-from invoices.views import OrderListView
+from invoices.views import OrderListView, SearchOrderListView
 from invoices.views import OrderDetailView
 from invoices.views import OrderCreateView
 from invoices.views import OrderUpdateView
@@ -18,7 +18,7 @@ from invoices.views import ItemCreateView
 from invoices.views import ItemUpdateView
 from invoices.views import ItemDeleteView
 
-from invoices.views import InvoiceListView
+from invoices.views import InvoiceListView, SearchInvoiceListView
 from invoices.views import InvoiceDetailView
 from invoices.views import InvoicePrintView
 
@@ -54,8 +54,14 @@ urlpatterns = patterns('invoices.views',
                        url(r'^orders/$', login_required(OrderListView.as_view()),
                            name='orders'),
 
+                       url(r'^orders/search$', login_required(SearchOrderListView.as_view()),
+                           name='orders-search'),
+
                        url(r'^invoices$', login_required(InvoiceListView.as_view()),
                            name='invoices'),
+
+                       url(r'^invoices/search$', login_required(SearchInvoiceListView.as_view()),
+                           name='invoices-search'),
 
                        url(r'^invoice/(?P<pk>\d+)$',
                            login_required(InvoiceDetailView.as_view()),

@@ -3,6 +3,17 @@
 
 {% block container %}
 <h3>{% trans "Invoices" %}</h3>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form class="form-inline" role="form" action="{% url 'invoices-search' %}" method="GET">
+      <div class="form-group">
+	<label class="sr-only" for="searchtext">{% trans "Search" %}</label>
+	<input type="text" class="form-control" id="searchtext" placeholder="{% trans "Customer surname, name" %}"  name="q">
+      </div>
+      <button type="submit" class="btn btn-default">{% trans "Search" %}</button>
+    </form>
+  </div>
+</div>
 {% if is_paginated %}
 <ul class="pager">
   {% if page_obj.has_previous %}
