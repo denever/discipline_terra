@@ -3,7 +3,7 @@
 {% block container %}
 <h3>{% trans "Order" %}</h3>
 <p>
-  <a type="button" class="btn btn-default btn-xs" href="url 'order-close order.id">
+  <a type="button" class="btn btn-default btn-xs" href="{% url 'order-invoice' order.id %}">
     <span class="glyphicon glyphicon-shopping-cart"></span>
   </a>
   <a type="button" class="btn btn-default btn-xs"  href="{% url 'order-delete' order.id %}">
@@ -31,9 +31,9 @@
   <thead>
     <tr>
       <td>{% trans "Product" %}</td>
-      <td>{% trans "Price" %}</td>      
+      <td>{% trans "Price" %}</td>
       <td>{% trans "Pieces" %}</td>
-      <td>{% trans "Total" %}</td>      
+      <td>{% trans "Total" %}</td>
     </tr>
   </thead>
   <tbody>
@@ -47,12 +47,12 @@
 	{% endif %}</td>
       <td>{{item.value}} €</td>
       <td>
-        <a type="button" class="btn btn-default btn-xs" href="{% url 'item-edit' order.id item.id %}">
-          <span class="glyphicon glyphicon-edit"></span>
-        </a>
-        <a type="button" class="btn btn-default btn-xs"  href="{% url 'item-delete' order.id item.id %}">
-          <span class="glyphicon glyphicon-trash"></span>
-        </a>
+	<a type="button" class="btn btn-default btn-xs" href="{% url 'item-edit' order.id item.id %}">
+	  <span class="glyphicon glyphicon-edit"></span>
+	</a>
+	<a type="button" class="btn btn-default btn-xs"  href="{% url 'item-delete' order.id item.id %}">
+	  <span class="glyphicon glyphicon-trash"></span>
+	</a>
       </td>
     </tr>
     {% endfor %}

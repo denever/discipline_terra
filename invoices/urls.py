@@ -12,10 +12,15 @@ from invoices.views import OrderDetailView
 from invoices.views import OrderCreateView
 from invoices.views import OrderUpdateView
 from invoices.views import OrderDeleteView
+from invoices.views import OrderInvoiceView
 
 from invoices.views import ItemCreateView
 from invoices.views import ItemUpdateView
 from invoices.views import ItemDeleteView
+
+from invoices.views import InvoiceListView
+from invoices.views import InvoiceDetailView
+from invoices.views import InvoicePrintView
 
 urlpatterns = patterns('invoices.views',
                        # url(r'^/$', login_required(InvoicesListView.as_view()),
@@ -49,6 +54,17 @@ urlpatterns = patterns('invoices.views',
                        url(r'^orders/$', login_required(OrderListView.as_view()),
                            name='orders'),
 
+                       url(r'^invoices$', login_required(InvoiceListView.as_view()),
+                           name='invoices'),
+
+                       url(r'^invoice/(?P<pk>\d+)$',
+                           login_required(InvoiceDetailView.as_view()),
+                           name = 'invoice-detail'),
+
+                       url(r'^invoice_print/(?P<pk>\d+)$',
+                           login_required(InvoicePrintView.as_view()),
+                           name = 'invoice-print'),
+
                        url(r'^order/(?P<pk>\d+)$',
                            login_required(OrderDetailView.as_view()),
                            name = 'order-detail'),
@@ -66,6 +82,11 @@ urlpatterns = patterns('invoices.views',
                        url(r'^order_delete/(?P<pk>\d+)$',
                            login_required(OrderDeleteView.as_view()),
                            name = 'order-delete'
+                           ),
+
+                       url(r'^order_invoice/(?P<pk>\d+)$',
+                           login_required(OrderInvoiceView.as_view()),
+                           name = 'order-invoice'
                            ),
 
                        # url(r'^items/$', login_required(ItemListView.as_view()),

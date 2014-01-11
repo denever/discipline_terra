@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block container %}
-<h3>Orders</h3>
+<h3>{% trans "Orders" %}</h3>
 <p>
   <a href="{% url 'order-create' %}"><span class="glyphicon glyphicon-plus"></span> New order </a>
 </p>
@@ -29,20 +29,20 @@
     {% for order in orders %}
     <tr>
       <td>
-        <a href="{% url 'customer-detail' order.customer.id %}">
-          <span class="glyphicon glyphicon-eye-open"></span>
-        </a>{{order.customer}}
+	<a href="{% url 'customer-detail' order.customer.id %}">
+	  <span class="glyphicon glyphicon-eye-open"></span>
+	</a>{{order.customer}}
       </td>
       <td>{{order.item_count}}</td>
-      <td>{{order.total_value}} €</td>      
+      <td>{{order.total_value}} €</td>
       <td>
-        <a type="button" class="btn btn-default btn-xs" href="{% url 'order-detail' order.id %}">
-          <span class="glyphicon glyphicon-edit"></span>
-        </a>
-        <a type="button" class="btn btn-default btn-xs"  href="{% url 'order-delete' order.id %}">
-          <span class="glyphicon glyphicon-trash"></span>
-        </a>
-	<a type="button" class="btn btn-default btn-xs" href="url 'order-close order.id">
+	<a type="button" class="btn btn-default btn-xs" href="{% url 'order-detail' order.id %}">
+	  <span class="glyphicon glyphicon-edit"></span>
+	</a>
+	<a type="button" class="btn btn-default btn-xs"  href="{% url 'order-delete' order.id %}">
+	  <span class="glyphicon glyphicon-trash"></span>
+	</a>
+	<a type="button" class="btn btn-default btn-xs" href="{% url 'order-invoice' order.id %}">
 	  <span class="glyphicon glyphicon-shopping-cart"></span>
 	</a>
       </td>

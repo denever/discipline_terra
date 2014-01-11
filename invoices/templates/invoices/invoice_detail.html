@@ -1,0 +1,44 @@
+{% extends "invoices/base-invoices.html" %}
+{% load i18n %}
+{% block container %}
+<h3>{% trans "Invoice" %}</h3>
+<p>
+  <a type="button" class="btn btn-default btn-xs"  href="{% url 'invoice-print' invoice.id %}">
+    <span class="glyphicon glyphicon-print"></span>
+  </a>
+</p>
+<table class="table table-hover">
+  <tbody>
+    <tr>
+      <td>{% trans "Customer" %}</td><td>{{invoice.customer}}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Voices count" %}</td><td>{{invoice.voice_count}}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Total value" %}</td><td>{{invoice.total_value}} €</td>
+    </tr>
+  </tbody>
+</table>
+<h3>{% trans "Voices" %}</h3>
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <td>{% trans "Description" %}</td>
+      <td>{% trans "Pieces" %}</td>
+      <td>{% trans "Single Price" %}</td>
+      <td>{% trans "Total price" %}</td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for voice in invoice.voice_set.all %}
+    <tr>
+      <td>{{voice.description}}</td>
+      <td>{{voice.pieces}}</td>
+      <td>{{voice.single_price}} €</td>
+      <td>{{voice.total_price}} €</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

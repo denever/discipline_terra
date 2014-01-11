@@ -1,16 +1,18 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.db.models import Q
+from django.http import HttpResponseForbidden, HttpResponseRedirect
 
 from invoices.models import *
 
 # Create your views here.
-
+from django.views.generic import View
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
+from django.views.generic.detail import SingleObjectTemplateResponseMixin, SingleObjectMixin
 
 from invoices.forms import CustomerForm, OrderForm, ItemForm
 
@@ -58,23 +60,30 @@ class CustomerUpdateView(UpdateView):
         self.success_url = reverse('customer-detail', args=[self.kwargs['pk']])
         return super(CustomerUpdateView, self).form_valid(form)
 
-    # def get_initial(self):
-    #     self.initial = super(CustomerUpdateView, self).get_initial()
-    #     self.initial['ateco_sector'] = self.object.ateco_sector.name
-    #     self.initial['cpi'] = self.object.cpi.name
-    #     return self.initial
-
 class CustomerDeleteView(DeleteView):
     model = Customer
     form_class = CustomerForm
     success_url = '/invoices/customers'
     context_object_name = 'customer'
 
-
 class OrderListView(ListView):
     queryset = Order.objects.all()
     context_object_name = 'orders'
     paginate_by = 5
+
+class InvoiceListView(ListView):
+    queryset = Invoice.objects.all()
+    context_object_name = 'invoices'
+    paginate_by = 5
+
+class InvoiceDetailView(DetailView):
+    model = Invoice
+    context_object_name = 'invoice'
+
+class InvoicePrintView(DetailView): # Temporary view
+    model = Invoice
+    context_object_name = 'invoice'
+    template_name = 'invoices/invoice_detail.html'
 
 class OrderDetailView(DetailView):
     model = Order
@@ -104,12 +113,6 @@ class OrderUpdateView(UpdateView):
         self.order.newrevision_needed = True
         self.success_url = reverse('order-detail', args=[self.kwargs['pk']])
         return super(OrderUpdateView, self).form_valid(form)
-
-    # def get_initial(self):
-    #     self.initial = super(OrderUpdateView, self).get_initial()
-    #     self.initial['ateco_sector'] = self.object.ateco_sector.name
-    #     self.initial['cpi'] = self.object.cpi.name
-    #     return self.initial
 
 class OrderDeleteView(DeleteView):
     model = Order
@@ -172,3 +175,33 @@ class ItemDeleteView(DeleteView):
     def get_success_url(self):
         self.success_url = reverse('order-detail', args=[self.kwargs['order']])
         return self.success_url
+
+
+class OrderInvoiceView(SingleObjectMixin, SingleObjectTemplateResponseMixin, View):
+    """ This view invoices an order creating a Invoice object and deleting the existing order"""
+    model = Order
+    template_name = 'invoices/order_invoice.html'
+    context_object_name = 'order'
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated():
+            return HttpResponseForbidden()
+        order = self.get_object()
+        order.invoiced = True # in pre_delete_item avoid to release items for an invoiced order
+        order.lastupdate_by = request.user.get_profile()
+        order.save()
+
+        invoice = Invoice.objects.create(customer=order.customer)
+        for item in order.item_set.all():
+            print item
+            voice = Voice.objects.create(invoice=invoice, description=item.__unicode__(), pieces=item.pieces, single_price=item.price.price_out, total_price=item.value)
+            print voice
+            voice.save()
+
+        order.delete()
+        
+        return HttpResponseRedirect(reverse('invoices'))
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return self.render_to_response(self.get_context_data())

@@ -1,0 +1,47 @@
+{% extends "invoices/base-invoices.html" %}
+{% load i18n %}
+
+{% block container %}
+<h3>{% trans "Invoices" %}</h3>
+{% if is_paginated %}
+<ul class="pager">
+  {% if page_obj.has_previous %}
+  <li class="previous"><a href="/invoices/invoices?page={{ page_obj.previous_page_number }}">&larr; {% trans "Previous" %}</a></li>
+  {% endif %}
+  <li>{% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}.</li>
+  {% if page_obj.has_next %}
+  <li class="next"><a href="/invoices/invoices?page={{ page_obj.next_page_number }}">{% trans "Next" %} &rarr;</a></li>
+  {% endif %}
+</ul>
+{% endif %}
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <td>{% trans "Customer" %}</td>
+      <td>{% trans "Voices count" %}</td>
+      <td>{% trans "Total value" %}</td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for invoice in invoices %}
+    <tr>
+      <td>
+	<a href="{% url 'customer-detail' invoice.customer.id %}">
+	  <span class="glyphicon glyphicon-eye-open"></span>
+	</a>{{invoice.customer}}
+      </td>
+      <td>{{invoice.voice_count}}</td>
+      <td>{{invoice.total_value}} €</td>
+      <td>
+	<a type="button" class="btn btn-default btn-xs" href="{% url 'invoice-detail' invoice.id %}">
+	  <span class="glyphicon glyphicon-eye-open"></span>
+	</a>
+	<a type="button" class="btn btn-default btn-xs"  href="{% url 'invoice-detail' invoice.id %}">
+	  <span class="glyphicon glyphicon-print"></span>
+	</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

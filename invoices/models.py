@@ -34,10 +34,10 @@ class Customer(models.Model):
 
 class Item(models.Model):
     order = models.ForeignKey('invoices.Order',
-                                verbose_name=_('Order'))
+                                verbose_name=_('Order'), on_delete=models.CASCADE)
     price = models.ForeignKey('catalog.Price',
                               verbose_name=_('Product'))
-    pieces = models.IntegerField(_('Pieces'))
+    pieces = models.PositiveIntegerField(_('Pieces'))
 
     class Meta:
         verbose_name = _('Item')
@@ -60,11 +60,19 @@ class Item(models.Model):
         except Exception, e:
             return ('N/A', self.pieces)
 
+    def __unicode__(self):
+        return self.price.product.__unicode__()
+
 class Order(models.Model):
     customer = models.ForeignKey(Customer,
                                 verbose_name=_('Customer'))
 
     record_date = models.DateTimeField(_('Recorded on'), auto_now_add=True)
+    lastupdate_by = models.ForeignKey('accounts.UserProfile',
+                                    related_name='order_edited',
+                                    verbose_name=_('Last update by'))
+
+    invoiced = models.BooleanField(_('Invoiced'), default=False)
 
     class Meta:
         verbose_name = _('Order')
@@ -87,7 +95,51 @@ class Order(models.Model):
             total += item.value
         return total
 
+
+class Invoice(models.Model):
+    customer = models.ForeignKey(Customer,
+                                verbose_name=_('Customer'))
+    record_date = models.DateTimeField(_('Recorded on'), auto_now_add=True)
+
+    class Meta:
+        verbose_name = _('Invoice')
+        verbose_name_plural = _('Invoices')
+
+    def __unicode__(self):
+        return _('Invoice for %(customer)s on %(record_date)s: ') % {'customer': self.customer, 'record_date': self.record_date}
+
+    @property
+    def voice_count(self):
+        total = int()
+        for voice in self.voice_set.all():
+            total += voice.pieces
+        return total
+
+    @property
+    def total_value(self):
+        total = Decimal(0.0)
+        for voice in self.voice_set.all():
+            total += voice.total_price
+        return total
+
+class Voice(models.Model):
+    invoice = models.ForeignKey('invoices.Invoice',
+                                verbose_name=_('Invoice'))
+
+    description = models.CharField(_('Description'), max_length=200)
+    single_price = models.DecimalField(_('Price single'), max_digits=10, decimal_places=2)
+    total_price = models.DecimalField(_('Total price'), max_digits=10, decimal_places=2)
+    pieces = models.PositiveIntegerField(_('Pieces'))
+
+    class Meta:
+        verbose_name = _('Voice')
+        verbose_name_plural = _('Voices')
+
+    def __unicode__(self):
+        return '%s %s %s %s' % (self.description, self.pieces, self.single_price, self.total_price)
+
 @receiver(pre_delete, sender=Item)
 def pre_delete_item(sender, **kwargs):
     instance = kwargs['instance']
-    instance.price.product.release(instance.pieces)
+    if not instance.order.invoiced: # avoid to release items for an invoiced order
+        instance.price.product.release(instance.pieces)

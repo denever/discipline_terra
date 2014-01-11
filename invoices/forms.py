@@ -44,6 +44,8 @@ class OrderForm(forms.ModelForm):
             'customer': Select(attrs={'class': 'form-control'}),
             }
 
+        exclude = ('invoiced', 'lastupdate_by')
+
 class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
