@@ -6,7 +6,7 @@ from catalog.models import Price
 class PriceForm(ModelForm):
     class Meta:
         model = Price
-        exclude = ('lastupdate', 'lastupdate_by')
+        exclude = ('lastchange', 'lastchange_by')
 
         widgets = {
             'product': Select(attrs={'class': 'form-control'}),

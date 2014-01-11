@@ -6,7 +6,7 @@ from stock.models import Product, Package
 class ProductForm(ModelForm):
     class Meta:
         model = Product
-        exclude = ('lastupdate', 'lastupdate_by')
+        exclude = ('lastchange', 'lastchange_by')
 
         widgets = {
             'code': TextInput(attrs={'class': 'form-control'}),
@@ -15,12 +15,13 @@ class ProductForm(ModelForm):
             'wrn_tsh': NumberInput(attrs={'class': 'form-control'}),
             'producer': TextInput(attrs={'class': 'form-control'}),
             'barcode': NumberInput(attrs={'class': 'form-control'}),
+            'category': Select(attrs={'class': 'form-control'}),
         }
 
 class PackageForm(ModelForm):
     class Meta:
         model = Package
-        exclude = ('lastupdate', 'lastupdate_by')
+        exclude = ('lastchange', 'lastchange_by')
         widgets = {
             'product': Select(attrs={'class': 'form-control'}),
             'size': NumberInput(attrs={'class': 'form-control'}),

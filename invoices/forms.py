@@ -15,7 +15,7 @@ class CustomerForm(forms.ModelForm):
 
     class Meta:
         model = Customer
-        exclude = ('lastupdate', 'lastupdate_by')
+        exclude = ('lastchange', 'lastchange_by')
 
         widgets = {
             'surname': TextInput(attrs={'class': 'form-control'}),
@@ -44,7 +44,7 @@ class OrderForm(forms.ModelForm):
             'customer': Select(attrs={'class': 'form-control'}),
             }
 
-        exclude = ('invoiced', 'lastupdate_by')
+        exclude = ('invoiced', 'lastchange_by')
 
 class ItemForm(forms.ModelForm):
     class Meta:
