@@ -38,11 +38,13 @@ class Item(models.Model):
     price = models.ForeignKey('catalog.Price',
                               verbose_name=_('Product'))
     pieces = models.PositiveIntegerField(_('Pieces'))
+    record_date = models.DateTimeField(_('Recorded on'), auto_now_add=True)
 
     class Meta:
         verbose_name = _('Item')
         verbose_name_plural = _('Item')
         unique_together = ('order','price')
+        ordering = ['record_date']
 
     @property
     def value(self):
@@ -77,6 +79,7 @@ class Order(models.Model):
     class Meta:
         verbose_name = _('Order')
         verbose_name_plural = _('Orders')
+        ordering = ['record_date']
 
     def __unicode__(self):
         return _('Order from %(customer)s on %(record_date)s: ') % {'customer': self.customer, 'record_date': self.record_date}
@@ -104,6 +107,7 @@ class Invoice(models.Model):
     class Meta:
         verbose_name = _('Invoice')
         verbose_name_plural = _('Invoices')
+        ordering = ['record_date']
 
     def __unicode__(self):
         return _('Invoice for %(customer)s on %(record_date)s: ') % {'customer': self.customer, 'record_date': self.record_date}
