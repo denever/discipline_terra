@@ -12,10 +12,10 @@ class Price(models.Model):
     gain_percentage = models.FloatField(_('Gain'))
     vat_out = models.FloatField(_('VAT OUT'))
 
-    lastupdate_by = models.ForeignKey('accounts.UserProfile',
+    lastchange_by = models.ForeignKey('accounts.UserProfile',
                                       related_name='price_edited',
-                                      verbose_name=_('Last update by'))
-    lastupdate = models.DateTimeField(_('Last update on'), auto_now_add=True)
+                                      verbose_name=_('Last change by'))
+    lastchange = models.DateTimeField(_('Last change on'), auto_now_add=True)
 
     class Meta:
         ordering = ['product']
