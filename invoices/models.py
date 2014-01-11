@@ -106,6 +106,9 @@ class Invoice(models.Model):
     customer = models.ForeignKey(Customer,
                                 verbose_name=_('Customer'))
     date = models.DateTimeField(_('Invoiced on'), auto_now_add=True)
+    issuer = models.ForeignKey('accounts.UserProfile',
+                        related_name='invoices_issued',
+                        verbose_name=_('Issued by'))
 
     class Meta:
         verbose_name = _('Invoice')

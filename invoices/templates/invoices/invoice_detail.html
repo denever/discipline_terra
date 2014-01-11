@@ -18,6 +18,12 @@
     <tr>
       <td>{% trans "Total value" %}</td><td>{{invoice.total_value}} €</td>
     </tr>
+    <tr>
+      <td>{% trans "Issued on" %}</td><td>{{invoice.date}}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Issued by" %}</td><td>{{invoice.issuer}}</td>
+    </tr>
   </tbody>
 </table>
 <h3>{% trans "Voices" %}</h3>
