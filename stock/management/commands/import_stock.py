@@ -16,13 +16,18 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         author = UserProfile.objects.get(id=1)
         conn = sqlite3.connect(args[0])
-#        conn.row_factory = sqlite3.Row
-        src_cur = conn.execute('select code, description, producer, barcode from stock_product;')
+
+        src_cur = conn.execute('select name, description from stock_category;')
         for row in src_cur:
-            obj = Product(code=row[0], description=row[1], producer=row[2], barcode=row[3], quantity=0, wrn_tsh=1, lastupdate_by=author)
+            obj = Category(name=row[0], description=row[1])
+            obj.save()
+
+        src_cur = conn.execute('select code, description, producer, barcode, category_id from stock_product;')
+        for row in src_cur:
+            obj = Product(code=row[0], description=row[1], producer=row[2], barcode=row[3], quantity=0, wrn_tsh=1, lastchange_by=author, category_id=row[4])
             obj.save()
 
         src_cur = conn.execute('select product_id, size, barcode from stock_package')
         for row in src_cur:
-            obj = Package(product_id=row[0], size=row[1], barcode=row[2], lastupdate_by=author)
+            obj = Package(product_id=row[0], size=row[1], barcode=row[2], lastchange_by=author)
             obj.save()
