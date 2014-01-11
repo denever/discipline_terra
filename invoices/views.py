@@ -160,6 +160,7 @@ class ItemCreateView(CreateView):
         self.item.order = get_object_or_404(Order, id=self.kwargs['order'])
         self.item.order.lastchange_by = self.request.user.get_profile()
         self.item.order.lastchange = datetime.utcnow().replace(tzinfo=utc)
+        self.item.order.save()
         self.success_url = reverse('order-detail', args=[self.kwargs['order']])
         return super(ItemCreateView, self).form_valid(form)
 
@@ -188,6 +189,7 @@ class ItemUpdateView(UpdateView):
         self.item.order = get_object_or_404(Order, id=self.kwargs['order'])
         self.item.order.lastchange_by = self.request.user.get_profile()
         self.item.order.lastchange = datetime.utcnow().replace(tzinfo=utc)
+        self.item.order.save()
         self.success_url = reverse('order-detail', args=[self.kwargs['order']])
         return super(ItemUpdateView, self).form_valid(form)
 
