@@ -33,6 +33,12 @@
     <tr>
       <td>{% trans "Email" %}</td><td>{{customer.email}}</td>
     </tr>
+    <tr>
+      <td>{% trans "Last change by" %}</td><td>{{customer.lastchange_by}}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Last change on" %}</td><td>{{customer.lastchange}}</td>
+    </tr>
   </tbody>
 </table>
 {% endblock %}

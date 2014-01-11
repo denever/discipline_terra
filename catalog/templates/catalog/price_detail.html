@@ -28,7 +28,10 @@
       <td>{% trans "VAT out" %}</td><td>{{price.vat_out}} %</td>
     </tr>
     <tr>
-      <td>{% trans "Price out" %}</td><td>{{price.price_out}} €</td>
+      <td>{% trans "Last change by" %}</td><td>{{price.lastchange_by}}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Last change on" %}</td><td>{{price.lastchange}}</td>
     </tr>
   </tbody>
 </table>

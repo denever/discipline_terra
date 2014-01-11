@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import HttpResponseForbidden, HttpResponseRedirect
+from datetime import datetime
+from django.utils.timezone import utc
 
 from invoices.models import *
 
@@ -43,7 +45,8 @@ class CustomerCreateView(CreateView):
     def form_valid(self, form):
         self.customer = form.save(commit=False)
         self.customer.record_by = self.request.user.get_profile()
-        self.customer.lastupdate_by = self.request.user.get_profile()
+        self.customer.lastchange_by = self.request.user.get_profile()
+        self.customer.lastchange = datetime.utcnow().replace(tzinfo=utc)
         return super(CustomerCreateView, self).form_valid(form)
 
 class CustomerUpdateView(UpdateView):
@@ -55,8 +58,8 @@ class CustomerUpdateView(UpdateView):
 
     def form_valid(self, form):
         self.customer = form.save(commit=False)
-        self.customer.lastupdate_by = self.request.user.get_profile()
-        self.customer.newrevision_needed = True
+        self.customer.lastchange_by = self.request.user.get_profile()
+        self.customer.lastchange = datetime.utcnow().replace(tzinfo=utc)
         self.success_url = reverse('customer-detail', args=[self.kwargs['pk']])
         return super(CustomerUpdateView, self).form_valid(form)
 
@@ -117,7 +120,8 @@ class OrderCreateView(CreateView):
     def form_valid(self, form):
         self.order = form.save(commit=False)
         self.order.record_by = self.request.user.get_profile()
-        self.order.lastupdate_by = self.request.user.get_profile()
+        self.order.lastchange_by = self.request.user.get_profile()
+        self.order.lastchange = datetime.utcnow().replace(tzinfo=utc)
         return super(OrderCreateView, self).form_valid(form)
 
 class OrderUpdateView(UpdateView):
@@ -129,8 +133,8 @@ class OrderUpdateView(UpdateView):
 
     def form_valid(self, form):
         self.order = form.save(commit=False)
-        self.order.lastupdate_by = self.request.user.get_profile()
-        self.order.newrevision_needed = True
+        self.order.lastchange_by = self.request.user.get_profile()
+        self.order.lastchange = datetime.utcnow().replace(tzinfo=utc)
         self.success_url = reverse('order-detail', args=[self.kwargs['pk']])
         return super(OrderUpdateView, self).form_valid(form)
 
@@ -154,8 +158,8 @@ class ItemCreateView(CreateView):
         self.item = form.save(commit=False)
         self.item.price.product.sell(self.item.pieces)
         self.item.order = get_object_or_404(Order, id=self.kwargs['order'])
-#        self.item.record_by = self.request.user.get_profile()
-#        self.item.lastupdate_by = self.request.user.get_profile()
+        self.item.order.lastchange_by = self.request.user.get_profile()
+        self.item.order.lastchange = datetime.utcnow().replace(tzinfo=utc)
         self.success_url = reverse('order-detail', args=[self.kwargs['order']])
         return super(ItemCreateView, self).form_valid(form)
 
@@ -181,8 +185,9 @@ class ItemUpdateView(UpdateView):
         previous_item = get_object_or_404(Item, id=self.item.id)
         difference = previous_item.pieces - self.item.pieces
         self.item.price.product.release(difference)
-#        self.item.lastupdate_by = self.request.user.get_profile()
         self.item.order = get_object_or_404(Order, id=self.kwargs['order'])
+        self.item.order.lastchange_by = self.request.user.get_profile()
+        self.item.order.lastchange = datetime.utcnow().replace(tzinfo=utc)
         self.success_url = reverse('order-detail', args=[self.kwargs['order']])
         return super(ItemUpdateView, self).form_valid(form)
 
@@ -208,7 +213,7 @@ class OrderInvoiceView(SingleObjectMixin, SingleObjectTemplateResponseMixin, Vie
             return HttpResponseForbidden()
         order = self.get_object()
         order.invoiced = True # in pre_delete_item avoid to release items for an invoiced order
-        order.lastupdate_by = request.user.get_profile()
+        order.lastchange_by = request.user.get_profile()
         order.save()
 
         invoice = Invoice.objects.create(customer=order.customer)

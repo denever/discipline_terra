@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.urlresolvers import reverse
+from datetime import datetime
+from django.utils.timezone import utc
 
 from catalog.models import *
 
@@ -40,7 +42,8 @@ class PriceCreateView(CreateView):
     def form_valid(self, form):
         self.price = form.save(commit=False)
         self.price.record_by = self.request.user.get_profile()
-        self.price.lastupdate_by = self.request.user.get_profile()
+        self.price.lastchange_by = self.request.user.get_profile()
+        self.price.lastchange = datetime.utcnow().replace(tzinfo=utc)
         return super(PriceCreateView, self).form_valid(form)
 
 class PriceUpdateView(UpdateView):
@@ -52,16 +55,10 @@ class PriceUpdateView(UpdateView):
 
     def form_valid(self, form):
         self.price = form.save(commit=False)
-        self.price.lastupdate_by = self.request.user.get_profile()
-        self.price.newrevision_needed = True
+        self.price.lastchange_by = self.request.user.get_profile()
+        self.price.lastchange = datetime.utcnow().replace(tzinfo=utc)
         self.success_url = reverse('price-detail', args=[self.kwargs['pk']])
         return super(PriceUpdateView, self).form_valid(form)
-
-    # def get_initial(self):
-    #     self.initial = super(PriceUpdateView, self).get_initial()
-    #     self.initial['ateco_sector'] = self.object.ateco_sector.name
-    #     self.initial['cpi'] = self.object.cpi.name
-    #     return self.initial
 
 class PriceDeleteView(DeleteView):
     model = Price
