@@ -6,6 +6,7 @@ from django.dispatch import Signal, receiver
 
 product_warning_depletion = Signal(providing_args=["left"])
 product_danger_depletion = Signal(providing_args=["left"])
+product_depleted = Signal()
 
 def product_warning_handler(sender, **kwargs):
     print 'product_warning_handler'
@@ -13,8 +14,12 @@ def product_warning_handler(sender, **kwargs):
 def product_danger_handler(sender, **kwargs):
     print 'product_danger_handler'
 
+def product_depleted_handler(sender, **kwargs):
+    print 'product_depleted_handler'
+
 product_warning_depletion.connect(product_warning_handler)
 product_danger_depletion.connect(product_danger_handler)
+product_depleted.connect(product_depleted_handler)
 
 # Create your models here.
 class Category(models.Model):
@@ -84,6 +89,8 @@ class Product(models.Model):
 
             if self.status == 'danger':
                 product_danger_depletion.send(sender=self, left=self.quantity)
+                if self.quantity == 0:
+                    product_depleted.send(sender=self)
 
             self.save()
         except Exception, e:
