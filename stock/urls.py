@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib.auth.decorators import login_required, permission_required
 
 from stock.views import ProductListView, WarningProductListView, DangerProductListView, SearchProductListView
+from stock.views import ProductByCategoryListView
 from stock.views import ProductDetailView
 from stock.views import ProductCreateView
 from stock.views import ProductUpdateView
@@ -22,6 +23,10 @@ urlpatterns = patterns('stock.views',
 
                        url(r'^products/search$', login_required(SearchProductListView.as_view()),
                            name='products-search'),
+
+                       url(r'^products/category/(?P<pk>\d+)$',
+                           login_required(ProductByCategoryListView.as_view()),
+                           name='products-category'),
 
                        url(r'^products/warning$', login_required(WarningProductListView.as_view()),
                            name='products-warning'),

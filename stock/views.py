@@ -19,6 +19,11 @@ class ProductListView(ListView):
     context_object_name = 'products'
     paginate_by = 5
 
+    def get_context_data(self, **kwargs):
+        context = super(ProductListView, self).get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
 class WarningProductListView(ListView):
      context_object_name = 'products'
      paginate_by = 5
@@ -27,6 +32,11 @@ class WarningProductListView(ListView):
      def get_queryset(self):
          filtered = [x for x in Product.objects.all() if x.status =='warning']
          return filtered
+
+     def get_context_data(self, **kwargs):
+        context = super(WarningProductListView, self).get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
 
 class DangerProductListView(ListView):
      context_object_name = 'products'
@@ -37,6 +47,11 @@ class DangerProductListView(ListView):
          filtered = [x for x in Product.objects.all() if x.status == 'danger']
          return filtered
 
+     def get_context_data(self, **kwargs):
+        context = super(DangerProductListView, self).get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
 class SearchProductListView(ListView):
     model = Product
     context_object_name = 'products'
@@ -46,6 +61,27 @@ class SearchProductListView(ListView):
     def get_queryset(self):
         query = self.request.REQUEST.get("q")
         return self.model.objects.filter(description__icontains=query)
+
+    def get_context_data(self, **kwargs):
+        context = super(SearchProductListView, self).get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
+class ProductByCategoryListView(ListView):
+    model = Product
+    context_object_name = 'products'
+    paginate_by = 5
+    template_name = 'stock/product_list.html'
+
+    def get_queryset(self):
+        category = get_object_or_404(Category, id=self.kwargs['pk'])
+        return category.product_set.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductByCategoryListView, self).get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        context['active_cat_id'] = self.kwargs['pk']
+        return context
 
 class ProductDetailView(DetailView):
     model = Product
