@@ -2,10 +2,16 @@
 {% load i18n %}
 
 {% block container %}
-<h3>Packages</h3>
-<p>
-  <a href="{% url 'package-create' %}"><span class="glyphicon glyphicon-plus"></span> New package </a>
-</p>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <a class="navbar-brand" href="{% url 'packages' %}">{% trans "Packages" %}</a>
+    <ul class="nav navbar-nav">
+      <li>
+	<a href="{% url 'package-create' %}"><span class="glyphicon glyphicon-plus"></span> New package </a>
+      </li>
+    </ul>
+  </div>
+</nav>
 {% if is_paginated %}
 <ul class="pager">
   {% if page_obj.has_previous %}
