@@ -2,10 +2,10 @@
 {% load i18n %}
 
 {% block container %}
-<h3>{% trans "Invoices" %}</h3>
-<div class="panel panel-default">
-  <div class="panel-body">
-    <form class="form-inline" role="form" action="{% url 'invoices-search' %}" method="GET">
+<nav class="navbar navbar-default" role="navigation">
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <a class="navbar-brand" href="{% url 'invoices' %}">{% trans "Invoices" %}</a>
+    <form class="navbar-form navbar-right" role="search" action="{% url 'invoices-search' %}" method="GET">
       <div class="form-group">
 	<label class="sr-only" for="searchtext">{% trans "Search" %}</label>
 	<input type="text" class="form-control" id="searchtext" placeholder="{% trans "Customer surname, name" %}"  name="q">
@@ -13,7 +13,7 @@
       <button type="submit" class="btn btn-default">{% trans "Search" %}</button>
     </form>
   </div>
-</div>
+</nav>
 {% if is_paginated %}
 <ul class="pager">
   {% if page_obj.has_previous %}
