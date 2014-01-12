@@ -7,8 +7,9 @@
     <a class="navbar-brand" href="{% url 'customers' %}">{% trans "Customers" %}</a>
     <ul class="nav navbar-nav">
       <li>
-	<a href="{% url 'customer-create' %}">
-	  <span class="glyphicon glyphicon-plus"></span>{% trans "New customer" %}</a>
+	<a href="{% url 'customer-create' %}" data-toggle="tooltip" data-placement="left" title="{% trans "New customer" %}">
+	  <span class="glyphicon glyphicon-plus"></span>
+	</a>
       </li>
     </ul>
     <form class="navbar-form navbar-right" role="search" action="{% url 'customers-search' %}" method="GET">
@@ -54,13 +55,13 @@
       <td>{{customer.phone}}</td>
       <td>{{customer.email}}</td>
       <td>
-	<a type="button" class="btn btn-default btn-xs" href="{% url 'customer-detail' customer.id %}">
+	<a type="button" class="btn btn-default btn-xs" href="{% url 'customer-detail' customer.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Detail" %}">
 	  <span class="glyphicon glyphicon-eye-open"></span>
 	</a>
-	<a type="button" class="btn btn-default btn-xs" href="{% url 'customer-edit' customer.id %}">
+	<a type="button" class="btn btn-default btn-xs" href="{% url 'customer-edit' customer.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Edit" %}">
 	  <span class="glyphicon glyphicon-edit"></span>
 	</a>
-	<a type="button" class="btn btn-default btn-xs"  href="{% url 'customer-delete' customer.id %}">
+	<a type="button" class="btn btn-default btn-xs"  href="{% url 'customer-delete' customer.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Delete" %}">
 	  <span class="glyphicon glyphicon-trash"></span>
 	</a>
       </td>

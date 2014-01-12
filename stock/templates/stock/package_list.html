@@ -7,7 +7,8 @@
     <a class="navbar-brand" href="{% url 'packages' %}">{% trans "Packages" %}</a>
     <ul class="nav navbar-nav">
       <li>
-	<a href="{% url 'package-create' %}"><span class="glyphicon glyphicon-plus"></span>{% trans "New package" %}</a>
+	<a href="{% url 'package-create' %}" data-toggle="tooltip" data-placement="left" title="{% trans "New package" %}">
+	  <span class="glyphicon glyphicon-plus"></span></a>
       </li>
     </ul>
   </div>
@@ -38,15 +39,15 @@
       <td>{{package.size}}</td>
       <td>{{package.barcode}}</td>
       <td align="center">
-        <a type="button" class="btn btn-default btn-xs" href="{% url 'package-detail' package.id %}">
-          <span class="glyphicon glyphicon-eye-open"></span>
-        </a>
-        <a type="button" class="btn btn-default btn-xs" href="{% url 'package-edit' package.id %}">
-          <span class="glyphicon glyphicon-edit"></span>
-        </a>
-        <a type="button" class="btn btn-default btn-xs"  href="{% url 'package-delete' package.id %}">
-          <span class="glyphicon glyphicon-trash"></span>
-        </a>
+	<a type="button" class="btn btn-default btn-xs" href="{% url 'package-detail' package.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Detail" %}">
+	  <span class="glyphicon glyphicon-eye-open"></span>
+	</a>
+	<a type="button" class="btn btn-default btn-xs" href="{% url 'package-edit' package.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Edit" %}">
+	  <span class="glyphicon glyphicon-edit"></span>
+	</a>
+	<a type="button" class="btn btn-default btn-xs"  href="{% url 'package-delete' package.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Delete" %}">
+	  <span class="glyphicon glyphicon-trash"></span>
+	</a>
       </td>
     </tr>
     {% endfor %}

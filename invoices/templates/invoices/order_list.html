@@ -7,8 +7,9 @@
     <a class="navbar-brand" href="{% url 'orders' %}">{% trans "Orders" %}</a>
     <ul class="nav navbar-nav">
       <li>
-	<a href="{% url 'order-create' %}">
-	  <span class="glyphicon glyphicon-plus"></span>{% trans "New order" %}</a>
+	<a href="{% url 'order-create' %}"  data-toggle="tooltip" data-placement="left" title="{% trans "New order" %}">
+	  <span class="glyphicon glyphicon-plus"></span>
+	</a>
       </li>
     </ul>
     <form class="navbar-form navbar-right" role="search" action="{% url 'orders-search' %}" method="GET">
@@ -44,21 +45,22 @@
     {% for order in orders %}
     <tr>
       <td>
-	<a href="{% url 'customer-detail' order.customer.id %}">
-	  <span class="glyphicon glyphicon-eye-open"></span>
-	</a>{{order.customer}}
+	{{order.customer}}
+	<a type="button" class="btn btn-default btn-xs" href="{% url 'customer-detail' order.customer.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Customer details" %}">
+	  <span class="glyphicon glyphicon-user"></span>
+	</a>
       </td>
       <td>{{order.record_date}}</td>
       <td>{{order.item_count}}</td>
       <td>{{order.total_value}} €</td>
       <td>
-	<a type="button" class="btn btn-default btn-xs" href="{% url 'order-detail' order.id %}">
+	<a type="button" class="btn btn-default btn-xs" href="{% url 'order-detail' order.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Detail" %}">
 	  <span class="glyphicon glyphicon-edit"></span>
 	</a>
-	<a type="button" class="btn btn-default btn-xs"  href="{% url 'order-delete' order.id %}">
+	<a type="button" class="btn btn-default btn-xs"  href="{% url 'order-delete' order.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Edit" %}">
 	  <span class="glyphicon glyphicon-trash"></span>
 	</a>
-	<a type="button" class="btn btn-default btn-xs" href="{% url 'order-invoice' order.id %}">
+	<a type="button" class="btn btn-default btn-xs" href="{% url 'order-invoice' order.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Invoice" %}">
 	  <span class="glyphicon glyphicon-shopping-cart"></span>
 	</a>
       </td>

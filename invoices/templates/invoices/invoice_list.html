@@ -38,18 +38,19 @@
     {% for invoice in invoices %}
     <tr>
       <td>
-	<a href="{% url 'customer-detail' invoice.customer.id %}">
-	  <span class="glyphicon glyphicon-eye-open"></span>
-	</a>{{invoice.customer}}
+	{{invoice.customer}}
+	<a type="button" class="btn btn-default btn-xs" href="{% url 'customer-detail' invoice.customer.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Customer details" %}">
+	  <span class="glyphicon glyphicon-user"></span>
+	</a>
       </td>
       <td>{{invoice.record_date}}</td>
       <td>{{invoice.voice_count}}</td>
       <td>{{invoice.total_value}} €</td>
       <td>
-	<a type="button" class="btn btn-default btn-xs" href="{% url 'invoice-detail' invoice.id %}">
+	<a type="button" class="btn btn-default btn-xs" href="{% url 'invoice-detail' invoice.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Detail" %}">
 	  <span class="glyphicon glyphicon-eye-open"></span>
 	</a>
-	<a type="button" class="btn btn-default btn-xs"  href="{% url 'invoice-detail' invoice.id %}">
+	<a type="button" class="btn btn-default btn-xs"  href="{% url 'invoice-detail' invoice.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Print" %}">
 	  <span class="glyphicon glyphicon-print"></span>
 	</a>
       </td>
