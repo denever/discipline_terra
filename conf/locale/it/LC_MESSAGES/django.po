@@ -402,7 +402,7 @@ msgstr "Si, sono sicuro"
 #: catalog/templates/catalog/price_create_form.html:8
 #: catalog/templates/catalog/price_create_form.html:13
 msgid "New price registration"
-msgstr "Registra nuovo prezzo"
+msgstr "Aggiungi nuovo prezzo"
 
 #: catalog/templates/catalog/price_create_form.html:37
 #: catalog/templates/catalog/price_update_form.html:37
@@ -578,7 +578,7 @@ msgstr ""
 
 #: invoices/models.py:24 invoices/models.py:43 invoices/models.py:74
 msgid "Recorded on"
-msgstr "Registrato il"
+msgstr "Aggiunto il"
 
 #: invoices/models.py:32 invoices/models.py:72 invoices/models.py:107
 #: invoices/templates/customer_detail.html:4
@@ -690,7 +690,7 @@ msgstr "Vuoi davvere cancellare il cliente"
 #: invoices/templates/invoices/customer_create_form.html:8
 #: invoices/templates/invoices/customer_create_form.html:13
 msgid "New customer registration"
-msgstr "Registra nuovo cliente"
+msgstr "Aggiungi nuovo cliente"
 
 #: invoices/templates/invoices/customer_detail.html:28
 msgid "VAT code"
@@ -771,7 +771,7 @@ msgstr "Vuoi davvero cancellare il prezzo di questo prodotto"
 #: invoices/templates/invoices/order_create_form.html:8
 #: invoices/templates/invoices/order_create_form.html:13
 msgid "New order registration"
-msgstr "Registra nuovo ordine"
+msgstr "Apertura nuovo ordine"
 
 #: invoices/templates/invoices/order_detail.html:19
 #: invoices/templates/invoices/order_list.html:39
@@ -878,7 +878,7 @@ msgstr "Vuoi davvero cancellare il collo per il prodotto"
 #: stock/templates/stock/package_create_form.html:8
 #: stock/templates/stock/package_create_form.html:13
 msgid "New package registration"
-msgstr "Registra nuovo collo"
+msgstr "Aggiungi nuovo collo"
 
 #: stock/templates/stock/package_detail.html:19
 #: stock/templates/stock/package_list.html:30
@@ -896,7 +896,7 @@ msgstr "Nuovo collo"
 #: stock/templates/stock/product_category_list.html:11
 #: stock/templates/stock/product_list.html:11
 msgid "New product"
-msgstr "Registra nuovo prodotto"
+msgstr "Aggiungi nuovo prodotto"
 
 #: stock/templates/stock/product_category_list.html:22
 #: stock/templates/stock/product_list.html:22
@@ -937,4 +937,4 @@ msgstr "Vuoi davvero cancellare il prodotto"
 #: stock/templates/stock/product_create_form.html:8
 #: stock/templates/stock/product_create_form.html:13
 msgid "New product registration"
-msgstr "Registra nuovo prodotto"
+msgstr "Aggiungi nuovo prodotto"
