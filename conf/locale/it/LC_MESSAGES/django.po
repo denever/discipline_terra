@@ -698,13 +698,13 @@ msgstr "Partita IVA"
 
 #: invoices/templates/invoices/customer_list.html:11
 msgid "New customer"
-msgstr "Modifica cliente"
+msgstr "Nuovo cliente"
 
 #: invoices/templates/invoices/customer_list.html:17
 #: invoices/templates/invoices/invoice_list.html:11
 #: invoices/templates/invoices/order_list.html:17
 msgid "Customer surname, name"
-msgstr "Gestione clienti"
+msgstr "Cliente cognome, nome"
 
 #: invoices/templates/invoices/customer_list.html:40
 msgid "Tax Code"
