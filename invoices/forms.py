@@ -64,5 +64,6 @@ class ItemForm(forms.ModelForm):
         price = cleaned_data.get("price")
         tot_qty = price.product.quantity + previous_pieces
         if pieces > tot_qty:
-            raise forms.ValidationError(_("Value %s exceed quantity available for this product: %s") % (pieces, tot_qty))
+            data = { 'pieces': pieces, 'tot_qty': tot_qty }
+            raise forms.ValidationError(_("Value %(pieces)s exceed quantity available for this product: %(tot_qty)s") % data
         return cleaned_data
