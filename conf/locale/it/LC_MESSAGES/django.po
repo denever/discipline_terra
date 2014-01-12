@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Discipline 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-12 15:48+0100\n"
+"POT-Creation-Date: 2014-01-12 17:01+0100\n"
 "PO-Revision-Date: 2014-01-12 15:48+0100\n"
 "Last-Translator: Giuseppe Martino <denever@users.sf.net>\n"
 "Language-Team: Giuseppe Martino <denever@users.sf.net>\n"
@@ -371,7 +371,6 @@ msgid "Prices"
 msgstr "Prezzi"
 
 #: catalog/models.py:26
-#, fuzzy, python-format
 msgid "Price of %(product)s: %(price_out)s"
 msgstr "Prezzo di %(product)s: %(price_out)s"
 
@@ -476,7 +475,7 @@ msgstr "Modifica prodotto"
 
 #: cover/templates/cover/cover.html:49
 msgid "Welcome"
-msgstr "Benventuo"
+msgstr "Benvenuto"
 
 #: cover/templates/cover/cover.html:49
 msgid "Thanks for logging in"
@@ -555,7 +554,9 @@ msgstr "Devi inserire o il codice fiscale o la partita iva"
 #, python-format
 msgid ""
 "Value %(pieces)s exceed quantity available for this product: %(tot_qty)s"
-msgstr "Il numero di pezzi richiesti %(pieces)s supera la disponibilità in mazzino. Max %(tot_qty)s"
+msgstr ""
+"Il numero di pezzi richiesti %(pieces)s supera la disponibilità in mazzino. "
+"Max %(tot_qty)s"
 
 #: invoices/models.py:12 invoices/templates/customer_detail.html:19
 #: invoices/templates/invoices/customer_detail.html:19
@@ -571,6 +572,7 @@ msgstr "Cognome"
 
 #: invoices/models.py:18 invoices/templates/customer_detail.html:34
 #: invoices/templates/invoices/customer_detail.html:34
+#: invoices/templates/invoices/customer_list.html:43
 msgid "Email"
 msgstr ""
 
@@ -712,10 +714,6 @@ msgstr "Codice Fiscale"
 msgid "VAT Code"
 msgstr "Partita IVA"
 
-#: invoices/templates/invoices/customer_list.html:43
-msgid "email"
-msgstr ""
-
 #: invoices/templates/invoices/customer_update_form.html:8
 #: invoices/templates/invoices/customer_update_form.html:13
 msgid "Edit customer"
@@ -779,6 +777,10 @@ msgstr "Registra nuovo ordine"
 #: invoices/templates/invoices/order_list.html:39
 msgid "Items count"
 msgstr "Numero voci"
+
+#: invoices/templates/invoices/order_detail.html:33
+msgid "New item"
+msgstr "Aggiungi acquisto"
 
 #: invoices/templates/invoices/order_detail.html:35
 msgid "Items"
@@ -910,7 +912,7 @@ msgstr "Prodotti in esaurimento"
 #: stock/templates/stock/product_detail.html:33
 #: stock/templates/stock/product_list.html:54
 msgid "Packages left"
-msgstr "colli rimanenti"
+msgstr "Colli rimanenti"
 
 #: stock/templates/stock/product_category_list.html:64
 #: stock/templates/stock/product_detail.html:33
