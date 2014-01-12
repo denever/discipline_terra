@@ -437,7 +437,7 @@ msgstr "IVA in uscita"
 
 #: catalog/templates/catalog/price_list.html:10
 msgid "New price"
-msgstr "Registra nuovo prodotto"
+msgstr "Nuovo prezzo"
 
 #: catalog/templates/catalog/price_list.html:15
 #: catalog/templates/catalog/price_list.html:18
@@ -796,7 +796,7 @@ msgstr "Conferma fatturazione ordine"
 
 #: invoices/templates/invoices/order_invoice.html:10
 msgid "Do you really want to invoice order"
-msgstr "Vuoi davvero fattura questo ordine"
+msgstr "Vuoi davvero fatturare questo ordine"
 
 #: invoices/templates/invoices/order_list.html:11
 msgid "New order"
