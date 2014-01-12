@@ -3,7 +3,7 @@
 {% block container %}
 <h3>{% trans "Invoice" %}</h3>
 <p>
-  <a type="button" class="btn btn-default btn-xs"  href="{% url 'invoice-print' invoice.id %}">
+  <a type="button" class="btn btn-default btn-xs"  href="{% url 'invoice-print' invoice.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Print" %}">
     <span class="glyphicon glyphicon-print"></span>
   </a>
 </p>
