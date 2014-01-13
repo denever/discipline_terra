@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Discipline 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-13 20:51+0100\n"
+"POT-Creation-Date: 2014-01-13 21:00+0100\n"
 "PO-Revision-Date: 2014-01-12 15:48+0100\n"
 "Last-Translator: Giuseppe Martino <denever@users.sf.net>\n"
 "Language-Team: Giuseppe Martino <denever@users.sf.net>\n"
@@ -416,6 +416,28 @@ msgstr "Prezzo di %(product)s: %(price_out)s"
 msgid "Catalog management"
 msgstr "Gestione listino prezzi"
 
+#: catalog/templates/catalog/catalog_confirm_delete.html:6
+#, fuzzy
+msgid "Delete catalog confirm"
+msgstr "Conferma cancellazione collo"
+
+#: catalog/templates/catalog/catalog_confirm_delete.html:10
+#, fuzzy
+msgid "Do you really want to remove catalog"
+msgstr "Vuoi davvere cancellare il listino"
+
+#: catalog/templates/catalog/catalog_confirm_delete.html:15
+#: catalog/templates/catalog/price_config_delete.html:15
+#: catalog/templates/catalog/price_confirm_delete.html:15
+#: invoices/templates/invoices/customer_confirm_delete.html:15
+#: invoices/templates/invoices/item_confirm_delete.html:15
+#: invoices/templates/invoices/order_confirm_delete.html:15
+#: invoices/templates/invoices/order_invoice.html:15
+#: stock/templates/stock/package_confirm_delete.html:15
+#: stock/templates/stock/product_confirm_delete.html:15
+msgid "Yes, I'm sure"
+msgstr "Si, sono sicuro"
+
 #: catalog/templates/catalog/catalog_create_form.html:8
 #: catalog/templates/catalog/catalog_create_form.html:13
 #, fuzzy
@@ -437,28 +459,6 @@ msgstr "Aggiungi nuovo collo"
 #: stock/templates/stock/product_update_form.html:37
 msgid "Save"
 msgstr "Salva"
-
-#: catalog/templates/catalog/catalog_delete_form.html:6
-#, fuzzy
-msgid "Delete catalog confirm"
-msgstr "Conferma cancellazione collo"
-
-#: catalog/templates/catalog/catalog_delete_form.html:10
-#, fuzzy
-msgid "Do you really want to remove catalog"
-msgstr "Vuoi davvere cancellare il cliente"
-
-#: catalog/templates/catalog/catalog_delete_form.html:15
-#: catalog/templates/catalog/price_config_delete.html:15
-#: catalog/templates/catalog/price_confirm_delete.html:15
-#: invoices/templates/invoices/customer_confirm_delete.html:15
-#: invoices/templates/invoices/item_confirm_delete.html:15
-#: invoices/templates/invoices/order_confirm_delete.html:15
-#: invoices/templates/invoices/order_invoice.html:15
-#: stock/templates/stock/package_confirm_delete.html:15
-#: stock/templates/stock/product_confirm_delete.html:15
-msgid "Yes, I'm sure"
-msgstr "Si, sono sicuro"
 
 #: catalog/templates/catalog/catalog_list.html:10
 #, fuzzy
