@@ -57,11 +57,11 @@
 	<a type="button" class="btn btn-default btn-xs" href="{% url 'order-detail' order.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Detail" %}">
 	  <span class="glyphicon glyphicon-edit"></span>
 	</a>
-	<a type="button" class="btn btn-default btn-xs"  href="{% url 'order-delete' order.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Edit" %}">
-	  <span class="glyphicon glyphicon-trash"></span>
-	</a>
 	<a type="button" class="btn btn-default btn-xs" href="{% url 'order-invoice' order.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Invoice" %}">
 	  <span class="glyphicon glyphicon-shopping-cart"></span>
+	</a>
+	<a type="button" class="btn btn-default btn-xs"  href="{% url 'order-delete' order.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Delete" %}">
+	  <span class="glyphicon glyphicon-trash"></span>
 	</a>
       </td>
     </tr>
