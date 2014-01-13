@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Discipline 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-12 20:07+0100\n"
+"POT-Creation-Date: 2014-01-13 17:35+0100\n"
 "PO-Revision-Date: 2014-01-12 15:48+0100\n"
 "Last-Translator: Giuseppe Martino <denever@users.sf.net>\n"
 "Language-Team: Giuseppe Martino <denever@users.sf.net>\n"
@@ -98,7 +98,9 @@ msgstr ""
 #: invoices/templates/invoices/order_list.html:27
 #: stock/templates/stock/package_list.html:19
 #: stock/templates/stock/product_category_list.html:40
+#: stock/templates/stock/product_danger_list.html:40
 #: stock/templates/stock/product_list.html:40
+#: stock/templates/stock/product_warning_list.html:40
 msgid "Previous"
 msgstr "Precedente"
 
@@ -109,7 +111,9 @@ msgstr "Precedente"
 #: invoices/templates/invoices/order_list.html:29
 #: stock/templates/stock/package_list.html:21
 #: stock/templates/stock/product_category_list.html:42
+#: stock/templates/stock/product_danger_list.html:42
 #: stock/templates/stock/product_list.html:42
+#: stock/templates/stock/product_warning_list.html:42
 msgid "Page"
 msgstr "Pagina"
 
@@ -120,7 +124,9 @@ msgstr "Pagina"
 #: invoices/templates/invoices/order_list.html:29
 #: stock/templates/stock/package_list.html:21
 #: stock/templates/stock/product_category_list.html:42
+#: stock/templates/stock/product_danger_list.html:42
 #: stock/templates/stock/product_list.html:42
+#: stock/templates/stock/product_warning_list.html:42
 msgid "of"
 msgstr "di"
 
@@ -131,7 +137,9 @@ msgstr "di"
 #: invoices/templates/invoices/order_list.html:31
 #: stock/templates/stock/package_list.html:23
 #: stock/templates/stock/product_category_list.html:44
+#: stock/templates/stock/product_danger_list.html:44
 #: stock/templates/stock/product_list.html:44
+#: stock/templates/stock/product_warning_list.html:44
 msgid "Next"
 msgstr "Successiva"
 
@@ -362,7 +370,7 @@ msgstr "Ultimo modifica di"
 msgid "Last change on"
 msgstr "Ultimo modifica il"
 
-#: catalog/models.py:22 invoices/templates/invoices/order_detail.html:40
+#: catalog/models.py:22
 msgid "Price"
 msgstr "Prezzo"
 
@@ -451,14 +459,20 @@ msgstr "Nuovo prezzo"
 #: invoices/templates/invoices/order_list.html:20
 #: stock/templates/stock/product_category_list.html:30
 #: stock/templates/stock/product_category_list.html:33
+#: stock/templates/stock/product_danger_list.html:30
+#: stock/templates/stock/product_danger_list.html:33
 #: stock/templates/stock/product_list.html:30
 #: stock/templates/stock/product_list.html:33
+#: stock/templates/stock/product_warning_list.html:30
+#: stock/templates/stock/product_warning_list.html:33
 msgid "Search"
 msgstr "Cerca"
 
 #: catalog/templates/catalog/price_list.html:18
 #: stock/templates/stock/product_category_list.html:31
+#: stock/templates/stock/product_danger_list.html:31
 #: stock/templates/stock/product_list.html:31
+#: stock/templates/stock/product_warning_list.html:31
 msgid "Product text"
 msgstr "Prodotto"
 
@@ -471,7 +485,10 @@ msgstr "Prezzo al cliente"
 #: invoices/templates/invoices/invoice_list.html:50
 #: invoices/templates/invoices/order_list.html:57
 #: stock/templates/stock/package_list.html:42
+#: stock/templates/stock/product_category_list.html:67
+#: stock/templates/stock/product_danger_list.html:67
 #: stock/templates/stock/product_list.html:67
+#: stock/templates/stock/product_warning_list.html:67
 msgid "Detail"
 msgstr "Dettaglio"
 
@@ -479,14 +496,20 @@ msgstr "Dettaglio"
 #: invoices/templates/invoices/customer_list.html:61
 #: invoices/templates/invoices/order_list.html:60
 #: stock/templates/stock/package_list.html:45
+#: stock/templates/stock/product_category_list.html:70
+#: stock/templates/stock/product_danger_list.html:70
 #: stock/templates/stock/product_list.html:70
+#: stock/templates/stock/product_warning_list.html:70
 msgid "Edit"
 msgstr "Modifica"
 
 #: catalog/templates/catalog/price_list.html:62
 #: invoices/templates/invoices/customer_list.html:64
 #: stock/templates/stock/package_list.html:48
+#: stock/templates/stock/product_category_list.html:73
+#: stock/templates/stock/product_danger_list.html:73
 #: stock/templates/stock/product_list.html:73
+#: stock/templates/stock/product_warning_list.html:73
 msgid "Delete"
 msgstr "Cancella"
 
@@ -499,7 +522,7 @@ msgstr "Cancella"
 msgid "Edit product"
 msgstr "Modifica prodotto"
 
-#: cover/templates/cover/cover.html:49
+#: cover/templates/cover/cover.html:49 cover/templates/cover/cover.html:67
 msgid "Welcome"
 msgstr "Benvenut*"
 
@@ -526,6 +549,10 @@ msgstr "Gestione ordini"
 #: cover/templates/cover/cover.html:63
 msgid "Invoices Management"
 msgstr "Gestione fatture"
+
+#: cover/templates/cover/cover.html:67
+msgid "Please log in or register yourself."
+msgstr ""
 
 #: cover/templates/cover/cover.html:69
 msgid "Facebook Login"
@@ -681,8 +708,10 @@ msgstr "Fattura per %(customer)s il %(record_date)s: "
 #: invoices/models.py:139 invoices/templates/invoices/invoice_detail.html:33
 #: stock/models.py:27 stock/models.py:40
 #: stock/templates/stock/product_category_list.html:52
+#: stock/templates/stock/product_danger_list.html:52
 #: stock/templates/stock/product_detail.html:27
 #: stock/templates/stock/product_list.html:52
+#: stock/templates/stock/product_warning_list.html:52
 msgid "Description"
 msgstr "Descrizione"
 
@@ -750,6 +779,11 @@ msgstr "Partita IVA"
 msgid "Edit customer"
 msgstr "Modifica cliente"
 
+#: invoices/templates/invoices/invoice_detail.html:6
+#: invoices/templates/invoices/invoice_list.html:53
+msgid "Print"
+msgstr "Stampa"
+
 #: invoices/templates/invoices/invoice_detail.html:16
 #: invoices/templates/invoices/invoice_list.html:33
 msgid "Voices count"
@@ -767,17 +801,14 @@ msgid "Issued on"
 msgstr "Emesso il"
 
 #: invoices/templates/invoices/invoice_detail.html:35
-msgid "Single Price"
-msgstr "Prezzo singolo"
+#: invoices/templates/invoices/order_detail.html:40
+msgid "Unit price"
+msgstr "Prezzo unitario"
 
 #: invoices/templates/invoices/invoice_list.html:42
 #: invoices/templates/invoices/order_list.html:49
 msgid "Customer details"
 msgstr "Dettagli cliente"
-
-#: invoices/templates/invoices/invoice_list.html:53
-msgid "Print"
-msgstr "Stampa"
 
 #: invoices/templates/invoices/item_confirm_delete.html:6
 msgid "Delete item confirm"
@@ -848,25 +879,33 @@ msgid "Category"
 msgstr "Categoria"
 
 #: stock/models.py:32 stock/templates/stock/product_category_list.html:14
+#: stock/templates/stock/product_danger_list.html:14
 #: stock/templates/stock/product_list.html:14
+#: stock/templates/stock/product_warning_list.html:14
 msgid "Categories"
 msgstr "Categorie"
 
 #: stock/models.py:39 stock/templates/stock/product_category_list.html:51
+#: stock/templates/stock/product_danger_list.html:51
 #: stock/templates/stock/product_detail.html:24
 #: stock/templates/stock/product_list.html:51
+#: stock/templates/stock/product_warning_list.html:51
 msgid "Code"
 msgstr "Codice"
 
 #: stock/models.py:41 stock/templates/stock/product_category_list.html:53
+#: stock/templates/stock/product_danger_list.html:53
 #: stock/templates/stock/product_detail.html:30
 #: stock/templates/stock/product_list.html:53
+#: stock/templates/stock/product_warning_list.html:53
 msgid "Quantity"
 msgstr "Quantità"
 
 #: stock/models.py:42 stock/templates/stock/product_category_list.html:55
+#: stock/templates/stock/product_danger_list.html:55
 #: stock/templates/stock/product_detail.html:39
 #: stock/templates/stock/product_list.html:55
+#: stock/templates/stock/product_warning_list.html:55
 msgid "Producer"
 msgstr "Produttore"
 
@@ -881,7 +920,9 @@ msgstr "Codice a barre"
 
 #: stock/models.py:58 stock/templates/stock/base-stock.html:7
 #: stock/templates/stock/product_category_list.html:7
+#: stock/templates/stock/product_danger_list.html:7
 #: stock/templates/stock/product_list.html:7
+#: stock/templates/stock/product_warning_list.html:7
 msgid "Products"
 msgstr "Prodotti"
 
@@ -933,36 +974,48 @@ msgstr "codice a barre"
 msgid "New package"
 msgstr "Nuovo collo"
 
-#: stock/templates/stock/product_category_list.html:11
+#: stock/templates/stock/product_category_list.html:10
+#: stock/templates/stock/product_danger_list.html:10
 #: stock/templates/stock/product_list.html:10
+#: stock/templates/stock/product_warning_list.html:10
 msgid "New product"
 msgstr "Aggiungi nuovo prodotto"
 
 #: stock/templates/stock/product_category_list.html:22
+#: stock/templates/stock/product_danger_list.html:22
 #: stock/templates/stock/product_list.html:22
+#: stock/templates/stock/product_warning_list.html:22
 msgid "Products in Warning"
 msgstr "Prodotti in consumo"
 
 #: stock/templates/stock/product_category_list.html:25
+#: stock/templates/stock/product_danger_list.html:25
 #: stock/templates/stock/product_list.html:25
+#: stock/templates/stock/product_warning_list.html:25
 msgid "Products in Danger"
 msgstr "Prodotti in esaurimento"
 
 #: stock/templates/stock/product_category_list.html:54
+#: stock/templates/stock/product_danger_list.html:54
 #: stock/templates/stock/product_detail.html:33
 #: stock/templates/stock/product_list.html:54
+#: stock/templates/stock/product_warning_list.html:54
 msgid "Packages left"
 msgstr "Colli rimanenti"
 
 #: stock/templates/stock/product_category_list.html:64
+#: stock/templates/stock/product_danger_list.html:64
 #: stock/templates/stock/product_detail.html:33
 #: stock/templates/stock/product_list.html:64
+#: stock/templates/stock/product_warning_list.html:64
 msgid "packages"
 msgstr "colli"
 
 #: stock/templates/stock/product_category_list.html:64
+#: stock/templates/stock/product_danger_list.html:64
 #: stock/templates/stock/product_detail.html:33
 #: stock/templates/stock/product_list.html:64
+#: stock/templates/stock/product_warning_list.html:64
 msgid "pieces"
 msgstr "pezzi"
 
