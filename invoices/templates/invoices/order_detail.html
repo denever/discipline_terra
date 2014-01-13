@@ -1,15 +1,23 @@
 {% extends "invoices/base-invoices.html" %}
 {% load i18n %}
 {% block container %}
-<h3>{% trans "Order" %}</h3>
-<p>
-  <a type="button" class="btn btn-default btn-xs" href="{% url 'order-invoice' order.id %}">
-    <span class="glyphicon glyphicon-shopping-cart"></span>
-  </a>
-  <a type="button" class="btn btn-default btn-xs"  href="{% url 'order-delete' order.id %}">
-    <span class="glyphicon glyphicon-trash"></span>
-  </a>
-</p>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <span class="navbar-brand">{% trans "Order" %}</span>
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+	<a type="button" class="btn btn-xs" href="{% url 'order-invoice' order.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Invoice" %}">
+	  <span class="glyphicon glyphicon-shopping-cart"></span>
+	</a>
+      </li>
+      <li>
+	<a type="button" class="btn btn-xs"  href="{% url 'order-delete' order.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Delete" %}">
+	  <span class="glyphicon glyphicon-trash"></span>
+	</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 <table class="table table-hover">
   <tbody>
     <tr>
@@ -29,10 +37,18 @@
     </tr>
   </tbody>
 </table>
-<p>
-  <a href="{% url 'item-create' order.id %}"><span class="glyphicon glyphicon-plus"></span>{% trans "New item" %}</a>
-</p>
-<h3>{% trans "Items" %}</h3>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <span class="navbar-brand">{% trans "Items" %}</span>
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+	<a href="{% url 'item-create' order.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "New item" %}">
+	  <span class="glyphicon glyphicon-plus"></span>
+	</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
