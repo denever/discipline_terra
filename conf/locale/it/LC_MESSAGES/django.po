@@ -417,12 +417,10 @@ msgid "Catalog management"
 msgstr "Gestione listino prezzi"
 
 #: catalog/templates/catalog/catalog_confirm_delete.html:6
-#, fuzzy
 msgid "Delete catalog confirm"
-msgstr "Conferma cancellazione collo"
+msgstr "Conferma cancellazione listino"
 
 #: catalog/templates/catalog/catalog_confirm_delete.html:10
-#, fuzzy
 msgid "Do you really want to remove catalog"
 msgstr "Vuoi davvere cancellare il listino"
 
@@ -440,9 +438,8 @@ msgstr "Si, sono sicuro"
 
 #: catalog/templates/catalog/catalog_create_form.html:8
 #: catalog/templates/catalog/catalog_create_form.html:13
-#, fuzzy
 msgid "New catalog registration"
-msgstr "Aggiungi nuovo collo"
+msgstr "Registra nuovo listino"
 
 #: catalog/templates/catalog/catalog_create_form.html:37
 #: catalog/templates/catalog/catalog_update_form.html:37
@@ -461,12 +458,10 @@ msgid "Save"
 msgstr "Salva"
 
 #: catalog/templates/catalog/catalog_list.html:10
-#, fuzzy
 msgid "New catalog"
-msgstr "Nuovo collo"
+msgstr "Nuovo listino"
 
 #: catalog/templates/catalog/catalog_list.html:32
-#, fuzzy
 msgid "Products priced"
 msgstr "Prodotti"
 
@@ -498,9 +493,8 @@ msgstr "Cancella"
 
 #: catalog/templates/catalog/catalog_update_form.html:8
 #: catalog/templates/catalog/catalog_update_form.html:13
-#, fuzzy
 msgid "Edit catalog"
-msgstr "Modifica cliente"
+msgstr "Modifica listino"
 
 #: catalog/templates/catalog/price_catalog_list.html:10
 #: catalog/templates/catalog/price_list.html:10
@@ -590,9 +584,8 @@ msgstr "IVA in uscita"
 
 #: catalog/templates/catalog/price_update_form.html:8
 #: catalog/templates/catalog/price_update_form.html:13
-#, fuzzy
 msgid "Edit price"
-msgstr "Prezzo unitario"
+msgstr "Modifica prezzo"
 
 #: cover/templates/cover/cover.html:49 cover/templates/cover/cover.html:67
 msgid "Welcome"
