@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Discipline 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-13 17:35+0100\n"
+"POT-Creation-Date: 2014-01-13 20:51+0100\n"
 "PO-Revision-Date: 2014-01-12 15:48+0100\n"
 "Last-Translator: Giuseppe Martino <denever@users.sf.net>\n"
 "Language-Team: Giuseppe Martino <denever@users.sf.net>\n"
@@ -92,7 +92,9 @@ msgid "Difference Details for activity"
 msgstr ""
 
 #: accounts/templates/accounts/activity_list.html:8
-#: catalog/templates/catalog/price_list.html:27
+#: catalog/templates/catalog/catalog_list.html:20
+#: catalog/templates/catalog/price_catalog_list.html:35
+#: catalog/templates/catalog/price_list.html:35
 #: invoices/templates/invoices/customer_list.html:27
 #: invoices/templates/invoices/invoice_list.html:20
 #: invoices/templates/invoices/order_list.html:27
@@ -105,7 +107,9 @@ msgid "Previous"
 msgstr "Precedente"
 
 #: accounts/templates/accounts/activity_list.html:10
-#: catalog/templates/catalog/price_list.html:29
+#: catalog/templates/catalog/catalog_list.html:22
+#: catalog/templates/catalog/price_catalog_list.html:37
+#: catalog/templates/catalog/price_list.html:37
 #: invoices/templates/invoices/customer_list.html:29
 #: invoices/templates/invoices/invoice_list.html:22
 #: invoices/templates/invoices/order_list.html:29
@@ -118,7 +122,9 @@ msgid "Page"
 msgstr "Pagina"
 
 #: accounts/templates/accounts/activity_list.html:10
-#: catalog/templates/catalog/price_list.html:29
+#: catalog/templates/catalog/catalog_list.html:22
+#: catalog/templates/catalog/price_catalog_list.html:37
+#: catalog/templates/catalog/price_list.html:37
 #: invoices/templates/invoices/customer_list.html:29
 #: invoices/templates/invoices/invoice_list.html:22
 #: invoices/templates/invoices/order_list.html:29
@@ -131,7 +137,9 @@ msgid "of"
 msgstr "di"
 
 #: accounts/templates/accounts/activity_list.html:12
-#: catalog/templates/catalog/price_list.html:31
+#: catalog/templates/catalog/catalog_list.html:24
+#: catalog/templates/catalog/price_catalog_list.html:39
+#: catalog/templates/catalog/price_list.html:39
 #: invoices/templates/invoices/customer_list.html:31
 #: invoices/templates/invoices/invoice_list.html:24
 #: invoices/templates/invoices/order_list.html:31
@@ -329,57 +337,77 @@ msgstr ""
 msgid "Reset my password"
 msgstr ""
 
-#: catalog/models.py:9 catalog/templates/catalog/price_detail.html:16
-#: catalog/templates/catalog/price_list.html:38 invoices/models.py:41
-#: invoices/templates/invoices/order_detail.html:39 stock/models.py:57
+#: catalog/models.py:7 catalog/templates/catalog/catalog_list.html:31
+msgid "Title"
+msgstr "Titolo"
+
+#: catalog/models.py:10 catalog/models.py:22 invoices/models.py:72
+msgid "Catalog"
+msgstr "Listino"
+
+#: catalog/models.py:11 catalog/templates/catalog/base-catalog.html:10
+#: catalog/templates/catalog/catalog_list.html:7
+#: catalog/templates/catalog/price_catalog_list.html:15
+#: catalog/templates/catalog/price_list.html:15
+msgid "Catalogs"
+msgstr "Listini"
+
+#: catalog/models.py:24 catalog/templates/catalog/price_catalog_list.html:46
+#: catalog/templates/catalog/price_detail.html:16
+#: catalog/templates/catalog/price_list.html:46 invoices/models.py:41
+#: invoices/templates/invoices/order_detail.html:55 stock/models.py:57
 #: stock/models.py:105 stock/templates/stock/package_detail.html:16
 #: stock/templates/stock/package_list.html:30
 msgid "Product"
 msgstr "Prodotto"
 
-#: catalog/models.py:10
+#: catalog/models.py:25
 msgid "Price IN"
 msgstr "Prezzo in entrata"
 
-#: catalog/models.py:11 catalog/templates/catalog/price_list.html:40
+#: catalog/models.py:26 catalog/templates/catalog/price_catalog_list.html:48
+#: catalog/templates/catalog/price_list.html:48
 msgid "VAT IN"
 msgstr "IVA in entrata"
 
-#: catalog/models.py:12 catalog/templates/catalog/price_detail.html:25
-#: catalog/templates/catalog/price_list.html:41
+#: catalog/models.py:27 catalog/templates/catalog/price_catalog_list.html:49
+#: catalog/templates/catalog/price_detail.html:25
+#: catalog/templates/catalog/price_list.html:49
 msgid "Gain"
 msgstr "Guadagno"
 
-#: catalog/models.py:13 catalog/templates/catalog/price_list.html:42
+#: catalog/models.py:28 catalog/templates/catalog/price_catalog_list.html:50
+#: catalog/templates/catalog/price_list.html:50
 msgid "VAT OUT"
 msgstr "IVA in uscita"
 
-#: catalog/models.py:17 catalog/templates/catalog/price_detail.html:31
-#: invoices/models.py:22 invoices/models.py:77
+#: catalog/models.py:32 catalog/templates/catalog/price_detail.html:31
+#: invoices/models.py:22 invoices/models.py:80
 #: invoices/templates/invoices/customer_detail.html:37
-#: invoices/templates/invoices/order_detail.html:25 stock/models.py:48
+#: invoices/templates/invoices/order_detail.html:33 stock/models.py:48
 #: stock/models.py:112 stock/templates/stock/product_detail.html:42
 msgid "Last change by"
 msgstr "Ultimo modifica di"
 
-#: catalog/models.py:18 catalog/templates/catalog/price_detail.html:34
-#: invoices/models.py:25 invoices/models.py:78
+#: catalog/models.py:33 catalog/templates/catalog/price_detail.html:34
+#: invoices/models.py:25 invoices/models.py:81
 #: invoices/templates/invoices/customer_detail.html:40
-#: invoices/templates/invoices/order_detail.html:28 stock/models.py:49
+#: invoices/templates/invoices/order_detail.html:36 stock/models.py:49
 #: stock/models.py:113 stock/templates/stock/product_detail.html:45
 msgid "Last change on"
 msgstr "Ultimo modifica il"
 
-#: catalog/models.py:22
+#: catalog/models.py:37
 msgid "Price"
 msgstr "Prezzo"
 
-#: catalog/models.py:23 catalog/templates/catalog/base-catalog.html:7
+#: catalog/models.py:38 catalog/templates/catalog/base-catalog.html:7
+#: catalog/templates/catalog/price_catalog_list.html:7
 #: catalog/templates/catalog/price_list.html:7
 msgid "Prices"
 msgstr "Prezzi"
 
-#: catalog/models.py:26
+#: catalog/models.py:42
 #, python-format
 msgid "Price of %(product)s: %(price_out)s"
 msgstr "Prezzo di %(product)s: %(price_out)s"
@@ -388,32 +416,14 @@ msgstr "Prezzo di %(product)s: %(price_out)s"
 msgid "Catalog management"
 msgstr "Gestione listino prezzi"
 
-#: catalog/templates/catalog/price_config_delete.html:6
-#: catalog/templates/catalog/price_confirm_delete.html:6
-msgid "Delete price confirm"
-msgstr "Conferma cancellazione prezzo"
+#: catalog/templates/catalog/catalog_create_form.html:8
+#: catalog/templates/catalog/catalog_create_form.html:13
+#, fuzzy
+msgid "New catalog registration"
+msgstr "Aggiungi nuovo collo"
 
-#: catalog/templates/catalog/price_config_delete.html:10
-#: catalog/templates/catalog/price_confirm_delete.html:10
-msgid "Do you really want to remove price for product"
-msgstr "Vuoi davvero cancellare il prezzo di questo prodotto"
-
-#: catalog/templates/catalog/price_config_delete.html:15
-#: catalog/templates/catalog/price_confirm_delete.html:15
-#: invoices/templates/invoices/customer_confirm_delete.html:15
-#: invoices/templates/invoices/item_confirm_delete.html:15
-#: invoices/templates/invoices/order_confirm_delete.html:15
-#: invoices/templates/invoices/order_invoice.html:15
-#: stock/templates/stock/package_confirm_delete.html:15
-#: stock/templates/stock/product_confirm_delete.html:15
-msgid "Yes, I'm sure"
-msgstr "Si, sono sicuro"
-
-#: catalog/templates/catalog/price_create_form.html:8
-#: catalog/templates/catalog/price_create_form.html:13
-msgid "New price registration"
-msgstr "Aggiungi nuovo prezzo"
-
+#: catalog/templates/catalog/catalog_create_form.html:37
+#: catalog/templates/catalog/catalog_update_form.html:37
 #: catalog/templates/catalog/price_create_form.html:37
 #: catalog/templates/catalog/price_update_form.html:37
 #: invoices/templates/invoices/customer_create_form.html:37
@@ -428,29 +438,79 @@ msgstr "Aggiungi nuovo prezzo"
 msgid "Save"
 msgstr "Salva"
 
-#: catalog/templates/catalog/price_detail.html:4
-msgid "Price for"
-msgstr "Prezzo per"
+#: catalog/templates/catalog/catalog_delete_form.html:6
+#, fuzzy
+msgid "Delete catalog confirm"
+msgstr "Conferma cancellazione collo"
 
-#: catalog/templates/catalog/price_detail.html:19
-#: catalog/templates/catalog/price_list.html:39
-msgid "Price in"
-msgstr "Prezzo in entrata"
+#: catalog/templates/catalog/catalog_delete_form.html:10
+#, fuzzy
+msgid "Do you really want to remove catalog"
+msgstr "Vuoi davvere cancellare il cliente"
 
-#: catalog/templates/catalog/price_detail.html:22
-msgid "VAT in"
-msgstr "IVA in entrata"
+#: catalog/templates/catalog/catalog_delete_form.html:15
+#: catalog/templates/catalog/price_config_delete.html:15
+#: catalog/templates/catalog/price_confirm_delete.html:15
+#: invoices/templates/invoices/customer_confirm_delete.html:15
+#: invoices/templates/invoices/item_confirm_delete.html:15
+#: invoices/templates/invoices/order_confirm_delete.html:15
+#: invoices/templates/invoices/order_invoice.html:15
+#: stock/templates/stock/package_confirm_delete.html:15
+#: stock/templates/stock/product_confirm_delete.html:15
+msgid "Yes, I'm sure"
+msgstr "Si, sono sicuro"
 
-#: catalog/templates/catalog/price_detail.html:28
-msgid "VAT out"
-msgstr "IVA in uscita"
+#: catalog/templates/catalog/catalog_list.html:10
+#, fuzzy
+msgid "New catalog"
+msgstr "Nuovo collo"
 
+#: catalog/templates/catalog/catalog_list.html:32
+#, fuzzy
+msgid "Products priced"
+msgstr "Prodotti"
+
+#: catalog/templates/catalog/catalog_list.html:41
+#: catalog/templates/catalog/price_catalog_list.html:67
+#: catalog/templates/catalog/price_list.html:67
+#: invoices/templates/invoices/customer_list.html:61
+#: stock/templates/stock/package_list.html:45
+#: stock/templates/stock/product_category_list.html:70
+#: stock/templates/stock/product_danger_list.html:70
+#: stock/templates/stock/product_list.html:70
+#: stock/templates/stock/product_warning_list.html:70
+msgid "Edit"
+msgstr "Modifica"
+
+#: catalog/templates/catalog/catalog_list.html:44
+#: catalog/templates/catalog/price_catalog_list.html:70
+#: catalog/templates/catalog/price_list.html:70
+#: invoices/templates/invoices/customer_list.html:64
+#: invoices/templates/invoices/order_detail.html:14
+#: invoices/templates/invoices/order_list.html:63
+#: stock/templates/stock/package_list.html:48
+#: stock/templates/stock/product_category_list.html:73
+#: stock/templates/stock/product_danger_list.html:73
+#: stock/templates/stock/product_list.html:73
+#: stock/templates/stock/product_warning_list.html:73
+msgid "Delete"
+msgstr "Cancella"
+
+#: catalog/templates/catalog/catalog_update_form.html:8
+#: catalog/templates/catalog/catalog_update_form.html:13
+#, fuzzy
+msgid "Edit catalog"
+msgstr "Modifica cliente"
+
+#: catalog/templates/catalog/price_catalog_list.html:10
 #: catalog/templates/catalog/price_list.html:10
 msgid "New price"
 msgstr "Nuovo prezzo"
 
-#: catalog/templates/catalog/price_list.html:17
-#: catalog/templates/catalog/price_list.html:20
+#: catalog/templates/catalog/price_catalog_list.html:25
+#: catalog/templates/catalog/price_catalog_list.html:28
+#: catalog/templates/catalog/price_list.html:25
+#: catalog/templates/catalog/price_list.html:28
 #: invoices/templates/invoices/customer_list.html:17
 #: invoices/templates/invoices/customer_list.html:20
 #: invoices/templates/invoices/invoice_list.html:10
@@ -468,7 +528,8 @@ msgstr "Nuovo prezzo"
 msgid "Search"
 msgstr "Cerca"
 
-#: catalog/templates/catalog/price_list.html:18
+#: catalog/templates/catalog/price_catalog_list.html:26
+#: catalog/templates/catalog/price_list.html:26
 #: stock/templates/stock/product_category_list.html:31
 #: stock/templates/stock/product_danger_list.html:31
 #: stock/templates/stock/product_list.html:31
@@ -476,11 +537,19 @@ msgstr "Cerca"
 msgid "Product text"
 msgstr "Prodotto"
 
-#: catalog/templates/catalog/price_list.html:43
+#: catalog/templates/catalog/price_catalog_list.html:47
+#: catalog/templates/catalog/price_detail.html:19
+#: catalog/templates/catalog/price_list.html:47
+msgid "Price in"
+msgstr "Prezzo in entrata"
+
+#: catalog/templates/catalog/price_catalog_list.html:51
+#: catalog/templates/catalog/price_list.html:51
 msgid "Price out"
 msgstr "Prezzo al cliente"
 
-#: catalog/templates/catalog/price_list.html:56
+#: catalog/templates/catalog/price_catalog_list.html:64
+#: catalog/templates/catalog/price_list.html:64
 #: invoices/templates/invoices/customer_list.html:58
 #: invoices/templates/invoices/invoice_list.html:50
 #: invoices/templates/invoices/order_list.html:57
@@ -492,35 +561,38 @@ msgstr "Prezzo al cliente"
 msgid "Detail"
 msgstr "Dettaglio"
 
-#: catalog/templates/catalog/price_list.html:59
-#: invoices/templates/invoices/customer_list.html:61
-#: invoices/templates/invoices/order_list.html:60
-#: stock/templates/stock/package_list.html:45
-#: stock/templates/stock/product_category_list.html:70
-#: stock/templates/stock/product_danger_list.html:70
-#: stock/templates/stock/product_list.html:70
-#: stock/templates/stock/product_warning_list.html:70
-msgid "Edit"
-msgstr "Modifica"
+#: catalog/templates/catalog/price_config_delete.html:6
+#: catalog/templates/catalog/price_confirm_delete.html:6
+msgid "Delete price confirm"
+msgstr "Conferma cancellazione prezzo"
 
-#: catalog/templates/catalog/price_list.html:62
-#: invoices/templates/invoices/customer_list.html:64
-#: stock/templates/stock/package_list.html:48
-#: stock/templates/stock/product_category_list.html:73
-#: stock/templates/stock/product_danger_list.html:73
-#: stock/templates/stock/product_list.html:73
-#: stock/templates/stock/product_warning_list.html:73
-msgid "Delete"
-msgstr "Cancella"
+#: catalog/templates/catalog/price_config_delete.html:10
+#: catalog/templates/catalog/price_confirm_delete.html:10
+msgid "Do you really want to remove price for product"
+msgstr "Vuoi davvero cancellare il prezzo di questo prodotto"
+
+#: catalog/templates/catalog/price_create_form.html:8
+#: catalog/templates/catalog/price_create_form.html:13
+msgid "New price registration"
+msgstr "Aggiungi nuovo prezzo"
+
+#: catalog/templates/catalog/price_detail.html:4
+msgid "Price for"
+msgstr "Prezzo per"
+
+#: catalog/templates/catalog/price_detail.html:22
+msgid "VAT in"
+msgstr "IVA in entrata"
+
+#: catalog/templates/catalog/price_detail.html:28
+msgid "VAT out"
+msgstr "IVA in uscita"
 
 #: catalog/templates/catalog/price_update_form.html:8
 #: catalog/templates/catalog/price_update_form.html:13
-#: stock/templates/stock/package_update_form.html:8
-#: stock/templates/stock/package_update_form.html:13
-#: stock/templates/stock/product_update_form.html:8
-#: stock/templates/stock/product_update_form.html:13
-msgid "Edit product"
-msgstr "Modifica prodotto"
+#, fuzzy
+msgid "Edit price"
+msgstr "Prezzo unitario"
 
 #: cover/templates/cover/cover.html:49 cover/templates/cover/cover.html:67
 msgid "Welcome"
@@ -552,7 +624,7 @@ msgstr "Gestione fatture"
 
 #: cover/templates/cover/cover.html:67
 msgid "Please log in or register yourself."
-msgstr ""
+msgstr "Per favore fai il login o registrati."
 
 #: cover/templates/cover/cover.html:69
 msgid "Facebook Login"
@@ -607,7 +679,7 @@ msgstr "Inserisci o il codice fiscale o la partita iva"
 msgid "You must enter a tax code or a vat code"
 msgstr "Devi inserire o il codice fiscale o la partita iva"
 
-#: invoices/forms.py:68
+#: invoices/forms.py:69
 #, python-format
 msgid ""
 "Value %(pieces)s exceed quantity available for this product: %(tot_qty)s"
@@ -633,16 +705,16 @@ msgstr "Cognome"
 msgid "Email"
 msgstr ""
 
-#: invoices/models.py:24 invoices/models.py:43 invoices/models.py:74
+#: invoices/models.py:24 invoices/models.py:43 invoices/models.py:77
 msgid "Recorded on"
 msgstr "Aggiunto il"
 
-#: invoices/models.py:32 invoices/models.py:72 invoices/models.py:107
+#: invoices/models.py:32 invoices/models.py:75 invoices/models.py:109
 #: invoices/templates/customer_detail.html:4
 #: invoices/templates/invoices/customer_detail.html:4
 #: invoices/templates/invoices/invoice_detail.html:13
 #: invoices/templates/invoices/invoice_list.html:31
-#: invoices/templates/invoices/order_detail.html:16
+#: invoices/templates/invoices/order_detail.html:24
 #: invoices/templates/invoices/order_list.html:38
 msgid "Customer"
 msgstr "Cliente"
@@ -652,14 +724,14 @@ msgstr "Cliente"
 msgid "Customers"
 msgstr "Clienti"
 
-#: invoices/models.py:39 invoices/models.py:83
-#: invoices/templates/invoices/order_detail.html:4
+#: invoices/models.py:39 invoices/models.py:86
+#: invoices/templates/invoices/order_detail.html:6
 msgid "Order"
 msgstr "Ordine"
 
-#: invoices/models.py:42 invoices/models.py:142
+#: invoices/models.py:42 invoices/models.py:144
 #: invoices/templates/invoices/invoice_detail.html:34
-#: invoices/templates/invoices/order_detail.html:41
+#: invoices/templates/invoices/order_detail.html:57
 msgid "Pieces"
 msgstr "Pezzi"
 
@@ -667,45 +739,46 @@ msgstr "Pezzi"
 msgid "Item"
 msgstr "Voce"
 
-#: invoices/models.py:80
+#: invoices/models.py:83
 msgid "Invoiced"
 msgstr "Fatturato"
 
-#: invoices/models.py:84 invoices/templates/invoices/base-invoices.html:10
+#: invoices/models.py:87 invoices/templates/invoices/base-invoices.html:10
 #: invoices/templates/invoices/order_list.html:7
 msgid "Orders"
 msgstr "Ordini"
 
-#: invoices/models.py:88
+#: invoices/models.py:91
 #, python-format
 msgid "Order from %(customer)s on %(record_date)s: "
 msgstr "Ordine da %(customer)s il %(record_date)s: "
 
-#: invoices/models.py:108
+#: invoices/models.py:110
 msgid "Invoiced on"
 msgstr "Fatturato il"
 
-#: invoices/models.py:111 invoices/templates/invoices/invoice_detail.html:25
+#: invoices/models.py:113 invoices/templates/invoices/invoice_detail.html:25
 msgid "Issued by"
 msgstr "Emessa da"
 
-#: invoices/models.py:114 invoices/models.py:137
+#: invoices/models.py:116 invoices/models.py:139
 #: invoices/templates/invoices/invoice_detail.html:4
-#: invoices/templates/invoices/order_list.html:63
+#: invoices/templates/invoices/order_detail.html:9
+#: invoices/templates/invoices/order_list.html:60
 msgid "Invoice"
 msgstr "Fattura"
 
-#: invoices/models.py:115 invoices/templates/invoices/base-invoices.html:13
+#: invoices/models.py:117 invoices/templates/invoices/base-invoices.html:13
 #: invoices/templates/invoices/invoice_list.html:7
 msgid "Invoices"
 msgstr "Fatture"
 
-#: invoices/models.py:119
+#: invoices/models.py:121
 #, python-format
 msgid "Invoice for %(customer)s on %(record_date)s: "
 msgstr "Fattura per %(customer)s il %(record_date)s: "
 
-#: invoices/models.py:139 invoices/templates/invoices/invoice_detail.html:33
+#: invoices/models.py:141 invoices/templates/invoices/invoice_detail.html:33
 #: stock/models.py:27 stock/models.py:40
 #: stock/templates/stock/product_category_list.html:52
 #: stock/templates/stock/product_danger_list.html:52
@@ -715,19 +788,19 @@ msgstr "Fattura per %(customer)s il %(record_date)s: "
 msgid "Description"
 msgstr "Descrizione"
 
-#: invoices/models.py:140
+#: invoices/models.py:142
 msgid "Price single"
 msgstr "Prezzo in entrata"
 
-#: invoices/models.py:141 invoices/templates/invoices/invoice_detail.html:36
+#: invoices/models.py:143 invoices/templates/invoices/invoice_detail.html:36
 msgid "Total price"
 msgstr "Importo totale"
 
-#: invoices/models.py:145
+#: invoices/models.py:147
 msgid "Voice"
 msgstr "Voce"
 
-#: invoices/models.py:146 invoices/templates/invoices/invoice_detail.html:29
+#: invoices/models.py:148 invoices/templates/invoices/invoice_detail.html:29
 msgid "Voices"
 msgstr "Voci"
 
@@ -791,7 +864,7 @@ msgstr "Numero voci"
 
 #: invoices/templates/invoices/invoice_detail.html:19
 #: invoices/templates/invoices/invoice_list.html:34
-#: invoices/templates/invoices/order_detail.html:22
+#: invoices/templates/invoices/order_detail.html:30
 #: invoices/templates/invoices/order_list.html:41
 msgid "Total value"
 msgstr "Importo totale"
@@ -801,7 +874,7 @@ msgid "Issued on"
 msgstr "Emesso il"
 
 #: invoices/templates/invoices/invoice_detail.html:35
-#: invoices/templates/invoices/order_detail.html:40
+#: invoices/templates/invoices/order_detail.html:56
 msgid "Unit price"
 msgstr "Prezzo unitario"
 
@@ -844,20 +917,20 @@ msgstr "Vuoi davvero cancellare il prezzo di questo prodotto"
 msgid "New order registration"
 msgstr "Apertura nuovo ordine"
 
-#: invoices/templates/invoices/order_detail.html:19
+#: invoices/templates/invoices/order_detail.html:27
 #: invoices/templates/invoices/order_list.html:40
 msgid "Items count"
 msgstr "Numero voci"
 
-#: invoices/templates/invoices/order_detail.html:33
-msgid "New item"
-msgstr "Aggiungi acquisto"
-
-#: invoices/templates/invoices/order_detail.html:35
+#: invoices/templates/invoices/order_detail.html:42
 msgid "Items"
 msgstr "Voci"
 
-#: invoices/templates/invoices/order_detail.html:42
+#: invoices/templates/invoices/order_detail.html:45
+msgid "New item"
+msgstr "Aggiungi acquisto"
+
+#: invoices/templates/invoices/order_detail.html:58
 msgid "Total"
 msgstr "Totale"
 
@@ -973,6 +1046,13 @@ msgstr "codice a barre"
 #: stock/templates/stock/package_list.html:10
 msgid "New package"
 msgstr "Nuovo collo"
+
+#: stock/templates/stock/package_update_form.html:8
+#: stock/templates/stock/package_update_form.html:13
+#: stock/templates/stock/product_update_form.html:8
+#: stock/templates/stock/product_update_form.html:13
+msgid "Edit product"
+msgstr "Modifica prodotto"
 
 #: stock/templates/stock/product_category_list.html:10
 #: stock/templates/stock/product_danger_list.html:10
