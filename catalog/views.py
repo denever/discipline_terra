@@ -13,12 +13,40 @@ from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
 
-from catalog.forms import PriceForm
+from catalog.forms import PriceForm, CatalogForm
+
+class CatalogListView(ListView):
+    queryset = Catalog.objects.all()
+    context_object_name = 'catalogs'
+    paginate_by = 5
+
+class CatalogCreateView(CreateView):
+    form_class = CatalogForm
+    template_name = 'catalog/catalog_create_form.html'
+    success_url = '/catalog/catalogs/'
+
+class CatalogUpdateView(UpdateView):
+    model = Catalog
+    form_class = CatalogForm
+    template_name = 'catalog/catalog_update_form.html'
+    success_url = '/catalog/catalogs/'
+    context_object_name = 'catalog'
+
+class CatalogDeleteView(DeleteView):
+    model = Catalog
+    form_class = CatalogForm
+    success_url = '/catalog/catalogs'
+    context_object_name = 'catalog'
 
 class PriceListView(ListView):
     queryset = Price.objects.all()
     context_object_name = 'prices'
     paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+        context = super(PriceListView, self).get_context_data(**kwargs)
+        context['catalogs'] = Catalog.objects.all()
+        return context
 
 class SearchPriceListView(ListView):
     model = Price
@@ -29,6 +57,23 @@ class SearchPriceListView(ListView):
     def get_queryset(self):
         query = self.request.REQUEST.get("q")
         return self.model.objects.filter(product__description__icontains=query)
+
+    def get_context_data(self, **kwargs):
+        context = super(SearchPriceListView, self).get_context_data(**kwargs)
+        context['catalogs'] = Catalog.objects.all()
+        return context
+
+class PriceListByCatalogView(ListView):
+    model = Price
+    context_object_name = 'prices'
+    paginate_by = 5
+    template_name = 'stock/price_catalog_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PriceListByCatalogView, self).get_context_data(**kwargs)
+        context['catalogs'] = Catalog.objects.all()
+        context['active_cat_id'] = self.kwargs['pk']
+        return context
 
 class PriceDetailView(DetailView):
     model = Price

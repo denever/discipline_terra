@@ -68,6 +68,9 @@ class Item(models.Model):
         return self.price.product.__unicode__()
 
 class Order(models.Model):
+    catalog = models.ForeignKey('catalog.catalog',
+                                verbose_name=_('Catalog'))
+
     customer = models.ForeignKey(Customer,
                                 verbose_name=_('Customer'))
 
@@ -100,7 +103,6 @@ class Order(models.Model):
         for item in self.item_set.all():
             total += item.value
         return total
-
 
 class Invoice(models.Model):
     customer = models.ForeignKey(Customer,

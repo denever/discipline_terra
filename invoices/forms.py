@@ -41,6 +41,7 @@ class OrderForm(forms.ModelForm):
         model = Order
 
         widgets = {
+            'catalog': Select(attrs={'class': 'form-control'}),
             'customer': Select(attrs={'class': 'form-control'}),
             }
 

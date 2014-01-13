@@ -1,0 +1,52 @@
+{% extends "catalog/base-catalog.html" %}
+{% load i18n %}
+
+{% block container %}
+<nav class="navbar navbar-default" role="navigation">
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <a class="navbar-brand" href="{% url 'catalogs' %}">{% trans "Catalogs" %}</a>
+    <ul class="nav navbar-nav">
+      <li>
+	<a href="{% url 'catalog-create' %}" data-toggle="tooltip" data-placement="left" title="{% trans "New catalog" %}">
+	  <span class="glyphicon glyphicon-plus"></span>
+	</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+{% if is_paginated %}
+<ul class="pager">
+  {% if page_obj.has_previous %}
+  <li class="previous"><a href="/catalog/catalogs?page={{ page_obj.previous_page_number }}">&larr; {% trans "Previous" %}</a></li>
+  {% endif %}
+  <li>{% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}.</li>
+  {% if page_obj.has_next %}
+  <li class="next"><a href="/catalog/catalogs?page={{ page_obj.next_page_number }}">{% trans "Next" %} &rarr;</a></li>
+  {% endif %}
+</ul>
+{% endif %}
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <td>{% trans "Title" %}</td>
+      <td>{% trans "Products priced" %}</td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for catalog in catalogs %}
+    <tr>
+      <td>{{catalog.title}}</td>
+      <td>{{catalog.price_count}}</td>
+      <td align="center">
+	<a type="button" class="btn btn-default btn-xs" href="{% url 'catalog-edit' catalog.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Edit" %}">
+	  <span class="glyphicon glyphicon-edit"></span>
+	</a>
+	<a type="button" class="btn btn-default btn-xs"  href="{% url 'catalog-delete' catalog.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Delete" %}">
+	  <span class="glyphicon glyphicon-trash"></span>
+	</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

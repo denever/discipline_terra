@@ -32,11 +32,11 @@
 {% if is_paginated %}
 <ul class="pager">
   {% if page_obj.has_previous %}
-  <li class="previous"><a href="/catalog/prices?page={{ page_obj.previous_page_number }}">&larr; {% trans "Previous" %}</a></li>
+  <li class="previous"><a href="/catalog/prices/catalog/{{active_cat_id}}?page={{ page_obj.previous_page_number }}">&larr; {% trans "Previous" %}</a></li>
   {% endif %}
   <li>{% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}.</li>
   {% if page_obj.has_next %}
-  <li class="next"><a href="/catalog/prices?page={{ page_obj.next_page_number }}">{% trans "Next" %} &rarr;</a></li>
+  <li class="next"><a href="/catalog/prices/catalog/{{active_cat_id}}?page={{ page_obj.next_page_number }}">{% trans "Next" %} &rarr;</a></li>
   {% endif %}
 </ul>
 {% endif %}

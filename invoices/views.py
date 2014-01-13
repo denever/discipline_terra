@@ -149,6 +149,13 @@ class ItemCreateView(CreateView):
     template_name = 'invoices/item_create_form.html'
     success_url = '/invoices/items/'
 
+    def get_form_class(self):
+        """Show in price select only the prices from the catalog choosen in the order"""
+        form = super(ItemCreateView, self).get_form_class()
+        order = get_object_or_404(Order, id=self.kwargs['order'])
+        form.base_fields['price'].queryset = order.catalog.price_set
+        return form
+
     def get_context_data(self, **kwargs):
         context = super(ItemCreateView, self).get_context_data(**kwargs)
         context['order'] = get_object_or_404(Order, id=self.kwargs['order'])
