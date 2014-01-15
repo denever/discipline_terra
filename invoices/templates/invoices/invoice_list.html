@@ -31,7 +31,7 @@
       <td>{% trans "Customer" %}</td>
       <td>{% trans "Date" %}</td>
       <td>{% trans "Voices count" %}</td>
-      <td>{% trans "Total value" %}</td>
+      <td>{% trans "Amount" %}</td>
     </tr>
   </thead>
   <tbody>
@@ -45,7 +45,7 @@
       </td>
       <td>{{invoice.record_date}}</td>
       <td>{{invoice.voice_count}}</td>
-      <td>{{invoice.total_value}} €</td>
+      <td>{{invoice.amount}} €</td>
       <td>
 	<a type="button" class="btn btn-default btn-xs" href="{% url 'invoice-detail' invoice.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Detail" %}">
 	  <span class="glyphicon glyphicon-eye-open"></span>

@@ -128,10 +128,10 @@ class Invoice(models.Model):
         return total
 
     @property
-    def total_value(self):
+    def amount(self):
         total = Decimal(0.0)
         for voice in self.voice_set.all():
-            total += voice.total_price
+            total += voice.amount
         return total
 
 class Voice(models.Model):
@@ -139,8 +139,8 @@ class Voice(models.Model):
                                 verbose_name=_('Invoice'))
 
     description = models.CharField(_('Description'), max_length=200)
-    single_price = models.DecimalField(_('Price single'), max_digits=10, decimal_places=2)
-    total_price = models.DecimalField(_('Total price'), max_digits=10, decimal_places=2)
+    unit_price = models.DecimalField(_('Price single'), max_digits=10, decimal_places=2)
+    amount = models.DecimalField(_('Total price'), max_digits=10, decimal_places=2)
     pieces = models.PositiveIntegerField(_('Pieces'))
 
     class Meta:
@@ -148,7 +148,7 @@ class Voice(models.Model):
         verbose_name_plural = _('Voices')
 
     def __unicode__(self):
-        return '%s %s %s %s' % (self.description, self.pieces, self.single_price, self.total_price)
+        return '%s %s %s %s' % (self.description, self.pieces, self.unit_price, self.amount)
 
 @receiver(pre_delete, sender=Item)
 def pre_delete_item(sender, **kwargs):

@@ -20,7 +20,7 @@ class OrderAdmin(admin.ModelAdmin):
 admin.site.register(Order, OrderAdmin)
 
 class InvoiceAdmin(admin.ModelAdmin):
-    list_display = ('customer', 'date', 'voice_count', 'total_value', 'issuer')
+    list_display = ('customer', 'date', 'voice_count', 'amount', 'issuer')
     list_filter = ['customer']
     search_field = ['customer', 'barcode']
 

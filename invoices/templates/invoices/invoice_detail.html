@@ -16,7 +16,7 @@
       <td>{% trans "Voices count" %}</td><td>{{invoice.voice_count}}</td>
     </tr>
     <tr>
-      <td>{% trans "Total value" %}</td><td>{{invoice.total_value}} €</td>
+      <td>{% trans "Total value" %}</td><td>{{invoice.amount}} €</td>
     </tr>
     <tr>
       <td>{% trans "Issued on" %}</td><td>{{invoice.date}}</td>
@@ -33,7 +33,7 @@
       <td>{% trans "Description" %}</td>
       <td>{% trans "Pieces" %}</td>
       <td>{% trans "Unit price" %}</td>
-      <td>{% trans "Total price" %}</td>
+      <td>{% trans "Amount" %}</td>
     </tr>
   </thead>
   <tbody>
@@ -41,8 +41,8 @@
     <tr>
       <td>{{voice.description}}</td>
       <td>{{voice.pieces}}</td>
-      <td>{{voice.single_price}} €</td>
-      <td>{{voice.total_price}} €</td>
+      <td>{{voice.unit_price}} €</td>
+      <td>{{voice.amount}} €</td>
     </tr>
     {% endfor %}
   </tbody>
