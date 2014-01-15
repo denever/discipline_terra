@@ -118,7 +118,7 @@ class Invoice(models.Model):
         ordering = ['date']
 
     def __unicode__(self):
-        return _('Invoice for %(customer)s on %(record_date)s: ') % {'customer': self.customer, 'record_date': self.record_date}
+        return _('Invoice for %(customer)s on %(date)s: ') % {'customer': self.customer, 'date': self.date}
 
     @property
     def voice_count(self):
