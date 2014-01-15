@@ -677,7 +677,7 @@ msgstr "Devi inserire o il codice fiscale o la partita iva"
 msgid ""
 "Value %(pieces)s exceed quantity available for this product: %(tot_qty)s"
 msgstr ""
-"Il numero di pezzi richiesti %(pieces)s supera la disponibilità in mazzino. "
+"Il numero di pezzi richiesti %(pieces)s supera la disponibilità in magazino. "
 "Max %(tot_qty)s"
 
 #: invoices/models.py:12 invoices/templates/customer_detail.html:19
