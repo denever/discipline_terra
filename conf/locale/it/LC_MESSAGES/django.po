@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Discipline 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-13 21:00+0100\n"
+"POT-Creation-Date: 2014-01-15 11:36+0100\n"
 "PO-Revision-Date: 2014-01-12 15:48+0100\n"
 "Last-Translator: Giuseppe Martino <denever@users.sf.net>\n"
 "Language-Team: Giuseppe Martino <denever@users.sf.net>\n"
@@ -767,9 +767,8 @@ msgid "Invoices"
 msgstr "Fatture"
 
 #: invoices/models.py:121
-#, python-format
-msgid "Invoice for %(customer)s on %(record_date)s: "
-msgstr "Fattura per %(customer)s il %(record_date)s: "
+msgid "Invoice for %(customer)s on %(date)s: "
+msgstr "Fattura per %(customer)s il %(date)s: "
 
 #: invoices/models.py:141 invoices/templates/invoices/invoice_detail.html:33
 #: stock/models.py:27 stock/models.py:40
@@ -781,13 +780,16 @@ msgstr "Fattura per %(customer)s il %(record_date)s: "
 msgid "Description"
 msgstr "Descrizione"
 
-#: invoices/models.py:142
-msgid "Price single"
-msgstr "Prezzo in entrata"
+#: invoices/models.py:142 invoices/templates/invoices/invoice_detail.html:35
+#: invoices/templates/invoices/order_detail.html:56
+msgid "Unit price"
+msgstr "Prezzo unitario"
 
 #: invoices/models.py:143 invoices/templates/invoices/invoice_detail.html:36
-msgid "Total price"
-msgstr "Importo totale"
+#: invoices/templates/invoices/invoice_list.html:34
+#: invoices/templates/invoices/order_detail.html:30
+msgid "Amount"
+msgstr "Totale"
 
 #: invoices/models.py:147
 msgid "Voice"
@@ -856,8 +858,6 @@ msgid "Voices count"
 msgstr "Numero voci"
 
 #: invoices/templates/invoices/invoice_detail.html:19
-#: invoices/templates/invoices/invoice_list.html:34
-#: invoices/templates/invoices/order_detail.html:30
 #: invoices/templates/invoices/order_list.html:41
 msgid "Total value"
 msgstr "Importo totale"
@@ -865,11 +865,6 @@ msgstr "Importo totale"
 #: invoices/templates/invoices/invoice_detail.html:22
 msgid "Issued on"
 msgstr "Emesso il"
-
-#: invoices/templates/invoices/invoice_detail.html:35
-#: invoices/templates/invoices/order_detail.html:56
-msgid "Unit price"
-msgstr "Prezzo unitario"
 
 #: invoices/templates/invoices/invoice_list.html:42
 #: invoices/templates/invoices/order_list.html:49
@@ -1104,3 +1099,9 @@ msgstr "Vuoi davvero cancellare il prodotto"
 #: stock/templates/stock/product_create_form.html:13
 msgid "New product registration"
 msgstr "Aggiungi nuovo prodotto"
+
+#~ msgid "Price single"
+#~ msgstr "Prezzo in entrata"
+
+#~ msgid "Total price"
+#~ msgstr "Importo totale"

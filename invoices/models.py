@@ -49,7 +49,7 @@ class Item(models.Model):
         ordering = ['record_date']
 
     @property
-    def value(self):
+    def amount(self):
         return Decimal(self.pieces) * self.price.price_out
 
     @property
@@ -98,10 +98,10 @@ class Order(models.Model):
         return total
 
     @property
-    def total_value(self):
+    def amount(self):
         total = Decimal(0.0)
         for item in self.item_set.all():
-            total += item.value
+            total += item.amount
         return total
 
 class Invoice(models.Model):
@@ -139,8 +139,8 @@ class Voice(models.Model):
                                 verbose_name=_('Invoice'))
 
     description = models.CharField(_('Description'), max_length=200)
-    unit_price = models.DecimalField(_('Price single'), max_digits=10, decimal_places=2)
-    amount = models.DecimalField(_('Total price'), max_digits=10, decimal_places=2)
+    unit_price = models.DecimalField(_('Unit price'), max_digits=10, decimal_places=2)
+    amount = models.DecimalField(_('Amount'), max_digits=10, decimal_places=2)
     pieces = models.PositiveIntegerField(_('Pieces'))
 
     class Meta:

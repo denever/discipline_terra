@@ -228,7 +228,7 @@ class OrderInvoiceView(SingleObjectMixin, SingleObjectTemplateResponseMixin, Vie
         invoice = Invoice.objects.create(customer=order.customer, issuer=request.user.get_profile())
         for item in order.item_set.all():
             print item
-            voice = Voice.objects.create(invoice=invoice, description=item.__unicode__(), pieces=item.pieces, single_price=item.price.price_out, total_price=item.value)
+            voice = Voice.objects.create(invoice=invoice, description=item.__unicode__(), pieces=item.pieces, unit_price=item.price.price_out, amount=item.amount)
             print voice
             voice.save()
 

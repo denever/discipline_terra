@@ -27,7 +27,7 @@
       <td>{% trans "Items count" %}</td><td>{{order.item_count}}</td>
     </tr>
     <tr>
-      <td>{% trans "Total value" %}</td><td>{{order.total_value}} €</td>
+      <td>{% trans "Amount" %}</td><td>{{order.amount}} €</td>
     </tr>
     <tr>
       <td>{% trans "Last change by" %}</td><td>{{order.lastchange_by}}</td>
@@ -67,7 +67,7 @@
 	{% if item.as_packages != "N/A" %}
 	(packages {{item.as_packages.0}} and {{item.as_packages.1}} pieces)
 	{% endif %}</td>
-      <td>{{item.value}} €</td>
+      <td>{{item.amount}} €</td>
       <td>
 	<a type="button" class="btn btn-default btn-xs" href="{% url 'item-edit' order.id item.id %}">
 	  <span class="glyphicon glyphicon-edit"></span>
