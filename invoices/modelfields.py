@@ -2,6 +2,8 @@
 from django.db import models
 from invoices.widgets import AddressFormField
 from urllib import urlencode
+import re
+addr_re = re.compile('(?P<street>.+), (?P<number>.+) - (?P<postcode>\d+) (?P<town>\w+) \((?P<province>\w{2})\)')
 
 class Address(object):
     def __init__(self, street, number, postcode, town, province):
@@ -12,7 +14,7 @@ class Address(object):
         self.province = province
 
     def __unicode__(self):
-        return "%s,%s,%s,%s,%s" % (self.street,
+        return "%s, %s - %s %s (%s)" % (self.street,
                                        self.number,
                                        self.postcode,
                                        self.town,
@@ -63,13 +65,9 @@ class AddressField(models.Field):
     def to_python(self, value):
         if isinstance(value, Address):
             return value
-
         value = str(value)
-        args = value.split(',')[:5]
-        if len(args)<5:
-            n = 5 - len(args)
-            args.extend([None for i in xrange(n)])
-        return Address(*args)
+        match = addr_re.match(value)
+        return Address(**match.groupdict())
 
     def get_prep_value(self, value):
         return ','.join([value.street,
