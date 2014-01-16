@@ -1,10 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.db.models import Q
-from django.http import HttpResponseForbidden, HttpResponseRedirect
+from django.http import HttpResponseForbidden, HttpResponseRedirect, HttpResponse
 from datetime import datetime
 from django.utils.timezone import utc
-
+from invoices.draw_pdf import draw_pdf
 from invoices.models import *
 
 # Create your views here.
@@ -16,7 +16,7 @@ from django.views.generic import UpdateView
 from django.views.generic import DeleteView
 from django.views.generic.detail import SingleObjectTemplateResponseMixin, SingleObjectMixin
 
-from invoices.forms import CustomerForm, OrderForm, ItemForm
+from invoices.forms import *
 
 class CustomerListView(ListView):
     queryset = Customer.objects.all()
@@ -99,6 +99,46 @@ class SearchInvoiceListView(ListView):
         query = self.request.REQUEST.get("q")
         return self.model.objects.filter(Q(customer__surname__contains=query)| Q(customer__name__contains=query))
 
+class PaymentListView(ListView):
+    queryset = Payment.objects.all()
+    context_object_name = 'payments'
+    paginate_by = 8
+
+class PaymentDetailView(DetailView):
+    model = Payment
+    context_object_name = 'payment'
+
+class PaymentCreateView(CreateView):
+    form_class = PaymentForm
+    template_name = 'invoices/payment_create_form.html'
+    success_url = '/invoices/payments/'
+
+    def form_valid(self, form):
+        self.payment = form.save(commit=False)
+        self.payment.record_by = self.request.user.get_profile()
+        self.payment.lastchange_by = self.request.user.get_profile()
+        self.payment.lastchange = datetime.utcnow().replace(tzinfo=utc)
+        return super(PaymentCreateView, self).form_valid(form)
+
+class PaymentUpdateView(UpdateView):
+    model = Payment
+    form_class = PaymentForm
+    template_name = 'invoices/payment_update_form.html'
+    success_url = '/invoices/payments/'
+    context_object_name = 'payment'
+
+    def form_valid(self, form):
+        self.payment = form.save(commit=False)
+        self.payment.lastchange_by = self.request.user.get_profile()
+        self.payment.lastchange = datetime.utcnow().replace(tzinfo=utc)
+        return super(PaymentUpdateView, self).form_valid(form)
+
+class PaymentDeleteView(DeleteView):
+    model = Payment
+    form_class = PaymentForm
+    success_url = '/invoices/payments'
+    context_object_name = 'payment'
+
 class InvoiceDetailView(DetailView):
     model = Invoice
     context_object_name = 'invoice'
@@ -107,6 +147,17 @@ class InvoicePrintView(DetailView): # Temporary view
     model = Invoice
     context_object_name = 'invoice'
     template_name = 'invoices/invoice_detail.html'
+
+class InvoicePrintView(SingleObjectMixin, View):
+    """ This view invoices generate a pdf"""
+    model = Invoice
+
+    def get(self, request, *args, **kwargs):
+        invoice = self.get_object()
+        response = HttpResponse(content_type="application/pdf")
+        response["Content-Disposition"] = "attachment; filename=\"%s-%s\"" % (invoice.id, invoice.date.year)
+        draw_pdf(response, invoice)
+        return response
 
 class OrderDetailView(DetailView):
     model = Order
@@ -210,32 +261,98 @@ class ItemDeleteView(DeleteView):
         self.success_url = reverse('order-detail', args=[self.kwargs['order']])
         return self.success_url
 
+# class OrderInvoiceView(SingleObjectMixin, SingleObjectTemplateResponseMixin, View):
+#     """ This view invoices an order creating a Invoice object and deleting the existing order"""
+#     model = Order
+#     template_name = 'invoices/order_invoice.html'
+#     context_object_name = 'order'
 
-class OrderInvoiceView(SingleObjectMixin, SingleObjectTemplateResponseMixin, View):
+#     def post(self, request, *args, **kwargs):
+#         if not request.user.is_authenticated():
+#             return HttpResponseForbidden()
+#         order = self.get_object()
+#         order.invoiced = True # in pre_delete_item avoid to release items for an invoiced order
+#         order.lastchange_by = request.user.get_profile()
+#         order.save()
+
+#         invoice = Invoice.objects.create(customer=order.customer, issuer=request.user.get_profile())
+#         for item in order.item_set.all():
+#             print item
+#             voice = Voice.objects.create(invoice=invoice, description=item.__unicode__(),
+#                                          pieces=item.pieces, unit_price=item.price.price_out,
+#                                          amount=item.amount, vat=item.price.vat_out,
+#                                          amount_novat=item.amount_novat, unit_price_novat=item.price.unit_price)
+#             voice.save()
+
+#         order.delete()
+
+#         return HttpResponseRedirect(reverse('invoices'))
+
+#     def get(self, request, *args, **kwargs):
+#         self.object = self.get_object()
+#         return self.render_to_response(self.get_context_data())
+
+class InvoiceCreateView(CreateView):
     """ This view invoices an order creating a Invoice object and deleting the existing order"""
-    model = Order
-    template_name = 'invoices/order_invoice.html'
-    context_object_name = 'order'
+    form_class = InvoiceForm
+    template_name = 'invoices/invoice_create_form.html'
+    success_url = '/invoices/invoices/'
 
-    def post(self, request, *args, **kwargs):
-        if not request.user.is_authenticated():
-            return HttpResponseForbidden()
-        order = self.get_object()
+    def form_valid(self, form):
+        self.invoice = form.save(commit=False)
+        order = get_object_or_404(Order, id=self.kwargs['order'])
         order.invoiced = True # in pre_delete_item avoid to release items for an invoiced order
-        order.lastchange_by = request.user.get_profile()
+        order.lastchange_by = self.request.user.get_profile()
         order.save()
-
-        invoice = Invoice.objects.create(customer=order.customer, issuer=request.user.get_profile())
+        self.invoice.customer = order.customer
+        self.invoice.issuer = self.request.user.get_profile()
+        temp_output = super(InvoiceCreateView, self).form_valid(form) # saving self.invoice to have a self.invoce.id needed in voice.create
         for item in order.item_set.all():
-            print item
-            voice = Voice.objects.create(invoice=invoice, description=item.__unicode__(), pieces=item.pieces, unit_price=item.price.price_out, amount=item.amount)
-            print voice
+            voice = Voice.objects.create(invoice=self.invoice, description=item.__unicode__(),
+                                         pieces=item.pieces, unit_price=item.price.price_out,
+                                         amount=item.amount, vat=item.price.vat_out,
+                                         amount_novat=item.amount_novat, unit_price_novat=item.price.unit_price)
             voice.save()
-
         order.delete()
+        return temp_output
 
-        return HttpResponseRedirect(reverse('invoices'))
+class HeadingListView(ListView):
+    queryset = InvoiceHeading.objects.all()
+    context_object_name = 'headings'
+    paginate_by = 5
 
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        return self.render_to_response(self.get_context_data())
+class HeadingDetailView(DetailView):
+    model = InvoiceHeading
+    context_object_name = 'heading'
+
+class HeadingCreateView(CreateView):
+    form_class = HeadingForm
+    template_name = 'invoices/invoiceheading_create_form.html'
+    success_url = '/invoices/headings/'
+
+    def form_valid(self, form):
+        self.InvoiceHeading = form.save(commit=False)
+        self.InvoiceHeading.record_by = self.request.user.get_profile()
+        self.InvoiceHeading.lastchange_by = self.request.user.get_profile()
+        self.InvoiceHeading.lastchange = datetime.utcnow().replace(tzinfo=utc)
+        return super(HeadingCreateView, self).form_valid(form)
+
+class HeadingUpdateView(UpdateView):
+    model = InvoiceHeading
+    form_class = HeadingForm
+    template_name = 'invoices/invoiceheading_update_form.html'
+    success_url = '/invoices/headings/'
+    context_object_name = 'heading'
+
+    def form_valid(self, form):
+        self.InvoiceHeading = form.save(commit=False)
+        self.InvoiceHeading.lastchange_by = self.request.user.get_profile()
+        self.InvoiceHeading.lastchange = datetime.utcnow().replace(tzinfo=utc)
+        self.success_url = reverse('heading-detail', args=[self.kwargs['pk']])
+        return super(HeadingUpdateView, self).form_valid(form)
+
+class HeadingDeleteView(DeleteView):
+    model = InvoiceHeading
+    form_class = HeadingForm
+    success_url = '/invoices/headings'
+    context_object_name = 'heading'

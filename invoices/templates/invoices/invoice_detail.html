@@ -13,6 +13,9 @@
       <td>{% trans "Customer" %}</td><td>{{invoice.customer}}</td>
     </tr>
     <tr>
+      <td>{% trans "Payment type" %}</td><td>{{invoice.payment_type}}</td>
+    </tr>
+    <tr>
       <td>{% trans "Voices count" %}</td><td>{{invoice.voice_count}}</td>
     </tr>
     <tr>
@@ -24,6 +27,9 @@
     <tr>
       <td>{% trans "Issued by" %}</td><td>{{invoice.issuer}}</td>
     </tr>
+    <tr>
+      <td>{% trans "Invoiced as" %}</td><td>{{invoice.heading_type}}</td>
+    </tr>
   </tbody>
 </table>
 <h3>{% trans "Voices" %}</h3>
@@ -32,6 +38,9 @@
     <tr>
       <td>{% trans "Description" %}</td>
       <td>{% trans "Pieces" %}</td>
+      <td>{% trans "Unit price without VAT" %}</td>
+      <td>{% trans "Amount without VAT" %}</td>
+      <td>{% trans "VAT" %}</td>
       <td>{% trans "Unit price" %}</td>
       <td>{% trans "Amount" %}</td>
     </tr>
@@ -41,6 +50,9 @@
     <tr>
       <td>{{voice.description}}</td>
       <td>{{voice.pieces}}</td>
+      <td>{{voice.unit_price_novat}} €</td>
+      <td>{{voice.amount_novat}} €</td>
+      <td>{{voice.vat}} %</td>
       <td>{{voice.unit_price}} €</td>
       <td>{{voice.amount}} €</td>
     </tr>

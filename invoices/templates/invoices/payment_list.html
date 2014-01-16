@@ -1,0 +1,54 @@
+{% extends "invoices/base-invoices.html" %}
+{% load i18n %}
+
+{% block container %}
+<nav class="navbar navbar-default" role="navigation">
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <a class="navbar-brand" href="{% url 'payments' %}">{% trans "Payments" %}</a>
+    <ul class="nav navbar-nav">
+      <li>
+	<a href="{% url 'payment-create' %}" data-toggle="tooltip" data-placement="left" title="{% trans "New payment" %}">
+	  <span class="glyphicon glyphicon-plus"></span>
+	</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+{% if is_paginated %}
+<ul class="pager">
+  {% if page_obj.has_previous %}
+  <li class="previous"><a href="/invoices/payments?page={{ page_obj.previous_page_number }}">&larr; {% trans "Previous" %}</a></li>
+  {% endif %}
+  <li>{% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}.</li>
+  {% if page_obj.has_next %}
+  <li class="next"><a href="/invoices/payments?page={{ page_obj.next_page_number }}">{% trans "Next" %} &rarr;</a></li>
+  {% endif %}
+</ul>
+{% endif %}
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <td>{% trans "Name" %}</td>
+      <td>{% trans "Amount without VAT" %}</td>
+      <td>{% trans "Amount" %}</td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for payment in payments %}
+    <tr>
+      <td>{{payment.name}}</td>
+      <td>{{payment.amount_novat}}</td>
+      <td>{{payment.amount}}</td>
+      <td>
+	<a type="button" class="btn btn-default btn-xs" href="{% url 'payment-edit' payment.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Edit" %}">
+	  <span class="glyphicon glyphicon-edit"></span>
+	</a>
+	<a type="button" class="btn btn-default btn-xs"  href="{% url 'payment-delete' payment.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Delete" %}">
+	  <span class="glyphicon glyphicon-trash"></span>
+	</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

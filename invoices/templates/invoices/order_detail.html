@@ -52,21 +52,27 @@
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
-      <td>{% trans "Product" %}</td>
-      <td>{% trans "Unit price" %}</td>
       <td>{% trans "Pieces" %}</td>
-      <td>{% trans "Total" %}</td>
+      <td>{% trans "Product" %}</td>
+      <td>{% trans "Unit price without VAT" %}</td>
+      <td>{% trans "Amount without VAT" %}</td>
+      <td>{% trans "VAT" %}</td>
+      <td>{% trans "Unit price" %}</td>
+      <td>{% trans "Amount" %}</td>
     </tr>
   </thead>
   <tbody>
     {% for item in order.item_set.all %}
     <tr>
-      <td>{{item.price.product}}</td>
-      <td>{{item.price.price_out}} €</td>
       <td>{{item.pieces}}
 	{% if item.as_packages != "N/A" %}
 	(packages {{item.as_packages.0}} and {{item.as_packages.1}} pieces)
 	{% endif %}</td>
+      <td>{{item.price.product}}</td>
+      <td>{{item.price.unit_price}} €</td>
+      <td>{{item.amount_novat}} €</td>
+      <td>{{item.price.vat_out}} %</td>
+      <td>{{item.price.price_out}} €</td>
       <td>{{item.amount}} €</td>
       <td>
 	<a type="button" class="btn btn-default btn-xs" href="{% url 'item-edit' order.id item.id %}">

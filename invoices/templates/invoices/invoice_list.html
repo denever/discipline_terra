@@ -50,7 +50,7 @@
 	<a type="button" class="btn btn-default btn-xs" href="{% url 'invoice-detail' invoice.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Detail" %}">
 	  <span class="glyphicon glyphicon-eye-open"></span>
 	</a>
-	<a type="button" class="btn btn-default btn-xs"  href="{% url 'invoice-detail' invoice.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Print" %}">
+	<a type="button" class="btn btn-default btn-xs"  href="{% url 'invoice-print' invoice.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Print" %}">
 	  <span class="glyphicon glyphicon-print"></span>
 	</a>
       </td>

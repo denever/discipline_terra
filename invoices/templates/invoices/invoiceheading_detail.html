@@ -1,0 +1,41 @@
+{% extends "invoices/base-invoices.html" %}
+{% load i18n %}
+{% block container %}
+<h3>{% trans "Heading" %}</h3>
+<p>
+  <a type="button" class="btn btn-default btn-xs" href="{% url 'heading-edit' heading.id %}">
+    <span class="glyphicon glyphicon-edit"></span>
+  </a>
+  <a type="button" class="btn btn-default btn-xs"  href="{% url 'heading-delete' heading.id %}">
+    <span class="glyphicon glyphicon-trash"></span>
+  </a>
+</p>
+<table class="table table-hover">
+  <tbody>
+    <tr>
+      <td>{% trans "Name" %}</td><td>{{heading.short_name}}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Long name" %}</td><td>{{heading.long_name}}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Address" %}</td><td>{{heading.address}}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Tax code" %}</td><td>{{heading.tax_code}}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Phone" %}</td><td>{{heading.phone}}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Email" %}</td><td>{{heading.email}}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Last change by" %}</td><td>{{heading.lastchange_by}}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Last change on" %}</td><td>{{heading.lastchange}}</td>
+    </tr>
+  </tbody>
+</table>
+{% endblock %}

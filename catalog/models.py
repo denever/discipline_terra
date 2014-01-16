@@ -23,9 +23,9 @@ class Price(models.Model):
     product = models.ForeignKey('stock.Product',
                                 verbose_name=_('Product'))
     price_in = models.DecimalField(_('Price IN'), max_digits=10, decimal_places=2)
-    vat_in = models.FloatField(_('VAT IN'))
-    gain_percentage = models.FloatField(_('Gain'))
-    vat_out = models.FloatField(_('VAT OUT'))
+    vat_in = models.DecimalField(_('VAT IN'), max_digits=4, decimal_places=2)
+    gain_percentage = models.DecimalField(_('Gain'), max_digits=4, decimal_places=2)
+    vat_out = models.DecimalField(_('VAT OUT'), max_digits=4, decimal_places=2)
 
     lastchange_by = models.ForeignKey('accounts.UserProfile',
                                       related_name='price_edited',
@@ -42,9 +42,17 @@ class Price(models.Model):
         return _('Price of %(product)s: %(price_out)s') % {'product':self.product, 'price_out':self.price_out}
 
     @property
+    def unit_price(self):
+        getcontext().prec = 3
+        getcontext().rounding = ROUND_UP
+        tot_in = self.price_in + self.price_in*(self.vat_in/Decimal(100))
+        gain = self.gain_percentage/Decimal(100)
+        return tot_in + tot_in*gain
+
+    @property
     def price_out(self):
         getcontext().prec = 3
         getcontext().rounding = ROUND_UP
-        tot_in = self.price_in + self.price_in*(Decimal(self.vat_in)/Decimal(100))
-        gain = (Decimal(self.gain_percentage) + Decimal(self.vat_out))/Decimal(100)
+        tot_in = self.price_in + self.price_in*(self.vat_in/Decimal(100))
+        gain = (self.gain_percentage + self.vat_out)/Decimal(100)
         return tot_in + tot_in*gain

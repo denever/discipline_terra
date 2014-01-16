@@ -1,26 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.auth.decorators import login_required, permission_required
 
-from invoices.views import CustomerListView, SearchCustomerListView
-from invoices.views import CustomerDetailView
-from invoices.views import CustomerCreateView
-from invoices.views import CustomerUpdateView
-from invoices.views import CustomerDeleteView
-
-from invoices.views import OrderListView, SearchOrderListView
-from invoices.views import OrderDetailView
-from invoices.views import OrderCreateView
-from invoices.views import OrderUpdateView
-from invoices.views import OrderDeleteView
-from invoices.views import OrderInvoiceView
-
-from invoices.views import ItemCreateView
-from invoices.views import ItemUpdateView
-from invoices.views import ItemDeleteView
-
-from invoices.views import InvoiceListView, SearchInvoiceListView
-from invoices.views import InvoiceDetailView
-from invoices.views import InvoicePrintView
+from invoices.views import *
 
 urlpatterns = patterns('invoices.views',
                        # url(r'^/$', login_required(InvoicesListView.as_view()),
@@ -57,7 +38,25 @@ urlpatterns = patterns('invoices.views',
                        url(r'^orders/search$', login_required(SearchOrderListView.as_view()),
                            name='orders-search'),
 
-                       url(r'^invoices$', login_required(InvoiceListView.as_view()),
+                       url(r'^payments/$', login_required(PaymentListView.as_view()),
+                           name='payments'),
+
+                       url(r'^payment_create/$',
+                           login_required(PaymentCreateView.as_view()),
+                           name = 'payment-create'
+                           ),
+
+                       url(r'^payment_update/(?P<pk>\d+)$',
+                           login_required(PaymentUpdateView.as_view()),
+                           name = 'payment-edit'
+                           ),
+
+                       url(r'^payment_delete/(?P<pk>\d+)$',
+                           login_required(PaymentDeleteView.as_view()),
+                           name = 'payment-delete'
+                           ),
+
+                       url(r'^invoices/$', login_required(InvoiceListView.as_view()),
                            name='invoices'),
 
                        url(r'^invoices/search$', login_required(SearchInvoiceListView.as_view()),
@@ -90,17 +89,15 @@ urlpatterns = patterns('invoices.views',
                            name = 'order-delete'
                            ),
 
-                       url(r'^order_invoice/(?P<pk>\d+)$',
-                           login_required(OrderInvoiceView.as_view()),
+                       # url(r'^order_invoice/(?P<pk>\d+)$',
+                       #     login_required(OrderInvoiceView.as_view()),
+                       #     name = 'order-invoice'
+                       #     ),
+
+                       url(r'^order_invoice/(?P<order>\d+)$',
+                           login_required(InvoiceCreateView.as_view()),
                            name = 'order-invoice'
                            ),
-
-                       # url(r'^items/$', login_required(ItemListView.as_view()),
-                       #     name='items'),
-
-                       # url(r'^item/(?P<pk>\d+)$',
-                       #     login_required(ItemDetailView.as_view()),
-                       #     name = 'item-detail'),
 
                        url(r'^order/(?P<order>\d+)/item_create/$',
                            login_required(ItemCreateView.as_view()),
@@ -115,5 +112,27 @@ urlpatterns = patterns('invoices.views',
                        url(r'^order/(?P<order>\d+)/item_delete/(?P<pk>\d+)$',
                            login_required(ItemDeleteView.as_view()),
                            name = 'item-delete'
+                           ),
+
+                       url(r'^headings/$', login_required(HeadingListView.as_view()),
+                           name='headings'),
+
+                       url(r'^heading/(?P<pk>\d+)$',
+                           login_required(HeadingDetailView.as_view()),
+                           name = 'heading-detail'),
+
+                       url(r'^heading_create/$',
+                           login_required(HeadingCreateView.as_view()),
+                           name = 'heading-create'
+                           ),
+
+                       url(r'^heading_update/(?P<pk>\d+)$',
+                           login_required(HeadingUpdateView.as_view()),
+                           name = 'heading-edit'
+                           ),
+
+                       url(r'^heading_delete/(?P<pk>\d+)$',
+                           login_required(HeadingDeleteView.as_view()),
+                           name = 'heading-delete'
                            ),
 )

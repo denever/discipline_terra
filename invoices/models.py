@@ -6,6 +6,7 @@ from django.db.models.signals import pre_save, post_save, pre_delete
 from django.dispatch import Signal, receiver
 
 from invoices.modelfields import AddressField
+from catalog.models import Catalog
 
 # Create your models here.
 class Customer(models.Model):
@@ -51,6 +52,10 @@ class Item(models.Model):
     @property
     def amount(self):
         return Decimal(self.pieces) * self.price.price_out
+
+    @property
+    def amount_novat(self):
+        return Decimal(self.pieces) * self.price.unit_price
 
     @property
     def as_packages(self):
@@ -104,6 +109,57 @@ class Order(models.Model):
             total += item.amount
         return total
 
+class Payment(models.Model):
+    name = models.CharField(_('Name'), max_length=200, unique=True)
+
+    class Meta:
+        verbose_name = _('Payment')
+        verbose_name_plural = _('Payments')
+
+    def __unicode__(self):
+        return self.name
+
+    @property
+    def amount(self):
+        total = Decimal(0.0)
+        for invoice in self.invoice_set.all():
+            total += invoice.amount
+        return total
+
+    @property
+    def amount_novat(self):
+        total = Decimal(0.0)
+        for invoice in self.invoice_set.all():
+            total += invoice.amount_novat
+        return total
+
+class InvoiceHeading(models.Model):
+    short_name = models.CharField(_('Name'), max_length=200)
+    long_name = models.CharField(_('Full name'), max_length=200)
+    address = AddressField(_('Address'))
+    tax_code = models.CharField(_('Tax code and Vat code'), max_length=200)
+    phone = models.CharField(_('Phone'), max_length=200)
+    email = models.EmailField(_('Email'), max_length=200)
+    logo_filename = models.FileField(_('Logo file'), upload_to='logos', null=True, blank=True)
+    usual_title_respect = models.CharField(_('Usual title respect'), max_length=200)
+    lastchange_by = models.ForeignKey('accounts.UserProfile',
+                                    related_name='invoice_headings_edited',
+                                    verbose_name=_('Last change by'))
+    lastchange = models.DateTimeField(_('Last change on'), auto_now_add=True)
+
+    class Meta:
+        verbose_name = _('Invoce Heading')
+        verbose_name_plural = _('Invoice Headings')
+
+    def __unicode__(self):
+        return self.short_name
+
+    def heading_note(self):
+        return (self.long_name, 
+                '%s - tel: %s - email: %s' % (self.address, self.phone, self.email),
+                'Tax code and Vat code: %s' % self.tax_code,
+        )
+
 class Invoice(models.Model):
     customer = models.ForeignKey(Customer,
                                 verbose_name=_('Customer'))
@@ -111,7 +167,13 @@ class Invoice(models.Model):
     issuer = models.ForeignKey('accounts.UserProfile',
                         related_name='invoices_issued',
                         verbose_name=_('Issued by'))
+    payment_type = models.ForeignKey(Payment,
+                        related_name='invoices_paid',
+                        verbose_name=_('Payment type'))
 
+    heading_type = models.ForeignKey(InvoiceHeading,
+                        related_name='invoices_entitled',
+                        verbose_name=_('Invoice as'))
     class Meta:
         verbose_name = _('Invoice')
         verbose_name_plural = _('Invoices')
@@ -128,9 +190,33 @@ class Invoice(models.Model):
         return total
 
     @property
+    def amount_novat(self):
+        total = Decimal(0.0)
+        for voice in self.voice_set.all():
+            total += voice.amount_novat
+        return total
+
+    @property
     def amount(self):
         total = Decimal(0.0)
         for voice in self.voice_set.all():
+            total += voice.amount
+        return total
+
+    @property
+    def tax_rates_used(self):
+        """Returns a list of all vat used for this invoice"""
+        value_set = set(self.voice_set.values_list('vat'))
+        return [ vat[0] for vat in value_set ]
+
+    def voices_by_vat(self, vat):
+        """Returns a queryset of voices by their vat"""
+        return self.voice_set.filter(vat=vat)
+
+    def amount_by_vat(self, vat):
+        """Returns the amount for each vat"""
+        total = Decimal(0.0)
+        for voice in self.voices_by_vat(vat):
             total += voice.amount
         return total
 
@@ -139,9 +225,12 @@ class Voice(models.Model):
                                 verbose_name=_('Invoice'))
 
     description = models.CharField(_('Description'), max_length=200)
+    unit_price_novat = models.DecimalField(_('Unit price'), max_digits=10, decimal_places=2)
     unit_price = models.DecimalField(_('Unit price'), max_digits=10, decimal_places=2)
     amount = models.DecimalField(_('Amount'), max_digits=10, decimal_places=2)
+    amount_novat = models.DecimalField(_('Amount'), max_digits=10, decimal_places=2)
     pieces = models.PositiveIntegerField(_('Pieces'))
+    vat = models.DecimalField(_('VAT'), max_digits=4, decimal_places=2)
 
     class Meta:
         verbose_name = _('Voice')

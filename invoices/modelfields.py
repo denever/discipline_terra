@@ -67,14 +67,17 @@ class AddressField(models.Field):
             return value
         value = str(value)
         match = addr_re.match(value)
-        return Address(**match.groupdict())
+        if match:
+            return Address(**match.groupdict())
+        else:
+            return Address(None, None, None, None, None)
 
     def get_prep_value(self, value):
-        return ','.join([value.street,
-                         value.number,
-                         value.postcode,
-                         value.town,
-                         value.province])
+        return "%s, %s - %s %s (%s)" % (value.street,
+                                       value.number,
+                                       value.postcode,
+                                       value.town,
+                                       value.province)
 
     def formfield(self, **kwargs):
         defaults = {'form_class': AddressFormField}

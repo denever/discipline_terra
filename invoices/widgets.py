@@ -94,4 +94,8 @@ class AddressFormField(forms.MultiValueField):
 	super(AddressFormField, self).__init__(fields, *args, **kwargs)
 
     def compress(self, data_list):
-	return ','.join(data_list)
+        return "%s, %s - %s %s (%s)" % (data_list[0],
+                                        data_list[1],
+                                        data_list[2],
+                                        data_list[3],
+                                        data_list[4])
