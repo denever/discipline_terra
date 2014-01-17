@@ -37,8 +37,8 @@
     {% for payment in payments %}
     <tr>
       <td>{{payment.name}}</td>
-      <td>{{payment.amount_novat}}</td>
-      <td>{{payment.amount}}</td>
+      <td>{{payment.amount_novat}} €</td>
+      <td>{{payment.amount}} €</td>
       <td>
 	<a type="button" class="btn btn-default btn-xs" href="{% url 'payment-edit' payment.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Edit" %}">
 	  <span class="glyphicon glyphicon-edit"></span>

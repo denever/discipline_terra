@@ -122,14 +122,14 @@ class Payment(models.Model):
     @property
     def amount(self):
         total = Decimal(0.0)
-        for invoice in self.invoice_set.all():
+        for invoice in self.invoices_paid.all():
             total += invoice.amount
         return total
 
     @property
     def amount_novat(self):
         total = Decimal(0.0)
-        for invoice in self.invoice_set.all():
+        for invoice in self.invoices_paid.all():
             total += invoice.amount_novat
         return total
 
@@ -137,7 +137,7 @@ class InvoiceHeading(models.Model):
     short_name = models.CharField(_('Name'), max_length=200)
     long_name = models.CharField(_('Full name'), max_length=200)
     address = AddressField(_('Address'))
-    tax_code = models.CharField(_('Tax code and Vat code'), max_length=200)
+    tax_code = models.CharField(_('Tax code or Vat code'), max_length=200)
     phone = models.CharField(_('Phone'), max_length=200)
     email = models.EmailField(_('Email'), max_length=200)
     logo_filename = models.FileField(_('Logo file'), upload_to='logos', null=True, blank=True)
@@ -155,7 +155,7 @@ class InvoiceHeading(models.Model):
         return self.short_name
 
     def heading_note(self):
-        return (self.long_name, 
+        return (self.long_name,
                 '%s - tel: %s - email: %s' % (self.address, self.phone, self.email),
                 'Tax code and Vat code: %s' % self.tax_code,
         )
