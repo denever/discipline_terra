@@ -16,6 +16,8 @@
 	  {% for category in categories %}
 	  <li {% if category.id == active_cat_id %} class="active" {% endif %}><a href="{% url 'products-category' category.id %}">{{category}}</a></li>
 	  {% endfor %}
+	  <li role="presentation" class="divider"></li>
+	  <li><a href="{% url 'category-create' %}">{% trans "New Category" %}</a>
 	</ul>
       </li>
       <li>

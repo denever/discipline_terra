@@ -17,6 +17,8 @@
 	  {% for catalog in catalogs %}
 	  <li {% if catalog.id == active_cat_id %} class="active" {% endif %}><a href="{% url 'prices-catalog' catalog.id %}">{{catalog}}</a></li>
 	  {% endfor %}
+	  <li role="presentation" class="divider"></li>
+	  <li><a href="{% url 'catalog-create' %}">{% trans "New Catalog" %}</a>
 	</ul>
       </li>
     </ul>

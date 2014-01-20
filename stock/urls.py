@@ -14,6 +14,9 @@ from stock.views import PackageCreateView
 from stock.views import PackageUpdateView
 from stock.views import PackageDeleteView
 
+from stock.views import CategoryCreateView
+from stock.views import CategoryDeleteView
+
 urlpatterns = patterns('stock.views',
                        url(r'^$', login_required(ProductListView.as_view()),
                            name='stock'),
@@ -73,5 +76,15 @@ urlpatterns = patterns('stock.views',
                        url(r'^package_delete/(?P<pk>\d+)$',
                            login_required(PackageDeleteView.as_view()),
                            name = 'package-delete'
+                           ),
+
+                       url(r'^category_create/$',
+                           login_required(CategoryCreateView.as_view()),
+                           name = 'category-create'
+                           ),
+
+                       url(r'^category_delete/(?P<pk>\d+)$',
+                           login_required(CategoryDeleteView.as_view()),
+                           name = 'category-delete'
                            ),
 )

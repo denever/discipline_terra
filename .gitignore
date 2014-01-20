@@ -1,3 +1,5 @@
 discipline.db
 django.mo
-
+*.pyc
+*.bak
+media/

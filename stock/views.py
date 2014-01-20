@@ -12,7 +12,7 @@ from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
 
-from stock.forms import ProductForm, PackageForm
+from stock.forms import ProductForm, PackageForm, CategoryForm
 
 class ProductListView(ListView):
     queryset = Product.objects.all()
@@ -174,3 +174,22 @@ class PackageDeleteView(DeleteView):
     form_class = PackageForm
     success_url = '/stock/packages/'
     context_object_name = 'package'
+
+
+class CategoryCreateView(CreateView):
+    form_class = CategoryForm
+    template_name = 'stock/category_create_form.html'
+    success_url = '/stock/products/'
+
+    def form_valid(self, form):
+        self.category = form.save(commit=False)
+        self.category.record_by = self.request.user.get_profile()
+        self.category.lastchange_by = self.request.user.get_profile()
+        self.category.lastchange = datetime.utcnow().replace(tzinfo=utc)
+        return super(CategoryCreateView, self).form_valid(form)
+
+class CategoryDeleteView(DeleteView):
+    model = Category
+    form_class = CategoryForm
+    success_url = '/stock/products'
+    context_object_name = 'category'
