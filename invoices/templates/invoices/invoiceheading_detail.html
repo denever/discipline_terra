@@ -1,15 +1,22 @@
 {% extends "invoices/base-invoices.html" %}
 {% load i18n %}
 {% block container %}
-<h3>{% trans "Heading" %}</h3>
-<p>
-  <a type="button" class="btn btn-default btn-xs" href="{% url 'heading-edit' heading.id %}">
-    <span class="glyphicon glyphicon-edit"></span>
-  </a>
-  <a type="button" class="btn btn-default btn-xs"  href="{% url 'heading-delete' heading.id %}">
-    <span class="glyphicon glyphicon-trash"></span>
-  </a>
-</p>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <a class="navbar-brand" href="{% url 'invoices' %}">{% trans "Heading" %}</a>
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+	<a type="button" class="btn btn-xs" href="{% url 'heading-edit' heading.id %}">
+	  <span class="glyphicon glyphicon-edit"></span>
+	</a>
+      </li>
+      <li>
+	<a type="button" class="btn btn-xs"  href="{% url 'heading-delete' heading.id %}">
+	  <span class="glyphicon glyphicon-trash"></span>
+	</a>
+      </li>
+  </div>
+</nav>
 <table class="table table-hover">
   <tbody>
     <tr>
@@ -29,6 +36,12 @@
     </tr>
     <tr>
       <td>{% trans "Email" %}</td><td>{{heading.email}}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Usual title respect" %}</td><td>{{heading.usual_title_respect}}</td>
+    </tr>
+    <tr>
+      <td>{% trans "Logo file" %}</td><td>{{heading.logo_filename}}</td>
     </tr>
     <tr>
       <td>{% trans "Last change by" %}</td><td>{{heading.lastchange_by}}</td>

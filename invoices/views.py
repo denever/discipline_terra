@@ -143,10 +143,10 @@ class InvoiceDetailView(DetailView):
     model = Invoice
     context_object_name = 'invoice'
 
-class InvoicePrintView(DetailView): # Temporary view
-    model = Invoice
-    context_object_name = 'invoice'
-    template_name = 'invoices/invoice_detail.html'
+# class InvoicePrintView(DetailView): # Temporary view
+#     model = Invoice
+#     context_object_name = 'invoice'
+#     template_name = 'invoices/invoice_detail.html'
 
 class InvoicePrintView(SingleObjectMixin, View):
     """ This view invoices generate a pdf"""

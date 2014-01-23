@@ -54,7 +54,7 @@
       <td>{{order.item_count}}</td>
       <td>{{order.total_value}} €</td>
       <td>
-	<a type="button" class="btn btn-default btn-xs" href="{% url 'order-detail' order.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Detail" %}">
+	<a type="button" class="btn btn-default btn-xs" href="{% url 'order-detail' order.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Edit" %}">
 	  <span class="glyphicon glyphicon-edit"></span>
 	</a>
 	<a type="button" class="btn btn-default btn-xs" href="{% url 'order-invoice' order.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Invoice" %}">

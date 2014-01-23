@@ -39,7 +39,6 @@ def template_pdf(mycanvas, invoice):
     textobject = mycanvas.beginText(13 * cm, -6.5 * cm)
     textobject.textLine(u'%s' % invoice.customer)
     textobject.setFont('Times-Roman', 11)
-    textobject.textLine(u'%s' % invoice.customer)
     textobject.textLine(u'%s' % invoice.customer.address)
     if invoice.customer.tax_code:
         textobject.textLine(u'%s' % invoice.customer.tax_code)
@@ -56,7 +55,7 @@ def template_pdf(mycanvas, invoice):
 
     textobject = mycanvas.beginText(1 * cm, -10.5 * cm)
     textobject.setFont('Times-Roman', 11)
-    textobject.textLine(_('Payment condition: %(payment)s') % {'payment': invoice.payment_type})
+    textobject.textLine(_('Payment condition: direct remission %(payment)s') % {'payment': invoice.payment_type})
     mycanvas.drawText(textobject)
     textobject = mycanvas.beginText(1 * cm, -11.7 * cm)
     textobject.setFont('Times-Roman', 11)

@@ -102,5 +102,6 @@ class HeadingForm(forms.ModelForm):
             'short_name': TextInput(attrs={'class': 'form-control'}),
             'long_name': TextInput(attrs={'class': 'form-control'}),
             'email': EmailInput(attrs={'class': 'form-control'}),
+            'usual_title_respect': TextInput(attrs={'class': 'form-control'}),
             'logo_file': ClearableFileInput(attrs={'class': 'form-control'}),
         }
