@@ -35,7 +35,7 @@
 	</div>
 	{% endfor %}
 	<button type="submit" class="btn btn-default">{% trans "Save" %}</button>
-	<a class="btn btn-default" href="{% url 'prices' %}">{% trans "Cancel" %}</a>
+	<a class="btn btn-default" href="{% url 'prices-catalog' current_catalog.id %}">{% trans "Cancel" %}</a>
       </fieldset>
     </form>
     {% endblock %}

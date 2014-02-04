@@ -38,6 +38,9 @@
       <td>{{catalog.title}}</td>
       <td>{{catalog.price_count}}</td>
       <td align="center">
+	<a type="button" class="btn btn-default btn-xs" href="{% url 'prices-catalog' catalog.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Detail" %}">
+	  <span class="glyphicon glyphicon-eye-open"></span>
+	</a>
 	<a type="button" class="btn btn-default btn-xs" href="{% url 'catalog-edit' catalog.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Edit" %}">
 	  <span class="glyphicon glyphicon-edit"></span>
 	</a>

@@ -52,28 +52,34 @@ class SearchPriceListView(ListView):
     model = Price
     context_object_name = 'prices'
     paginate_by = 5
-    template_name = 'stock/price_list.html'
+    template_name = 'catalog/price_catalog_list.html'
 
     def get_queryset(self):
+        catalog = get_object_or_404(Catalog, id=self.kwargs['pk'])
         query = self.request.REQUEST.get("q")
-        return self.model.objects.filter(product__description__icontains=query)
+        return catalog.price_set.filter(product__description__icontains=query)
 
     def get_context_data(self, **kwargs):
         context = super(SearchPriceListView, self).get_context_data(**kwargs)
         context['catalogs'] = Catalog.objects.all()
+        context['current_catalog'] = get_object_or_404(Catalog, id=self.kwargs['pk'])
         return context
 
 class PriceListByCatalogView(ListView):
     model = Price
     context_object_name = 'prices'
     paginate_by = 5
-    template_name = 'stock/price_catalog_list.html'
+    template_name = 'catalog/price_catalog_list.html'
 
     def get_context_data(self, **kwargs):
         context = super(PriceListByCatalogView, self).get_context_data(**kwargs)
         context['catalogs'] = Catalog.objects.all()
-        context['active_cat_id'] = self.kwargs['pk']
+        context['current_catalog'] = get_object_or_404(Catalog, id=self.kwargs['pk'])
         return context
+
+    def get_queryset(self):
+        catalog = get_object_or_404(Catalog, id=self.kwargs['pk'])
+        return catalog.price_set.all()
 
 class PriceDetailView(DetailView):
     model = Price
@@ -84,11 +90,22 @@ class PriceCreateView(CreateView):
     template_name = 'catalog/price_create_form.html'
     success_url = '/catalog/prices/'
 
+    def get_context_data(self, **kwargs):
+        context = super(PriceCreateView, self).get_context_data(**kwargs)
+        context['current_catalog'] = get_object_or_404(Catalog, id=self.kwargs['pk'])
+        return context
+
+    def get_initial(self):
+        self.initial = super(PriceCreateView, self).get_initial()
+        self.initial['catalog'] = get_object_or_404(Catalog, id=self.kwargs['pk'])
+        return self.initial
+
     def form_valid(self, form):
         self.price = form.save(commit=False)
         self.price.record_by = self.request.user.get_profile()
         self.price.lastchange_by = self.request.user.get_profile()
         self.price.lastchange = datetime.utcnow().replace(tzinfo=utc)
+        self.success_url = reverse('prices-catalog', args=[self.kwargs['pk']])
         return super(PriceCreateView, self).form_valid(form)
 
 class PriceUpdateView(UpdateView):
