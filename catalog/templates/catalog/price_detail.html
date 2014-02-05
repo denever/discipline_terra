@@ -1,15 +1,23 @@
 {% extends "catalog/base-catalog.html" %}
 {% load i18n %}
 {% block container %}
-<h3>{% trans "Price for" %} {{price.product}}</h3>
-<p>
-  <a type="button" class="btn btn-default btn-xs" href="{% url 'price-edit' price.id %}">
-    <span class="glyphicon glyphicon-edit"></span>
-  </a>
-  <a type="button" class="btn btn-default btn-xs"  href="{% url 'price-delete' price.id %}">
-    <span class="glyphicon glyphicon-trash"></span>
-  </a>
-</p>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    {% trans "Price for" %} {{price.product}}
+    <ul class="nav navbar-nav">
+      <li>  
+	<a type="button" class="btn btn-default btn-xs" href="{% url 'price-edit' price.id %}">
+	  <span class="glyphicon glyphicon-edit"></span>
+	</a>
+      </li>
+      <li>
+	<a type="button" class="btn btn-default btn-xs"  href="{% url 'price-delete' price.id %}">
+	  <span class="glyphicon glyphicon-trash"></span>
+	</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 <table class="table table-hover">
   <tbody>
     <tr>
@@ -26,6 +34,9 @@
     </tr>
     <tr>
       <td>{% trans "VAT out" %}</td><td>{{price.vat_out}} %</td>
+    </tr>
+    <tr>
+      <td>{% trans "Price out" %}</td><td>{{price.vat_out}} %</td>
     </tr>
     <tr>
       <td>{% trans "Last change by" %}</td><td>{{price.lastchange_by}}</td>
