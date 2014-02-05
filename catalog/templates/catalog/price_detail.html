@@ -3,23 +3,29 @@
 {% block container %}
 <nav class="navbar navbar-default" role="navigation">
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    {% trans "Price for" %} {{price.product}}
+    <span class="navbar-brand">{% trans "Price for" %} {{price.product}}</span>
     <ul class="nav navbar-nav">
       <li>  
-	<a type="button" class="btn btn-default btn-xs" href="{% url 'price-edit' price.id %}">
+	<a type="button" class="btn btn-xs" href="{% url 'price-edit' price.id %}">
 	  <span class="glyphicon glyphicon-edit"></span>
 	</a>
       </li>
       <li>
-	<a type="button" class="btn btn-default btn-xs"  href="{% url 'price-delete' price.id %}">
+	<a type="button" class="btn btn-xs"  href="{% url 'price-delete' price.id %}">
 	  <span class="glyphicon glyphicon-trash"></span>
 	</a>
+      </li>
+      <li>
+	<a type="button" class="btn btn-xs" href="{% url 'prices-catalog' price.catalog.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Back to catalog" %} {{ catalog }}">
       </li>
     </ul>
   </div>
 </nav>
 <table class="table table-hover">
   <tbody>
+    <tr>
+      <td>{% trans "Catalog" %}</td><td>{{price.catalog}}</td>
+    </tr>
     <tr>
       <td>{% trans "Product" %}</td><td>{{price.product}}</td>
     </tr>
