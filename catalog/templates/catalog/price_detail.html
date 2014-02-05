@@ -6,18 +6,18 @@
     <span class="navbar-brand">{% trans "Price for" %} {{price.product}}</span>
     <ul class="nav navbar-nav">
       <li>
-	<a type="button" class="btn btn-xs" href="{% url 'price-edit' price.id %}">
+	<a type="button" class="btn btn-xs" href="{% url 'price-edit' price.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Edit" %}">
 	  <span class="glyphicon glyphicon-edit"></span>
 	</a>
       </li>
       <li>
-	<a type="button" class="btn btn-xs"  href="{% url 'price-delete' price.id %}">
+	<a type="button" class="btn btn-xs"  href="{% url 'price-delete' price.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Delete" %}">
 	  <span class="glyphicon glyphicon-trash"></span>
 	</a>
       </li>
       <li>
 	<a type="button" class="btn btn-xs" href="{% url 'prices-catalog' price.catalog.id %}" data-toggle="tooltip" data-placement="left" title="{% trans "Back to catalog" %} {{ catalog }}">
-	  <span class="glyphicon glyphicon-back"></span>
+	  <span class="glyphicon glyphicon-chevron-up"></span>
 	</a>
       </li>
     </ul>
@@ -44,7 +44,7 @@
       <td>{% trans "VAT out" %}</td><td>{{price.vat_out}} %</td>
     </tr>
     <tr>
-      <td>{% trans "Price out" %}</td><td>{{price.price_out}}</td>
+      <td>{% trans "Price out" %}</td><td>{{price.price_out}} €</td>
     </tr>
     <tr>
       <td>{% trans "Last change by" %}</td><td>{{price.lastchange_by}}</td>
