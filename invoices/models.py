@@ -5,36 +5,10 @@ from django.utils.translation import ugettext as _
 from django.db.models.signals import pre_save, post_save, pre_delete
 from django.dispatch import Signal, receiver
 
-from invoices.modelfields import AddressField
 from catalog.models import Catalog
+from invoices.modelfields import AddressField
 
 # Create your models here.
-class Customer(models.Model):
-    name = models.CharField(_('Name'), max_length=200)
-    surname = models.CharField(_('Surname'), max_length=200)
-    address = AddressField(_('Address'))
-    tax_code = models.CharField(_('Tax code'), max_length=200, null=True, blank=True)
-    vat_code = models.CharField(_('Vat code'), max_length=200, null=True, blank=True)
-    phone = models.CharField(_('Phone'), max_length=200)
-    email = models.EmailField(_('Email'), max_length=200)
-
-    lastchange_by = models.ForeignKey('accounts.UserProfile',
-                                    related_name='customer_edited',
-                                    verbose_name=_('Last change by'))
-
-    record_date = models.DateTimeField(_('Recorded on'), auto_now_add=True)
-    lastchange = models.DateTimeField(_('Last change on'), auto_now_add=True)
-
-    def __unicode__(self):
-        return "%s %s" % (self.surname, self.name)
-
-    class Meta:
-        ordering = ['surname', 'name']
-        verbose_name = _('Customer')
-        verbose_name_plural = _('Customers')
-        get_latest_by = 'surname'
-        unique_together = ('tax_code','vat_code')
-
 class Item(models.Model):
     order = models.ForeignKey('invoices.Order',
                                 verbose_name=_('Order'), on_delete=models.CASCADE)
@@ -76,7 +50,7 @@ class Order(models.Model):
     catalog = models.ForeignKey('catalog.catalog',
                                 verbose_name=_('Catalog'))
 
-    customer = models.ForeignKey(Customer,
+    customer = models.ForeignKey('customers.Customer',
                                 verbose_name=_('Customer'))
 
     record_date = models.DateTimeField(_('Recorded on'), auto_now_add=True)
@@ -161,7 +135,7 @@ class InvoiceHeading(models.Model):
         )
 
 class Invoice(models.Model):
-    customer = models.ForeignKey(Customer,
+    customer = models.ForeignKey('customers.Customer',
                                 verbose_name=_('Customer'))
     date = models.DateTimeField(_('Invoiced on'), auto_now_add=True)
     issuer = models.ForeignKey('accounts.UserProfile',

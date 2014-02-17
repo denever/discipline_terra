@@ -128,6 +128,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'stock',
     'accounts',
+    'customers',
     'cover',
     'django_openid_auth',
     'catalog',
