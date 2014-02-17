@@ -298,6 +298,11 @@ class InvoiceCreateView(CreateView):
     template_name = 'invoices/invoice_create_form.html'
     success_url = '/invoices/invoices/'
 
+    def get_context_data(self, **kwargs):
+        context = super(InvoiceCreateView, self).get_context_data(**kwargs)
+        context['order'] = get_object_or_404(Order, id=self.kwargs['order'])
+        return context
+
     def form_valid(self, form):
         self.invoice = form.save(commit=False)
         order = get_object_or_404(Order, id=self.kwargs['order'])
