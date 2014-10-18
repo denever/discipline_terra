@@ -2,7 +2,11 @@
 import os
 import os.path
 
-DEBUG = True
+if os.getenv('DEBUG', '').strip().lower() in ('true', 't', 'yes', 'y', 'on', 'debug', '1'):
+    DEBUG = True
+else:
+    DEBUG = False
+
 TEMPLATE_DEBUG = DEBUG
 
 CURRENT_DIR = os.getcwd()
@@ -186,6 +190,7 @@ LOGOUT_URL = '/logout/'
 OPENID_SSO_SERVER_URL = 'https://www.google.com/accounts/o8/id'
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
-############### Locale settings #################
-
-LOCALE_PATHS = ('/home/denever/work/discipline_terra/conf/locale',)
+try:
+    from local_settings import *
+except ImportError:
+    print >>sys.stderr, 'WARNING: local_settings.py not found.'
