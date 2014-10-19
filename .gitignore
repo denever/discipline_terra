@@ -3,3 +3,4 @@ django.mo
 *.pyc
 *.bak
 media/
+local_settings.py
