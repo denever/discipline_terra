@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from datetime import datetime
 from django.utils.timezone import utc
 
-from stock.models import *
+from stock.models import Product, Category, Package
 
 from django.views.generic import DetailView
 from django.views.generic import ListView
@@ -13,6 +13,7 @@ from django.views.generic import UpdateView
 from django.views.generic import DeleteView
 
 from stock.forms import ProductForm, PackageForm, CategoryForm
+
 
 class ProductListView(ListView):
     queryset = Product.objects.all()
@@ -24,33 +25,36 @@ class ProductListView(ListView):
         context['categories'] = Category.objects.all()
         return context
 
+
 class WarningProductListView(ListView):
-     context_object_name = 'products'
-     paginate_by = 5
-     template_name = 'stock/product_warning_list.html'
+    context_object_name = 'products'
+    paginate_by = 5
+    template_name = 'stock/product_warning_list.html'
 
-     def get_queryset(self):
-         filtered = [x for x in Product.objects.all() if x.status =='warning']
-         return filtered
+    def get_queryset(self):
+        filtered = [x for x in Product.objects.all() if x.status =='warning']
+        return filtered
 
-     def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super(WarningProductListView, self).get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         return context
 
+
 class DangerProductListView(ListView):
-     context_object_name = 'products'
-     paginate_by = 5
-     template_name = 'stock/product_danger_list.html'
+    context_object_name = 'products'
+    paginate_by = 5
+    template_name = 'stock/product_danger_list.html'
 
-     def get_queryset(self):
-         filtered = [x for x in Product.objects.all() if x.status == 'danger']
-         return filtered
+    def get_queryset(self):
+        filtered = [x for x in Product.objects.all() if x.status == 'danger']
+        return filtered
 
-     def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super(DangerProductListView, self).get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         return context
+
 
 class SearchProductListView(ListView):
     model = Product
@@ -66,6 +70,7 @@ class SearchProductListView(ListView):
         context = super(SearchProductListView, self).get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         return context
+
 
 class ProductByCategoryListView(ListView):
     model = Product
@@ -83,9 +88,11 @@ class ProductByCategoryListView(ListView):
         context['active_cat_id'] = self.kwargs['pk']
         return context
 
+
 class ProductDetailView(DetailView):
     model = Product
     context_object_name = 'product'
+
 
 class ProductCreateView(CreateView):
     form_class = ProductForm
@@ -98,6 +105,7 @@ class ProductCreateView(CreateView):
         self.product.lastchange_by = self.request.user.get_profile()
         self.product.lastchange = datetime.utcnow().replace(tzinfo=utc)
         return super(ProductCreateView, self).form_valid(form)
+
 
 class ProductUpdateView(UpdateView):
     model = Product
@@ -120,6 +128,7 @@ class ProductUpdateView(UpdateView):
     #     self.initial['cpi'] = self.object.cpi.name
     #     return self.initial
 
+
 class ProductDeleteView(DeleteView):
     model = Product
     form_class = ProductForm
@@ -128,14 +137,17 @@ class ProductDeleteView(DeleteView):
 
 # Packages managment
 
+
 class PackageListView(ListView):
     queryset = Package.objects.all()
     context_object_name = 'packages'
     paginate_by = 5
 
+
 class PackageDetailView(DetailView):
     model = Package
     context_object_name = 'package'
+
 
 class PackageCreateView(CreateView):
     form_class = PackageForm
@@ -148,6 +160,7 @@ class PackageCreateView(CreateView):
         self.package.lastchange_by = self.request.user.get_profile()
         self.package.lastchange = datetime.utcnow().replace(tzinfo=utc)
         return super(PackageCreateView, self).form_valid(form)
+
 
 class PackageUpdateView(UpdateView):
     model = Package
@@ -169,6 +182,7 @@ class PackageUpdateView(UpdateView):
     #     self.initial['cpi'] = self.object.cpi.name
     #     return self.initial
 
+
 class PackageDeleteView(DeleteView):
     model = Package
     form_class = PackageForm
@@ -187,6 +201,7 @@ class CategoryCreateView(CreateView):
         self.category.lastchange_by = self.request.user.get_profile()
         self.category.lastchange = datetime.utcnow().replace(tzinfo=utc)
         return super(CategoryCreateView, self).form_valid(form)
+
 
 class CategoryDeleteView(DeleteView):
     model = Category

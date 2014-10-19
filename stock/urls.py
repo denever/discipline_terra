@@ -1,5 +1,6 @@
-from django.conf.urls import patterns, include, url
-from django.contrib.auth.decorators import login_required, permission_required
+from django.conf.urls import patterns, url
+from django.contrib.auth.decorators import login_required
+# permission_required
 
 from stock.views import ProductListView, WarningProductListView, DangerProductListView, SearchProductListView
 from stock.views import ProductByCategoryListView
@@ -39,21 +40,21 @@ urlpatterns = patterns('stock.views',
 
                        url(r'^product/(?P<pk>\d+)$',
                            login_required(ProductDetailView.as_view()),
-                           name = 'product-detail'),
+                           name='product-detail'),
 
                        url(r'^product_create/$',
                            login_required(ProductCreateView.as_view()),
-                           name = 'product-create'
+                           name='product-create'
                            ),
 
                        url(r'^product_update/(?P<pk>\d+)$',
                            login_required(ProductUpdateView.as_view()),
-                           name = 'product-edit'
+                           name='product-edit'
                            ),
 
                        url(r'^product_delete/(?P<pk>\d+)$',
                            login_required(ProductDeleteView.as_view()),
-                           name = 'product-delete'
+                           name='product-delete'
                            ),
 
                        url(r'^packages/$', login_required(PackageListView.as_view()),
@@ -61,30 +62,28 @@ urlpatterns = patterns('stock.views',
 
                        url(r'^package/(?P<pk>\d+)$',
                            login_required(PackageDetailView.as_view()),
-                           name = 'package-detail'),
+                           name='package-detail'),
 
                        url(r'^package_create/$',
                            login_required(PackageCreateView.as_view()),
-                           name = 'package-create'
+                           name='package-create'
                            ),
 
                        url(r'^package_update/(?P<pk>\d+)$',
                            login_required(PackageUpdateView.as_view()),
-                           name = 'package-edit'
+                           name='package-edit'
                            ),
 
                        url(r'^package_delete/(?P<pk>\d+)$',
                            login_required(PackageDeleteView.as_view()),
-                           name = 'package-delete'
+                           name='package-delete'
                            ),
 
                        url(r'^category_create/$',
                            login_required(CategoryCreateView.as_view()),
-                           name = 'category-create'
+                           name='category-create'
                            ),
 
                        url(r'^category_delete/(?P<pk>\d+)$',
                            login_required(CategoryDeleteView.as_view()),
-                           name = 'category-delete'
-                           ),
-)
+                           name='category-delete'))

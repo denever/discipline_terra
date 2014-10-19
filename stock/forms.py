@@ -1,7 +1,6 @@
 from django.forms import ModelForm, TextInput, NumberInput, Select
-from django.utils.translation import ugettext as _
-
 from stock.models import Product, Package, Category
+
 
 class ProductForm(ModelForm):
     class Meta:
@@ -18,6 +17,7 @@ class ProductForm(ModelForm):
             'category': Select(attrs={'class': 'form-control'}),
         }
 
+
 class PackageForm(ModelForm):
     class Meta:
         model = Package
@@ -27,6 +27,7 @@ class PackageForm(ModelForm):
             'size': NumberInput(attrs={'class': 'form-control'}),
             'barcode': NumberInput(attrs={'class': 'form-control'}),
         }
+
 
 class CategoryForm(ModelForm):
     class Meta:
