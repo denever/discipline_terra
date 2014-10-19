@@ -4,11 +4,11 @@ from reportlab.pdfgen import canvas
 from reportlab.platypus import Table
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import cm
-from reportlab.platypus import Image
 from django.utils.translation import ugettext as _
 from django.utils.formats import date_format
 
 from django.conf import settings
+
 
 def template_pdf(mycanvas, invoice):
     """ Draws the invoice """
@@ -30,7 +30,9 @@ def template_pdf(mycanvas, invoice):
     mycanvas.saveState()
     mycanvas.setFont('Times-Roman', 11)
     textobject = mycanvas.beginText(13 * cm, -5.5 * cm)
-    textobject.textLine(u'%(place)s, %(date)s' % { 'place': invoice.heading_type.address.town, 'date': date_format(invoice.date)})
+    placedate = {'place': invoice.heading_type.address.town,
+                 'date': date_format(invoice.date)}
+    textobject.textLine(u'%(place)s, %(date)s' % placedate)
     mycanvas.drawText(textobject)
     textobject = mycanvas.beginText(11 * cm, -6.5 * cm)
     textobject.setFont('Times-Bold', 11)
@@ -67,8 +69,7 @@ def template_pdf(mycanvas, invoice):
              _('Description'),
              _('Tax Rate'),
              _('Unit price'),
-             _('Amount'),
-         ]]
+             _('Amount')]]
 
     for voice in invoice.voice_set.all():
         data.append([
@@ -101,9 +102,11 @@ def template_pdf(mycanvas, invoice):
     mycanvas.showPage()
     mycanvas.save()
 
+
 def draw_pdf(buffer, invoice):
     mycanvas = canvas.Canvas(buffer, pagesize=A4)
     template_pdf(mycanvas, invoice)
+
 
 def draw_pdf_to_file(invoice, filename):
     mycanvas = canvas.Canvas(filename, pagesize=A4)

@@ -5,6 +5,7 @@ from urllib import urlencode
 import re
 addr_re = re.compile('(?P<street>.+), (?P<number>.+) - (?P<postcode>\d+) (?P<town>\w+) \((?P<province>\w{2})\)')
 
+
 class Address(object):
     def __init__(self, street, number, postcode, town, province):
         self.street = street
@@ -15,10 +16,10 @@ class Address(object):
 
     def __unicode__(self):
         return "%s, %s - %s %s (%s)" % (self.street,
-                                       self.number,
-                                       self.postcode,
-                                       self.town,
-                                       self.province)
+                                        self.number,
+                                        self.postcode,
+                                        self.town,
+                                        self.province)
 
     def __repr__(self):
         return self.__unicode__()
@@ -74,10 +75,10 @@ class AddressField(models.Field):
 
     def get_prep_value(self, value):
         return "%s, %s - %s %s (%s)" % (value.street,
-                                       value.number,
-                                       value.postcode,
-                                       value.town,
-                                       value.province)
+                                        value.number,
+                                        value.postcode,
+                                        value.town,
+                                        value.province)
 
     def formfield(self, **kwargs):
         defaults = {'form_class': AddressFormField}

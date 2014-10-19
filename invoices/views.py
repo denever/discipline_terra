@@ -1,11 +1,15 @@
-from django.shortcuts import render, get_object_or_404
+from datetime import datetime
+
+from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse
 from django.db.models import Q
-from django.http import HttpResponseForbidden, HttpResponseRedirect, HttpResponse
-from datetime import datetime
+from django.http import HttpResponse
 from django.utils.timezone import utc
+
 from invoices.draw_pdf import draw_pdf
-from invoices.models import *
+
+from invoices.models import Item, Order, Payment
+from invoices.models import Voice, Invoice, InvoiceHeading
 
 # Create your views here.
 from django.views.generic import View
@@ -14,14 +18,17 @@ from django.views.generic import ListView
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
-from django.views.generic.detail import SingleObjectTemplateResponseMixin, SingleObjectMixin
+from django.views.generic.detail import SingleObjectMixin
 
-from invoices.forms import *
+from invoices.forms import OrderForm, ItemForm, PaymentForm, InvoiceForm,\
+    HeadingForm
+
 
 class OrderListView(ListView):
     queryset = Order.objects.all()
     context_object_name = 'orders'
     paginate_by = 5
+
 
 class SearchOrderListView(ListView):
     model = Order
@@ -33,10 +40,12 @@ class SearchOrderListView(ListView):
         query = self.request.REQUEST.get("q")
         return self.model.objects.filter(Q(customer__surname__contains=query)| Q(customer__name__contains=query))
 
+
 class InvoiceListView(ListView):
     queryset = Invoice.objects.all()
     context_object_name = 'invoices'
     paginate_by = 5
+
 
 class SearchInvoiceListView(ListView):
     model = Invoice
@@ -48,14 +57,17 @@ class SearchInvoiceListView(ListView):
         query = self.request.REQUEST.get("q")
         return self.model.objects.filter(Q(customer__surname__contains=query)| Q(customer__name__contains=query))
 
+
 class PaymentListView(ListView):
     queryset = Payment.objects.all()
     context_object_name = 'payments'
     paginate_by = 8
 
+
 class PaymentDetailView(DetailView):
     model = Payment
     context_object_name = 'payment'
+
 
 class PaymentCreateView(CreateView):
     form_class = PaymentForm
@@ -68,6 +80,7 @@ class PaymentCreateView(CreateView):
         self.payment.lastchange_by = self.request.user.get_profile()
         self.payment.lastchange = datetime.utcnow().replace(tzinfo=utc)
         return super(PaymentCreateView, self).form_valid(form)
+
 
 class PaymentUpdateView(UpdateView):
     model = Payment
@@ -82,11 +95,13 @@ class PaymentUpdateView(UpdateView):
         self.payment.lastchange = datetime.utcnow().replace(tzinfo=utc)
         return super(PaymentUpdateView, self).form_valid(form)
 
+
 class PaymentDeleteView(DeleteView):
     model = Payment
     form_class = PaymentForm
     success_url = '/invoices/payments'
     context_object_name = 'payment'
+
 
 class InvoiceDetailView(DetailView):
     model = Invoice
@@ -96,6 +111,7 @@ class InvoiceDetailView(DetailView):
 #     model = Invoice
 #     context_object_name = 'invoice'
 #     template_name = 'invoices/invoice_detail.html'
+
 
 class InvoicePrintView(SingleObjectMixin, View):
     """ This view invoices generate a pdf"""
@@ -108,9 +124,11 @@ class InvoicePrintView(SingleObjectMixin, View):
         draw_pdf(response, invoice)
         return response
 
+
 class OrderDetailView(DetailView):
     model = Order
     context_object_name = 'order'
+
 
 class OrderCreateView(CreateView):
     form_class = OrderForm
@@ -123,6 +141,7 @@ class OrderCreateView(CreateView):
         self.order.lastchange_by = self.request.user.get_profile()
         self.order.lastchange = datetime.utcnow().replace(tzinfo=utc)
         return super(OrderCreateView, self).form_valid(form)
+
 
 class OrderUpdateView(UpdateView):
     model = Order
@@ -138,11 +157,13 @@ class OrderUpdateView(UpdateView):
         self.success_url = reverse('order-detail', args=[self.kwargs['pk']])
         return super(OrderUpdateView, self).form_valid(form)
 
+
 class OrderDeleteView(DeleteView):
     model = Order
     form_class = OrderForm
     success_url = '/invoices/orders'
     context_object_name = 'order'
+
 
 class ItemCreateView(CreateView):
     form_class = ItemForm
@@ -167,7 +188,8 @@ class ItemCreateView(CreateView):
         self.item.order = get_object_or_404(Order, id=self.kwargs['order'])
         self.item.order.lastchange_by = self.request.user.get_profile()
         self.item.order.lastchange = datetime.utcnow().replace(tzinfo=utc)
-        self.item.order.save() # If an item is added to an order update last change author and last change datetime for that order
+        # If an item is added to an order update last change author and last change datetime for that order
+        self.item.order.save()
         self.success_url = reverse('order-detail', args=[self.kwargs['order']])
         return super(ItemCreateView, self).form_valid(form)
 
@@ -175,6 +197,7 @@ class ItemCreateView(CreateView):
         self.initial = super(ItemCreateView, self).get_initial()
         self.initial['pieces'] = 1
         return self.initial
+
 
 class ItemUpdateView(UpdateView):
     model = Item
@@ -196,9 +219,11 @@ class ItemUpdateView(UpdateView):
         self.item.order = get_object_or_404(Order, id=self.kwargs['order'])
         self.item.order.lastchange_by = self.request.user.get_profile()
         self.item.order.lastchange = datetime.utcnow().replace(tzinfo=utc)
-        self.item.order.save() # If an item in an order is changed update last change author and last change datetime for that order
+        # If an item in an order is changed update last change author and last change datetime for that order
+        self.item.order.save()
         self.success_url = reverse('order-detail', args=[self.kwargs['order']])
         return super(ItemUpdateView, self).form_valid(form)
+
 
 class ItemDeleteView(DeleteView):
     model = Item
@@ -241,6 +266,7 @@ class ItemDeleteView(DeleteView):
 #         self.object = self.get_object()
 #         return self.render_to_response(self.get_context_data())
 
+
 class InvoiceCreateView(CreateView):
     """ This view invoices an order creating a Invoice object and deleting the existing order"""
     form_class = InvoiceForm
@@ -255,29 +281,38 @@ class InvoiceCreateView(CreateView):
     def form_valid(self, form):
         self.invoice = form.save(commit=False)
         order = get_object_or_404(Order, id=self.kwargs['order'])
-        order.invoiced = True # in pre_delete_item avoid to release items for an invoiced order
+        # in pre_delete_item avoid to release items for an invoiced order
+        order.invoiced = True
         order.lastchange_by = self.request.user.get_profile()
         order.save()
         self.invoice.customer = order.customer
         self.invoice.issuer = self.request.user.get_profile()
-        temp_output = super(InvoiceCreateView, self).form_valid(form) # saving self.invoice to have a self.invoce.id needed in voice.create
+        # saving self.invoice to have a self.invoce.id needed in voice.create
+        temp_output = super(InvoiceCreateView, self).form_valid(form)
         for item in order.item_set.all():
-            voice = Voice.objects.create(invoice=self.invoice, description=item.__unicode__(),
-                                         pieces=item.pieces, unit_price=item.price.price_out,
-                                         amount=item.amount, vat=item.price.vat_out,
-                                         amount_novat=item.amount_novat, unit_price_novat=item.price.unit_price)
+            voice = Voice.objects.create(invoice=self.invoice,
+                                         description=item.__unicode__(),
+                                         pieces=item.pieces,
+                                         unit_price=item.price.price_out,
+                                         amount=item.amount,
+                                         vat=item.price.vat_out,
+                                         amount_novat=item.amount_novat,
+                                         unit_price_novat=item.price.unit_price)
             voice.save()
         order.delete()
         return temp_output
+
 
 class HeadingListView(ListView):
     queryset = InvoiceHeading.objects.all()
     context_object_name = 'headings'
     paginate_by = 5
 
+
 class HeadingDetailView(DetailView):
     model = InvoiceHeading
     context_object_name = 'heading'
+
 
 class HeadingCreateView(CreateView):
     form_class = HeadingForm
@@ -290,6 +325,7 @@ class HeadingCreateView(CreateView):
         self.InvoiceHeading.lastchange_by = self.request.user.get_profile()
         self.InvoiceHeading.lastchange = datetime.utcnow().replace(tzinfo=utc)
         return super(HeadingCreateView, self).form_valid(form)
+
 
 class HeadingUpdateView(UpdateView):
     model = InvoiceHeading
@@ -304,6 +340,7 @@ class HeadingUpdateView(UpdateView):
         self.InvoiceHeading.lastchange = datetime.utcnow().replace(tzinfo=utc)
         self.success_url = reverse('heading-detail', args=[self.kwargs['pk']])
         return super(HeadingUpdateView, self).form_valid(form)
+
 
 class HeadingDeleteView(DeleteView):
     model = InvoiceHeading
