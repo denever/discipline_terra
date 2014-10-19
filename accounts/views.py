@@ -14,7 +14,7 @@ class ActivityListView(ListView):
     context_object_name = 'activities'
 
     def get_queryset(self):
-        user_profile = self.request.user.get_profile()
+        user_profile = self.request.user.profile
         return user_profile.activity_set.all().order_by('-date')
 
 class ActivityDetailView(DetailView):

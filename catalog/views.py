@@ -102,8 +102,8 @@ class PriceCreateView(CreateView):
 
     def form_valid(self, form):
         self.price = form.save(commit=False)
-        self.price.record_by = self.request.user.get_profile()
-        self.price.lastchange_by = self.request.user.get_profile()
+        self.price.record_by = self.request.user.profile
+        self.price.lastchange_by = self.request.user.profile
         self.price.lastchange = datetime.utcnow().replace(tzinfo=utc)
         self.success_url = reverse('prices-catalog', args=[self.kwargs['pk']])
         return super(PriceCreateView, self).form_valid(form)
@@ -117,7 +117,7 @@ class PriceUpdateView(UpdateView):
 
     def form_valid(self, form):
         self.price = form.save(commit=False)
-        self.price.lastchange_by = self.request.user.get_profile()
+        self.price.lastchange_by = self.request.user.profile
         self.price.lastchange = datetime.utcnow().replace(tzinfo=utc)
         self.success_url = reverse('price-detail', args=[self.kwargs['pk']])
         return super(PriceUpdateView, self).form_valid(form)

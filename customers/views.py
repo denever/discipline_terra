@@ -43,8 +43,8 @@ class CustomerCreateView(CreateView):
 
     def form_valid(self, form):
         self.customer = form.save(commit=False)
-        self.customer.record_by = self.request.user.get_profile()
-        self.customer.lastchange_by = self.request.user.get_profile()
+        self.customer.record_by = self.request.user.profile
+        self.customer.lastchange_by = self.request.user.profile
         self.customer.lastchange = datetime.utcnow().replace(tzinfo=utc)
         return super(CustomerCreateView, self).form_valid(form)
 
@@ -57,7 +57,7 @@ class CustomerUpdateView(UpdateView):
 
     def form_valid(self, form):
         self.customer = form.save(commit=False)
-        self.customer.lastchange_by = self.request.user.get_profile()
+        self.customer.lastchange_by = self.request.user.profile
         self.customer.lastchange = datetime.utcnow().replace(tzinfo=utc)
         self.success_url = reverse('customer-detail', args=[self.kwargs['pk']])
         return super(CustomerUpdateView, self).form_valid(form)

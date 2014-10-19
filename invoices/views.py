@@ -76,8 +76,8 @@ class PaymentCreateView(CreateView):
 
     def form_valid(self, form):
         self.payment = form.save(commit=False)
-        self.payment.record_by = self.request.user.get_profile()
-        self.payment.lastchange_by = self.request.user.get_profile()
+        self.payment.record_by = self.request.user.profile
+        self.payment.lastchange_by = self.request.user.profile
         self.payment.lastchange = datetime.utcnow().replace(tzinfo=utc)
         return super(PaymentCreateView, self).form_valid(form)
 
@@ -91,7 +91,7 @@ class PaymentUpdateView(UpdateView):
 
     def form_valid(self, form):
         self.payment = form.save(commit=False)
-        self.payment.lastchange_by = self.request.user.get_profile()
+        self.payment.lastchange_by = self.request.user.profile
         self.payment.lastchange = datetime.utcnow().replace(tzinfo=utc)
         return super(PaymentUpdateView, self).form_valid(form)
 
@@ -137,8 +137,8 @@ class OrderCreateView(CreateView):
 
     def form_valid(self, form):
         self.order = form.save(commit=False)
-        self.order.record_by = self.request.user.get_profile()
-        self.order.lastchange_by = self.request.user.get_profile()
+        self.order.record_by = self.request.user.profile
+        self.order.lastchange_by = self.request.user.profile
         self.order.lastchange = datetime.utcnow().replace(tzinfo=utc)
         return super(OrderCreateView, self).form_valid(form)
 
@@ -152,7 +152,7 @@ class OrderUpdateView(UpdateView):
 
     def form_valid(self, form):
         self.order = form.save(commit=False)
-        self.order.lastchange_by = self.request.user.get_profile()
+        self.order.lastchange_by = self.request.user.profile
         self.order.lastchange = datetime.utcnow().replace(tzinfo=utc)
         self.success_url = reverse('order-detail', args=[self.kwargs['pk']])
         return super(OrderUpdateView, self).form_valid(form)
@@ -186,7 +186,7 @@ class ItemCreateView(CreateView):
         self.item = form.save(commit=False)
         self.item.price.product.sell(self.item.pieces)
         self.item.order = get_object_or_404(Order, id=self.kwargs['order'])
-        self.item.order.lastchange_by = self.request.user.get_profile()
+        self.item.order.lastchange_by = self.request.user.profile
         self.item.order.lastchange = datetime.utcnow().replace(tzinfo=utc)
         # If an item is added to an order update last change author and last change datetime for that order
         self.item.order.save()
@@ -217,7 +217,7 @@ class ItemUpdateView(UpdateView):
         difference = previous_item.pieces - self.item.pieces
         self.item.price.product.release(difference)
         self.item.order = get_object_or_404(Order, id=self.kwargs['order'])
-        self.item.order.lastchange_by = self.request.user.get_profile()
+        self.item.order.lastchange_by = self.request.user.profile
         self.item.order.lastchange = datetime.utcnow().replace(tzinfo=utc)
         # If an item in an order is changed update last change author and last change datetime for that order
         self.item.order.save()
@@ -246,10 +246,10 @@ class ItemDeleteView(DeleteView):
 #             return HttpResponseForbidden()
 #         order = self.get_object()
 #         order.invoiced = True # in pre_delete_item avoid to release items for an invoiced order
-#         order.lastchange_by = request.user.get_profile()
+#         order.lastchange_by = request.user.profile
 #         order.save()
 
-#         invoice = Invoice.objects.create(customer=order.customer, issuer=request.user.get_profile())
+#         invoice = Invoice.objects.create(customer=order.customer, issuer=request.user.profile)
 #         for item in order.item_set.all():
 #             print item
 #             voice = Voice.objects.create(invoice=invoice, description=item.__unicode__(),
@@ -283,10 +283,10 @@ class InvoiceCreateView(CreateView):
         order = get_object_or_404(Order, id=self.kwargs['order'])
         # in pre_delete_item avoid to release items for an invoiced order
         order.invoiced = True
-        order.lastchange_by = self.request.user.get_profile()
+        order.lastchange_by = self.request.user.profile
         order.save()
         self.invoice.customer = order.customer
-        self.invoice.issuer = self.request.user.get_profile()
+        self.invoice.issuer = self.request.user.profile
         # saving self.invoice to have a self.invoce.id needed in voice.create
         temp_output = super(InvoiceCreateView, self).form_valid(form)
         for item in order.item_set.all():
@@ -321,8 +321,8 @@ class HeadingCreateView(CreateView):
 
     def form_valid(self, form):
         self.InvoiceHeading = form.save(commit=False)
-        self.InvoiceHeading.record_by = self.request.user.get_profile()
-        self.InvoiceHeading.lastchange_by = self.request.user.get_profile()
+        self.InvoiceHeading.record_by = self.request.user.profile
+        self.InvoiceHeading.lastchange_by = self.request.user.profile
         self.InvoiceHeading.lastchange = datetime.utcnow().replace(tzinfo=utc)
         return super(HeadingCreateView, self).form_valid(form)
 
@@ -336,7 +336,7 @@ class HeadingUpdateView(UpdateView):
 
     def form_valid(self, form):
         self.InvoiceHeading = form.save(commit=False)
-        self.InvoiceHeading.lastchange_by = self.request.user.get_profile()
+        self.InvoiceHeading.lastchange_by = self.request.user.profile
         self.InvoiceHeading.lastchange = datetime.utcnow().replace(tzinfo=utc)
         self.success_url = reverse('heading-detail', args=[self.kwargs['pk']])
         return super(HeadingUpdateView, self).form_valid(form)

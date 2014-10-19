@@ -174,9 +174,6 @@ LOGGING = {
     }
 }
 
-AUTH_PROFILE_MODULE = "accounts.UserProfile"
-
-
 ################ django openid auth #############
 AUTHENTICATION_BACKENDS = (
         'django.contrib.auth.backends.ModelBackend',

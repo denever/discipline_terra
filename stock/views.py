@@ -101,8 +101,8 @@ class ProductCreateView(CreateView):
 
     def form_valid(self, form):
         self.product = form.save(commit=False)
-        self.product.record_by = self.request.user.get_profile()
-        self.product.lastchange_by = self.request.user.get_profile()
+        self.product.record_by = self.request.user.profile
+        self.product.lastchange_by = self.request.user.profile
         self.product.lastchange = datetime.utcnow().replace(tzinfo=utc)
         return super(ProductCreateView, self).form_valid(form)
 
@@ -116,7 +116,7 @@ class ProductUpdateView(UpdateView):
 
     def form_valid(self, form):
         self.product = form.save(commit=False)
-        self.product.lastchange_by = self.request.user.get_profile()
+        self.product.lastchange_by = self.request.user.profile
         self.product.lastchange = datetime.utcnow().replace(tzinfo=utc)
         self.product.newrevision_needed = True
         self.success_url = reverse('product-detail', args=[self.kwargs['pk']])
@@ -156,8 +156,8 @@ class PackageCreateView(CreateView):
 
     def form_valid(self, form):
         self.package = form.save(commit=False)
-        self.package.record_by = self.request.user.get_profile()
-        self.package.lastchange_by = self.request.user.get_profile()
+        self.package.record_by = self.request.user.profile
+        self.package.lastchange_by = self.request.user.profile
         self.package.lastchange = datetime.utcnow().replace(tzinfo=utc)
         return super(PackageCreateView, self).form_valid(form)
 
@@ -171,7 +171,7 @@ class PackageUpdateView(UpdateView):
 
     def form_valid(self, form):
         self.package = form.save(commit=False)
-        self.package.lastchange_by = self.request.user.get_profile()
+        self.package.lastchange_by = self.request.user.profile
         self.package.lastchange = datetime.utcnow().replace(tzinfo=utc)
         self.success_url = reverse('package-detail', args=[self.kwargs['pk']])
         return super(PackageUpdateView, self).form_valid(form)
@@ -197,8 +197,8 @@ class CategoryCreateView(CreateView):
 
     def form_valid(self, form):
         self.category = form.save(commit=False)
-        self.category.record_by = self.request.user.get_profile()
-        self.category.lastchange_by = self.request.user.get_profile()
+        self.category.record_by = self.request.user.profile
+        self.category.lastchange_by = self.request.user.profile
         self.category.lastchange = datetime.utcnow().replace(tzinfo=utc)
         return super(CategoryCreateView, self).form_valid(form)
 

@@ -19,7 +19,7 @@ LOGIN, LOGOUT, CREATE, EDIT, DELETE = range(5)
 actions = [_('Logged In'), _('Logged Out'), _('Created'), _('Edited'), _('Deleted')]
 
 class UserProfile(models.Model):
-    user = models.ForeignKey(User, unique=True)
+    user = models.OneToOneField(User, related_name="profile")
 
     def __unicode__(self):
         return self.user.username
@@ -162,21 +162,21 @@ class Activity(models.Model):
 
 @receiver(user_logged_in)
 def logged_in_cb(sender, **kwargs):
-    user_profile = kwargs['user'].get_profile()
-    a = Activity(userprofile = user_profile,
-                 action = LOGIN,
-                 object_repr = force_unicode(user_profile),
-                 content_object = user_profile
+    user_profile = kwargs['user'].profile,
+    a = Activity(userprofile=user_profile,
+                 action=LOGIN,
+                 object_repr=force_unicode(user_profile),
+                 content_object=user_profile
                  )
     a.save()
 
 
 @receiver(user_logged_out)
 def logged_out_cb(sender, **kwargs):
-    user_profile = kwargs['user'].get_profile()
-    a = Activity(userprofile = user_profile,
-                 action = LOGOUT,
-                 object_repr = force_unicode(user_profile),
-                 content_object = user_profile
+    user_profile = kwargs['user'].profile,
+    a = Activity(userprofile=user_profile,
+                 action=LOGOUT,
+                 object_repr=force_unicode(user_profile),
+                 content_object=user_profile
                  )
     a.save()
