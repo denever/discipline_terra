@@ -10,6 +10,8 @@ services:
     volumes:
       - type: tmpfs
         target: /tmp
+    depends_on:
+      - postgres
 
   postgres:
     read_only: true
