@@ -1,6 +1,5 @@
 # Django settings for discipline_terra project.
 import os
-import os.path
 
 if os.getenv('DEBUG', '').strip().lower() in ('true', 't', 'yes', 'y', 'on', 'debug', '1'):
     DEBUG = True
@@ -8,8 +7,6 @@ else:
     DEBUG = False
 
 TEMPLATE_DEBUG = DEBUG
-
-CURRENT_DIR = os.getcwd()
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
