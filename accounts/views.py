@@ -1,31 +1,32 @@
 # Create your views here.
-from django.shortcuts import get_object_or_404
-
-from django.views.generic import TemplateView
-from django.views.generic import ListView, DetailView
 import json
 
-from accounts.models import UserProfile, Activity
+from django.views.generic import DetailView, ListView, TemplateView
+
+from accounts.models import Activity
+
 
 class ProfileView(TemplateView):
     template_name = "accounts/profile.html"
 
+
 class ActivityListView(ListView):
-    context_object_name = 'activities'
+    context_object_name = "activities"
 
     def get_queryset(self):
         user_profile = self.request.user.profile
-        return user_profile.activity_set.all().order_by('-date')
+        return user_profile.activity_set.all().order_by("-date")
+
 
 class ActivityDetailView(DetailView):
     model = Activity
-    context_object_name = 'activity'
+    context_object_name = "activity"
 
     def get_context_data(self, **kwargs):
         context = super(ActivityDetailView, self).get_context_data(**kwargs)
-        activity = context['activity']
+        activity = context["activity"]
         try:
-            context['diff_list'] = json.loads(activity.serialized_data)
-        except Exception, e:
-            print e
+            context["diff_list"] = json.loads(activity.serialized_data)
+        except Exception as e:
+            print(e)
         return context

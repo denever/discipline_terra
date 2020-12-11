@@ -37,4 +37,4 @@ known_frameworks = []
 profile = "black"
 atomic = true
 sections = ["FUTURE", "STDLIB", "MOCK", "FRAMEWORKS", "THIRDPARTY", "FIRSTPARTY", "TESTS", "LOCALFOLDER"]
-known_third_party = []
+known_third_party = ["django", "localflavor", "openid", "reportlab"]
