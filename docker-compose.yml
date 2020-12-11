@@ -10,3 +10,18 @@ services:
     volumes:
       - type: tmpfs
         target: /tmp
+
+  postgres:
+    read_only: true
+    image: postgres:9.6.11-alpine
+    volumes:
+      - type: bind
+        source: ./postgres-data
+        target: /var/lib/postgresql/data
+      - type: bind
+        source: ./postgres-tmp
+        target: /var/run
+      - type: tmpfs
+        target: /tmp
+    ports:
+      - 5432:5432
