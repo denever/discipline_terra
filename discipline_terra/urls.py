@@ -1,23 +1,21 @@
-from django.conf.urls import patterns, include, url
+"""dt URL Configuration
 
-# Uncomment the next two lines to enable the admin:
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/3.1/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
 from django.contrib import admin
-admin.autodiscover()
+from django.urls import path
 
-urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'discipline_terra.views.home', name='home'),
-    # url(r'^discipline_terra/', include('discipline_terra.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-                       url(r'^$', include('cover.urls')),
-                       url(r'^admin/', include(admin.site.urls)),
-                       url(r'^stock/', include('stock.urls')),
-                       url(r'^catalog/', include('catalog.urls')),
-                       url(r'^invoices/', include('invoices.urls')),
-                       url(r'^accounts/', include('accounts.urls')),
-                       url(r'^customers/', include('customers.urls')),
-)
+urlpatterns = [
+    path("admin/", admin.site.urls),
+]
