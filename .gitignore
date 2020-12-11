@@ -1,6 +1,25 @@
-discipline.db
-django.mo
-*.pyc
+# This is the common part between all viralize repos
+# Python
+*.py[cod]
+__pycache__/
+
+# Editors and backups
+.project
+.vscode/
+.idea/
+*~
+\#*#
+.#*
 *.bak
+.dir-locals.el
+
+# Mac
+.DS_Store
+
+# Zips
+*.tar.gz
+*.swp
+
+# This is the customized part for the app
 media/
 local_settings.py
