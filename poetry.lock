@@ -430,6 +430,14 @@ optional = false
 python-versions = ">=3.5"
 
 [[package]]
+name = "python-decouple"
+version = "3.3"
+description = "Strict separation of settings from code."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "python-dotenv"
 version = "0.15.0"
 description = "Add .env support to your django/flask apps in development and deployments"
@@ -583,7 +591,7 @@ six = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "7ef1077127dd7a1d0c811e4933a759e050a99cf8c71770531519c270a5eec39b"
+content-hash = "b923292f32bbccaafad320fe43cbe211d35354a73ee6f3b93b3c1816c293877e"
 
 [metadata.files]
 appdirs = [
@@ -792,6 +800,9 @@ pynacl = [
 ]
 pyrsistent = [
     {file = "pyrsistent-0.17.3.tar.gz", hash = "sha256:2e636185d9eb976a18a8a8e96efce62f2905fea90041958d8cc2a189756ebf3e"},
+]
+python-decouple = [
+    {file = "python-decouple-3.3.tar.gz", hash = "sha256:55c546b85b0c47a15a47a4312d451a437f7344a9be3e001660bccd93b637de95"},
 ]
 python-dotenv = [
     {file = "python-dotenv-0.15.0.tar.gz", hash = "sha256:587825ed60b1711daea4832cf37524dfd404325b7db5e25ebe88c495c9f807a0"},
