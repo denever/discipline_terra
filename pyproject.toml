@@ -39,4 +39,4 @@ known_frameworks = []
 profile = "black"
 atomic = true
 sections = ["FUTURE", "STDLIB", "MOCK", "FRAMEWORKS", "THIRDPARTY", "FIRSTPARTY", "TESTS", "LOCALFOLDER"]
-known_third_party = ["decouple", "django", "invoices", "localflavor"]
+known_third_party = ["decouple", "django", "localflavor"]
