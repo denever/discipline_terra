@@ -1,0 +1,16 @@
+**/.DS_Store
+**/*~
+**/*.pyc
+**/*.pyo
+**/*#
+**/.#*
+.venv
+.tox
+.git
+.gitignore
+conf
+README.md
+Dockerfile
+db.sqlite3
+local_data/
+.docker_volumes

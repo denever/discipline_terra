@@ -1,0 +1,47 @@
+version: '3.7'
+networks:
+  dt_network:
+services:
+  db:
+    read_only: true
+    image: postgres:9.6-alpine
+    volumes:
+      - type: tmpfs
+        target: /tmp
+      - ./.docker_volumes/postgres-data:/var/lib/postgresql/data/
+      - ./.docker_volumes/postgres-run:/var/run
+      - ./postgres-initdb:/docker-entrypoint-initdb.d/
+    environment:
+      - POSTGRES_PASSWORD=pgadmin
+      - POSTGRES_USER=postgres
+      - DJANGO_POSTGRES_DBNAME=discipline
+      - DJANGO_POSTGRES_DBUSER=discipline
+      - DJANGO_POSTGRES_DBPASSWD=devpasswd
+      - DJANGO_POSTGRES_DBHOST=db
+    ports:
+      - "5432:5432"
+    networks:
+      - dt_network
+
+  app:
+    read_only: true
+    environment:
+      - DJANGO_LOG_LEVEL=INFO
+      - DJANGO_SECRET_KEY=dev_secret_key
+      - DJANGO_POSTGRES_DBNAME=discipline
+      - DJANGO_POSTGRES_DBUSER=discipline
+      - DJANGO_POSTGRES_DBPASSWD=devpasswd
+      - DJANGO_POSTGRES_DBHOST=db
+    build: .
+    command:
+      - "runserver"
+      - "0.0.0.0:8000"
+    volumes:
+      - type: tmpfs
+        target: /tmp
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    networks:
+      - dt_network
