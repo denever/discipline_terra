@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "accounts.apps.AccountsConfig",
     "customers.apps.CustomersConfig",
     "invoices.apps.InvoicesConfig",
+    "catalog.apps.CatalogConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
