@@ -35,7 +35,8 @@ class Price(models.Model):
         "accounts.UserProfile",
         related_name="price_edited",
         verbose_name=_("Last change by"),
-        on_delete=models.CASCADE,
+        null=True,
+        on_delete=models.SET_NULL,
     )
     lastchange = models.DateTimeField(_("Last change on"), auto_now_add=True)
 

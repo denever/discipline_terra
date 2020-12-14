@@ -56,7 +56,8 @@ class Product(models.Model):
         "accounts.UserProfile",
         related_name="products_edited",
         verbose_name=_("Last change by"),
-        on_delete=models.CASCADE,
+        null=True,
+        on_delete=models.SET_NULL,
     )
     lastchange = models.DateTimeField(_("Last change on"), auto_now_add=True)
 
@@ -126,7 +127,8 @@ class Package(models.Model):
         "accounts.UserProfile",
         related_name="packages_edited",
         verbose_name=_("Last change by"),
-        on_delete=models.CASCADE,
+        null=True,
+        on_delete=models.SET_NULL,
     )
     lastchange = models.DateTimeField(_("Last change on"), auto_now_add=True)
 

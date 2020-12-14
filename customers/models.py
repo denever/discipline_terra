@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext as _
+
 from invoices.modelfields import AddressField
 
 
@@ -16,6 +17,8 @@ class Customer(models.Model):
         "accounts.UserProfile",
         related_name="customer_edited",
         verbose_name=_("Last change by"),
+        null=True,
+        on_delete=models.SET_NULL,
     )
 
     record_date = models.DateTimeField(_("Recorded on"), auto_now_add=True)

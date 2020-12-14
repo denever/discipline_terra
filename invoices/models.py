@@ -12,7 +12,9 @@ class Item(models.Model):
     order = models.ForeignKey(
         "invoices.Order", verbose_name=_("Order"), on_delete=models.CASCADE
     )
-    price = models.ForeignKey("catalog.Price", verbose_name=_("Product"))
+    price = models.ForeignKey(
+        "catalog.Price", verbose_name=_("Product"), on_delete=models.CASCADE
+    )
     pieces = models.PositiveIntegerField(_("Pieces"))
     record_date = models.DateTimeField(_("Recorded on"), auto_now_add=True)
 
@@ -47,15 +49,21 @@ class Item(models.Model):
 
 
 class Order(models.Model):
-    catalog = models.ForeignKey("catalog.catalog", verbose_name=_("Catalog"))
+    catalog = models.ForeignKey(
+        "catalog.catalog", verbose_name=_("Catalog"), on_delete=models.CASCADE
+    )
 
-    customer = models.ForeignKey("customers.Customer", verbose_name=_("Customer"))
+    customer = models.ForeignKey(
+        "customers.Customer", verbose_name=_("Customer"), on_delete=models.CASCADE
+    )
 
     record_date = models.DateTimeField(_("Recorded on"), auto_now_add=True)
     lastchange_by = models.ForeignKey(
         "accounts.UserProfile",
         related_name="order_edited",
         verbose_name=_("Last change by"),
+        null=True,
+        on_delete=models.SET_NULL,
     )
     lastchange = models.DateTimeField(_("Last change on"), auto_now_add=True)
 
@@ -125,6 +133,7 @@ class InvoiceHeading(models.Model):
         "accounts.UserProfile",
         related_name="invoice_headings_edited",
         verbose_name=_("Last change by"),
+        on_delete=models.CASCADE,
     )
     lastchange = models.DateTimeField(_("Last change on"), auto_now_add=True)
 
@@ -144,19 +153,28 @@ class InvoiceHeading(models.Model):
 
 
 class Invoice(models.Model):
-    customer = models.ForeignKey("customers.Customer", verbose_name=_("Customer"))
+    customer = models.ForeignKey(
+        "customers.Customer", verbose_name=_("Customer"), on_delete=models.CASCADE
+    )
     date = models.DateTimeField(_("Invoiced on"), auto_now_add=True)
     issuer = models.ForeignKey(
         "accounts.UserProfile",
         related_name="invoices_issued",
         verbose_name=_("Issued by"),
+        on_delete=models.CASCADE,
     )
     payment_type = models.ForeignKey(
-        Payment, related_name="invoices_paid", verbose_name=_("Payment type")
+        Payment,
+        related_name="invoices_paid",
+        verbose_name=_("Payment type"),
+        on_delete=models.CASCADE,
     )
 
     heading_type = models.ForeignKey(
-        InvoiceHeading, related_name="invoices_entitled", verbose_name=_("Invoice as")
+        InvoiceHeading,
+        related_name="invoices_entitled",
+        verbose_name=_("Invoice as"),
+        on_delete=models.CASCADE,
     )
 
     class Meta:
@@ -208,7 +226,9 @@ class Invoice(models.Model):
 
 
 class Voice(models.Model):
-    invoice = models.ForeignKey("invoices.Invoice", verbose_name=_("Invoice"))
+    invoice = models.ForeignKey(
+        "invoices.Invoice", verbose_name=_("Invoice"), on_delete=models.CASCADE
+    )
 
     description = models.CharField(_("Description"), max_length=200)
     unit_price_novat = models.DecimalField(
