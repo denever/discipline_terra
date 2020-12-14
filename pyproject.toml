@@ -9,6 +9,7 @@ python = "^3.8"
 Django = "^3.1.4"
 python-decouple = "^3.3"
 psycopg2-binary = "^2.8.6"
+django-localflavor = "^3.0.1"
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^2.9.3"
